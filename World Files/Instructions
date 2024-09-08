@@ -1,0 +1,4 @@
+This folder contains world files and the launch
+
+You will need to download these files and save them into your turtlebot 3 gazebo world and launch file folders.
+Perform a colcon build after that and run the same as you would any other TB gazebo world
