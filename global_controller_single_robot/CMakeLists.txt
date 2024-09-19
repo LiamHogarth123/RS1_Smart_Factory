@@ -16,7 +16,7 @@ add_executable(global_controller
   src/global_controller.cpp
   src/main.cpp
   src/task_allocation.cpp
-  src/prm.cpp
+  src/prm2.cpp
   # src/turtlebot_sensorprocessing.cpp
   # src/turtlebot_control_cal.cpp
 )

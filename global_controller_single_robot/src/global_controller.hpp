@@ -11,7 +11,9 @@
 #include "marker_msgs/msg/marker.hpp"
 #include <std_msgs/msg/bool.hpp>
 
-#include "prm.hpp"
+
+
+#include "prm2.hpp"
 #include "task_allocation.hpp"
 
 // #include "turtlebot.hpp"
@@ -46,7 +48,8 @@ private:
 
 
     Task_Allocation TA;
-    PRM GPS;
+    // PRM GPS;
+    bool map_data_recieved;
 
 
 

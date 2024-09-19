@@ -10,15 +10,16 @@ Task_Allocation::Task_Allocation() {
 
 
 std::vector<geometry_msgs::msg::Point> Task_Allocation::get_job_list(){
- std::vector<geometry_msgs::msg::Point> job_list;
+
+    std::vector<geometry_msgs::msg::Point> job_list;
 
     // Define five different goals (x, y, z)
     std::vector<std::tuple<double, double, double>> goals = {
-        {1.0, 1.0, 0.0},
-        {2.0, 2.0, 0.0},
-        {3.0, 3.0, 0.0},
-        {4.0, 4.0, 0.0},
-        {5.0, 5.0, 0.0}
+        {1.6, 2.0, 0.0},
+        {4.0, 1.0, 0.0},
+        {3.0, -1.0, 0.0},
+        {4.0, 0, 0.0},
+        {2.5, 0.5, 0.0}
     };
 
     // Fill the job list with points
@@ -36,5 +37,15 @@ std::vector<geometry_msgs::msg::Point> Task_Allocation::get_job_list(){
 
 }
 
+
+
+void Task_Allocation::Load_job_list_txt(){
+    // read text file of x,y points
+}
+
+std::vector<package_info> Task_Allocation::Tsp_sort(){
+    std::vector<package_info> Job_Outline;
+    return Job_Outline;
+}
 
 

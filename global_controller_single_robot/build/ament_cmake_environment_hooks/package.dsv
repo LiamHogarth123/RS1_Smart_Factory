@@ -1,0 +1,4 @@
+source;share/global_controller_single_robot/local_setup.bash
+source;share/global_controller_single_robot/local_setup.dsv
+source;share/global_controller_single_robot/local_setup.sh
+source;share/global_controller_single_robot/local_setup.zsh

@@ -14,8 +14,9 @@ Global_Controller::Global_Controller(const std::string &namespace_param) : Node(
     robot_status_sub = this->create_subscription<std_msgs::msg::Bool>("reached_goal", 10, std::bind(&Global_Controller::statusCallback, this, std::placeholders::_1));\
     Shut_down_request = this->create_publisher<std_msgs::msg::Bool>("shut_down", 10);
 
-    map_subscription_ = this->create_subscription<nav_msgs::msg::OccupancyGrid>("/map", 10, std::bind(&Global_Controller::mapCallback, this, std::placeholders::_1));
+    map_subscription_ = this->create_subscription<nav_msgs::msg::OccupancyGrid>("map", 10, std::bind(&Global_Controller::mapCallback, this, std::placeholders::_1));
 
+    map_data_recieved = false;
     
 
 
@@ -29,6 +30,8 @@ void Global_Controller::mapCallback(const nav_msgs::msg::OccupancyGrid::SharedPt
         RCLCPP_INFO(this->get_logger(), "Received a map with resolution: %f", msg->info.resolution);
         RCLCPP_INFO(this->get_logger(), "Map width: %d, height: %d", msg->info.width, msg->info.height);
         map = *msg;
+        map_data_recieved = true;
+        
 }
 
 
@@ -45,14 +48,26 @@ void Global_Controller::statusCallback(const std_msgs::msg::Bool::SharedPtr msg)
 
 
 void Global_Controller::Default_state(){
+    
+
     std::vector<geometry_msgs::msg::Point> trajectory;
     rclcpp::Rate rate(10); // 10 Hz
     std_msgs::msg::Bool msg;
+    int r = 0;
+    while (!map_data_recieved){
+        
+        if (r < 1){
+            std::cout << "first waiting" << std::endl;
+            r++;
+        }
+        rate.sleep();
+    }
 
 
 
     // GPS.UpdateMapData(map, map_meta_data);
-    // GPS.GeneratePRM();
+    
+    // GPS.GeneratePRM(map, map.info, true);
     
 
     
@@ -63,17 +78,17 @@ void Global_Controller::Default_state(){
     delievery_Location1.x = 0;
     delievery_Location1.y = 0;
     geometry_msgs::msg::Point start;
-    start.x = 0;
-    start.y = 0;
+    start.x = -2;
+    start.y = 0.5;
+
 
     
     
-    
     for (int i = 0; i < goals.size(); i++){
-        // trajectory.clear();
-        // trajectory.push_back(goals.at(i)); // convert this line to trajectory = PRM.genarate_path(Robot_odom, goals.at(i))
         trajectory.clear();
-        trajectory = GPS.A_star_To_Goal(start, goals.at(i));
+        trajectory.push_back(goals.at(i)); // convert this line to trajectory = PRM.genarate_path(Robot_odom, goals.at(i))
+        // trajectory.clear();
+        // trajectory = GPS.A_star_To_Goal(start, goals.at(i));
         publishTrajectory(trajectory);
 
         int k = 0;
@@ -88,6 +103,7 @@ void Global_Controller::Default_state(){
         
         if (true){ // if (get_AR_Tag = true){
             trajectory.clear();
+            // trajectory = GPS.A_star_To_Goal(goals.at(i), delievery_Location1);
             trajectory.push_back(delievery_Location1); // convert this line to trajectory = PRM.genarate_path(start, end);
          
             publishTrajectory(trajectory);

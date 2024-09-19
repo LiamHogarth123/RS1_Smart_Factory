@@ -10,11 +10,19 @@ def generate_launch_description():
     
     map_yaml_arg = DeclareLaunchArgument(
         'map_yaml', 
-        default_value='/home/liam',  # Provide the default path to your map.yaml file
+        default_value='/home/liam/map.yaml',  # Provide the default path to your map.yaml file
         description='Full path to the map YAML file to load')
 
     return LaunchDescription([
         namespace_arg,
+          Node(
+            package='nav2_map_server',
+            executable='map_server',
+            name='map_server',
+            namespace=LaunchConfiguration('namespace'),
+            output='screen',
+            parameters=[{'yaml_filename': LaunchConfiguration('map_yaml')}]
+        ),
         Node(
             package='global_controller_single_robot',
             executable='global_controller',
@@ -23,13 +31,6 @@ def generate_launch_description():
             output='screen',
             arguments=[LaunchConfiguration('namespace')],
         ),
-        Node(
-            package='nav2_map_server',
-            executable='map_server',
-            name='map_server',
-            namespace=LaunchConfiguration('namespace'),
-            output='screen',
-            parameters=[{'yaml_filename': LaunchConfiguration('map_yaml')}]
-        ),
+      
     ])
 
