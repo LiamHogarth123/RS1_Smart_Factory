@@ -1,0 +1,104 @@
+[0.208s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build']
+[0.208s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=False, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=8, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, mixin_files=None, mixin=None, verb_parser=<colcon_mixin.mixin.mixin_argument.MixinArgumentDecorator object at 0x74a9a5737d30>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x74a9a5890d30>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x74a9a5890d30>>, mixin_verb=('build',))
+[0.566s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.566s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.566s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.566s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.566s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[0.566s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.566s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/liam/ros2_ws/src/turtlebot_controller'
+[0.566s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.567s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[0.567s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[0.567s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[0.567s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[0.567s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[0.567s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[0.567s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[0.567s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[0.601s] DEBUG:colcon.colcon_core.package_identification:Package '.' with type 'ros.ament_cmake' and name 'turtlebot_controller'
+[0.601s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[0.601s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[0.601s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[0.601s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[0.601s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[0.647s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[0.648s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[0.659s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 58 installed packages in /home/liam/ros2_ws/install
+[0.665s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 423 installed packages in /opt/ros/humble
+[0.672s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[0.827s] Level 5:colcon.colcon_core.verb:set package 'turtlebot_controller' build argument 'cmake_args' from command line to 'None'
+[0.827s] Level 5:colcon.colcon_core.verb:set package 'turtlebot_controller' build argument 'cmake_target' from command line to 'None'
+[0.827s] Level 5:colcon.colcon_core.verb:set package 'turtlebot_controller' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.827s] Level 5:colcon.colcon_core.verb:set package 'turtlebot_controller' build argument 'cmake_clean_cache' from command line to 'False'
+[0.827s] Level 5:colcon.colcon_core.verb:set package 'turtlebot_controller' build argument 'cmake_clean_first' from command line to 'False'
+[0.827s] Level 5:colcon.colcon_core.verb:set package 'turtlebot_controller' build argument 'cmake_force_configure' from command line to 'False'
+[0.827s] Level 5:colcon.colcon_core.verb:set package 'turtlebot_controller' build argument 'ament_cmake_args' from command line to 'None'
+[0.827s] Level 5:colcon.colcon_core.verb:set package 'turtlebot_controller' build argument 'catkin_cmake_args' from command line to 'None'
+[0.827s] Level 5:colcon.colcon_core.verb:set package 'turtlebot_controller' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.827s] DEBUG:colcon.colcon_core.verb:Building package 'turtlebot_controller' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/liam/ros2_ws/src/turtlebot_controller/build/turtlebot_controller', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/liam/ros2_ws/src/turtlebot_controller/install/turtlebot_controller', 'merge_install': False, 'path': '/home/liam/ros2_ws/src/turtlebot_controller', 'symlink_install': False, 'test_result_base': None}
+[0.827s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[0.830s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[0.830s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/liam/ros2_ws/src/turtlebot_controller' with build type 'ament_cmake'
+[0.830s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/liam/ros2_ws/src/turtlebot_controller'
+[0.835s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.835s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.836s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.848s] ERROR:colcon.colcon_core.shell:Exception in shell extension 'sh': [Errno 17] File exists: '/home/liam/ros2_ws/src/turtlebot_controller/build/turtlebot_controller'
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/__init__.py", line 308, in get_command_environment
+    return await extension.generate_command_environment(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/sh.py", line 148, in generate_command_environment
+    expand_template(
+  File "/usr/lib/python3/dist-packages/colcon_core/shell/template/__init__.py", line 49, in expand_template
+    os.makedirs(str(destination_path.parent), exist_ok=True)
+  File "/usr/lib/python3.10/os.py", line 225, in makedirs
+    mkdir(name, mode)
+FileExistsError: [Errno 17] File exists: '/home/liam/ros2_ws/src/turtlebot_controller/build/turtlebot_controller'
+
+[0.848s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'bash' for command environment
+[0.848s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'zsh' for command environment
+[0.849s] ERROR:colcon.colcon_cmake.task.cmake.build:Could not find a shell extension for the command environment
+[0.849s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(turtlebot_controller)
+[0.853s] Level 1:colcon.colcon_core.environment:checking '/home/liam/ros2_ws/src/turtlebot_controller/install/turtlebot_controller' for CMake module files
+[0.854s] Level 1:colcon.colcon_core.environment:checking '/home/liam/ros2_ws/src/turtlebot_controller/install/turtlebot_controller' for CMake config files
+[0.854s] Level 1:colcon.colcon_core.environment:checking '/home/liam/ros2_ws/src/turtlebot_controller/install/turtlebot_controller/bin'
+[0.854s] Level 1:colcon.colcon_core.environment:checking '/home/liam/ros2_ws/src/turtlebot_controller/install/turtlebot_controller/lib/pkgconfig/turtlebot_controller.pc'
+[0.855s] Level 1:colcon.colcon_core.environment:checking '/home/liam/ros2_ws/src/turtlebot_controller/install/turtlebot_controller/lib/python3.10/site-packages'
+[0.855s] Level 1:colcon.colcon_core.environment:checking '/home/liam/ros2_ws/src/turtlebot_controller/install/turtlebot_controller/bin'
+[0.855s] INFO:colcon.colcon_core.shell:Creating package script '/home/liam/ros2_ws/src/turtlebot_controller/install/turtlebot_controller/share/turtlebot_controller/package.ps1'
+[0.857s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/liam/ros2_ws/src/turtlebot_controller/install/turtlebot_controller/share/turtlebot_controller/package.dsv'
+[0.857s] INFO:colcon.colcon_core.shell:Creating package script '/home/liam/ros2_ws/src/turtlebot_controller/install/turtlebot_controller/share/turtlebot_controller/package.sh'
+[0.858s] INFO:colcon.colcon_core.shell:Creating package script '/home/liam/ros2_ws/src/turtlebot_controller/install/turtlebot_controller/share/turtlebot_controller/package.bash'
+[0.860s] INFO:colcon.colcon_core.shell:Creating package script '/home/liam/ros2_ws/src/turtlebot_controller/install/turtlebot_controller/share/turtlebot_controller/package.zsh'
+[0.862s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/liam/ros2_ws/src/turtlebot_controller/install/turtlebot_controller/share/colcon-core/packages/turtlebot_controller)
+[0.865s] ERROR:colcon.colcon_core.event_reactor:Exception in event handler extension 'store_result': [Errno 17] File exists: '/home/liam/ros2_ws/src/turtlebot_controller/build/turtlebot_controller'
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/colcon_core/event_reactor.py", line 78, in _notify_observers
+    retval = observer(event)
+  File "/usr/lib/python3/dist-packages/colcon_package_selection/package_selection/previous/event_handler.py", line 53, in __call__
+    set_result(job.task_context.args.build_base, verb_name, result)
+  File "/usr/lib/python3/dist-packages/colcon_package_selection/package_selection/previous/__init__.py", line 35, in set_result
+    path.parent.mkdir(parents=True, exist_ok=True)
+  File "/usr/lib/python3.10/pathlib.py", line 1175, in mkdir
+    self._accessor.mkdir(self, mode)
+FileExistsError: [Errno 17] File exists: '/home/liam/ros2_ws/src/turtlebot_controller/build/turtlebot_controller'
+
+[0.873s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[0.873s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[0.873s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '1'
+[0.873s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[0.887s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[0.887s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[0.887s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[0.930s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[0.930s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/liam/ros2_ws/src/turtlebot_controller/install/local_setup.ps1'
+[0.932s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/liam/ros2_ws/src/turtlebot_controller/install/_local_setup_util_ps1.py'
+[0.935s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/liam/ros2_ws/src/turtlebot_controller/install/setup.ps1'
+[0.942s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/liam/ros2_ws/src/turtlebot_controller/install/local_setup.sh'
+[0.943s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/liam/ros2_ws/src/turtlebot_controller/install/_local_setup_util_sh.py'
+[0.944s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/liam/ros2_ws/src/turtlebot_controller/install/setup.sh'
+[0.950s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/liam/ros2_ws/src/turtlebot_controller/install/local_setup.bash'
+[0.951s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/liam/ros2_ws/src/turtlebot_controller/install/setup.bash'
+[0.960s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/liam/ros2_ws/src/turtlebot_controller/install/local_setup.zsh'
+[0.961s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/liam/ros2_ws/src/turtlebot_controller/install/setup.zsh'

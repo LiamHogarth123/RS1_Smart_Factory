@@ -1,0 +1,5 @@
+[0.000000] (-) TimerEvent: {}
+[0.001484] (turtlebot_controller) JobQueued: {'identifier': 'turtlebot_controller', 'dependencies': OrderedDict()}
+[0.001598] (turtlebot_controller) JobStarted: {'identifier': 'turtlebot_controller'}
+[0.032906] (turtlebot_controller) JobEnded: {'identifier': 'turtlebot_controller', 'rc': 1}
+[0.043666] (-) EventReactorShutdown: {}
