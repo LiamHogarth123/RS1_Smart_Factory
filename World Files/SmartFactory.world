@@ -25,7 +25,7 @@
     </scene>
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose>14.6072 17.6482 20.8021 0 0.906314 -2.29083</pose>
+        <pose>-12.5275 7.07502 16.3188 -0 0.810303 -0.246759</pose>
         <view_controller>orbit</view_controller>
         <projection_type>perspective</projection_type>
       </camera>
@@ -983,48 +983,48 @@
       </spot>
     </light>
     <state world_name='default'>
-      <sim_time>1108 379000000</sim_time>
-      <real_time>766 715276261</real_time>
-      <wall_time>1728367703 337406039</wall_time>
-      <iterations>741983</iterations>
+      <sim_time>1745 732000000</sim_time>
+      <real_time>939 987087693</real_time>
+      <wall_time>1728434158 846751955</wall_time>
+      <iterations>637353</iterations>
       <model name='Construction Cone_0'>
-        <pose>5.97389 1.26427 -9e-06 0 -0 0</pose>
+        <pose>5.97389 1.26427 -0 -2e-06 0 0</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose>5.97389 1.26427 -9e-06 0 -0 0</pose>
+          <pose>5.97389 1.26427 -0 -2e-06 0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -0.431832 -1.975 0.380686 0</acceleration>
+          <wrench>0 0 -0.431832 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Construction Cone_0_clone'>
+        <pose>6.06535 -1.85076 -9e-06 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>6.06535 -1.85076 -9e-06 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 -9.8 0 -0 0</acceleration>
           <wrench>0 0 -9.8 0 -0 0</wrench>
         </link>
       </model>
-      <model name='Construction Cone_0_clone'>
-        <pose>6.06535 -1.85076 0 0 -0 0</pose>
-        <scale>1 1 1</scale>
-        <link name='link'>
-          <pose>6.06535 -1.85076 0 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>-0 0 -8.72275 -0.270886 -0.142181 0</acceleration>
-          <wrench>-0 0 -8.72275 0 -0 0</wrench>
-        </link>
-      </model>
       <model name='Construction Cone_0_clone_0'>
-        <pose>7.58342 -1.87484 0 0 -0 0</pose>
+        <pose>7.58342 -1.87484 -9e-06 2e-06 2e-06 0</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose>7.58342 -1.87484 0 0 -0 0</pose>
+          <pose>7.58342 -1.87484 -9e-06 2e-06 2e-06 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>-0 0 -9.53785 -1.9e-05 0.065921 0</acceleration>
-          <wrench>-0 0 -9.53785 0 -0 0</wrench>
+          <acceleration>0 0 -9.8 0 -0 0</acceleration>
+          <wrench>0 0 -9.8 0 -0 0</wrench>
         </link>
       </model>
       <model name='Construction Cone_0_clone_1'>
-        <pose>8.99356 -1.98623 -0 0 -0 0</pose>
+        <pose>8.99356 -1.98623 -1e-06 2e-06 -2e-06 -0</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose>8.99356 -1.98623 -0 0 -0 0</pose>
+          <pose>8.99356 -1.98623 -1e-06 2e-06 -2e-06 -0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>2e-06 -3e-06 14.4747 0.791493 -0.590904 3.14159</acceleration>
-          <wrench>2e-06 -3e-06 14.4747 0 -0 0</wrench>
+          <acceleration>-0 -0 -0.827232 -1.61461 -0.8853 3.14159</acceleration>
+          <wrench>-0 -0 -0.827232 0 -0 0</wrench>
         </link>
       </model>
       <model name='Construction Cone_1'>
@@ -1033,38 +1033,292 @@
         <link name='link'>
           <pose>7.56614 1.18811 -0 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>-1e-06 0 16.6263 -0.211687 -0.29064 0</acceleration>
-          <wrench>-1e-06 0 16.6263 0 -0 0</wrench>
+          <acceleration>0 -0 17.8738 0.441233 0.753005 0</acceleration>
+          <wrench>0 -0 17.8738 0 -0 0</wrench>
         </link>
       </model>
       <model name='Construction Cone_2'>
-        <pose>9.01382 1.13078 -1e-05 0 -0 0</pose>
+        <pose>9.01382 1.13078 -0 0 -0 0</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose>9.01382 1.13078 -1e-05 0 -0 0</pose>
+          <pose>9.01382 1.13078 -0 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 -9.8 0 -0 0</acceleration>
-          <wrench>0 0 -9.8 0 -0 0</wrench>
+          <acceleration>-0 -0 19.2215 -1.5049 7.4e-05 0</acceleration>
+          <wrench>-0 -0 19.2215 0 -0 0</wrench>
         </link>
       </model>
       <model name='Construction Cone_3'>
-        <pose>10.3038 1.11446 -1e-05 0 -0 0</pose>
+        <pose>10.3038 1.11446 -0 0 -0 0</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose>10.3038 1.11446 -1e-05 0 -0 0</pose>
+          <pose>10.3038 1.11446 -0 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 -9.8 0 -0 0</acceleration>
-          <wrench>0 0 -9.8 0 -0 0</wrench>
+          <acceleration>-0 -0 19.2215 -1.5049 7.4e-05 0</acceleration>
+          <wrench>-0 -0 19.2215 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Mecanum lift'>
+        <pose>1.77804 0.899971 -0.006 -1e-06 -0 0.004052</pose>
+        <scale>1 1 1</scale>
+        <link name='chassis'>
+          <pose>1.77804 0.899971 -0.006 -1e-06 -0 0.004052</pose>
+          <velocity>5.4e-05 -5.8e-05 0.000185 -0.000886 -0.000343 5e-06</velocity>
+          <acceleration>0.155467 -0.226547 0.07203 -2.7726 -1.21096 -0.027358</acceleration>
+          <wrench>0.177846 -0.259159 0.082399 0 -0 0</wrench>
+        </link>
+        <link name='front_left_wheel'>
+          <pose>2.63489 1.18545 0.18 -1e-06 -0.029554 0.004053</pose>
+          <velocity>-3.7e-05 9.2e-05 -1e-05 -0.00088 0.000158 5e-06</velocity>
+          <acceleration>-0.102119 0.237554 -0.010112 -2.75472 0.854628 -0.013763</acceleration>
+          <wrench>-0.204238 0.475108 -0.020224 0 -0 0</wrench>
+        </link>
+        <link name='front_right_wheel'>
+          <pose>2.63827 0.351453 0.18 0 -0.060816 0.004052</pose>
+          <velocity>-5e-06 3.9e-05 0.001251 -0.000765 -0.000156 3e-06</velocity>
+          <acceleration>-0.07859 0.156146 3.01533 -2.58799 -0.010486 -0.003931</acceleration>
+          <wrench>-0.15718 0.312292 6.03066 0 -0 0</wrench>
+        </link>
+        <link name='rear_left_wheel'>
+          <pose>0.846906 1.1782 0.18 0 0.031084 0.004052</pose>
+          <velocity>-2e-06 0.000105 1e-05 -0.000764 -0.000198 4e-06</velocity>
+          <acceleration>-0.042307 0.316715 -1.28929 -2.58182 -0.840143 -0.042645</acceleration>
+          <wrench>-0.084613 0.63343 -2.57858 0 -0 0</wrench>
+        </link>
+        <link name='rear_right_wheel'>
+          <pose>0.850286 0.344207 0.18 0 0.029505 0.004052</pose>
+          <velocity>1.3e-05 7.8e-05 -1e-05 -0.000535 0.000177 6e-06</velocity>
+          <acceleration>-0.054614 0.276214 -0.010239 -2.25412 0.412015 -0.037645</acceleration>
+          <wrench>-0.109228 0.552429 -0.020477 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='aws_robomaker_warehouse_PalletJackB_01'>
+        <pose>-3.00543 -0.171047 -0.012312 0 -0.000837 -5e-06</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-3.00543 -0.171047 -0.012312 0 -0.000837 -5e-06</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0.147603 0.000209 -3.67987 0.001205 0.572352 0.000481</acceleration>
+          <wrench>0.295206 0.000417 -7.35975 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='aws_robomaker_warehouse_PalletJackB_01_0'>
+        <pose>6.01685 -1.00646 -0.012312 0 -0.000837 -5e-06</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>6.01685 -1.00646 -0.012312 0 -0.000837 -5e-06</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0.147603 0.000209 -3.67989 0.001203 0.572389 0.000481</acceleration>
+          <wrench>0.295206 0.000417 -7.35978 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='cafe_table'>
+        <pose>-0.885427 -3.3401 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-0.885427 -3.3401 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='cafe_table_0'>
+        <pose>0.051698 -3.33353 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0.051698 -3.33353 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='cardboard_box'>
+        <pose>-5.50388 0.49795 0.149 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-5.50388 0.49795 0.149 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='cardboard_box_clone'>
+        <pose>-5.48606 1.01465 0.149 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-5.48606 1.01465 0.149 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 -0 0 0 -0 0</acceleration>
+          <wrench>0 -0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='cardboard_box_clone_0'>
+        <pose>5.48496 -3.58118 0.149 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>5.48496 -3.58118 0.149 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='cardboard_box_clone_1'>
+        <pose>4.98579 -3.14911 0.149 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>4.98579 -3.14911 0.149 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0 -0 0 0 -0 0</acceleration>
+          <wrench>-0 -0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='cardboard_box_clone_2'>
+        <pose>4.45481 -3.51905 0.149 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>4.45481 -3.51905 0.149 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 -0 0 0 -0 0</acceleration>
+          <wrench>0 -0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='cardboard_box_clone_2_clone'>
+        <pose>-1.58599 -0.560108 0.149 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-1.58599 -0.560108 0.149 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0 0 0 -0 -0 -0</acceleration>
+          <wrench>-0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='cardboard_box_clone_2_clone_0'>
+        <pose>-1.61214 -0.119262 0.149 -0 -0 -0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-1.61214 -0.119262 0.149 -0 -0 -0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0 -0 -0 0 -0 0</acceleration>
+          <wrench>-0 -0 -0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='cardboard_box_clone_2_clone_1'>
+        <pose>-1.07041 -0.302048 0.149 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-1.07041 -0.302048 0.149 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0 0 -0 -0 -0 -0</acceleration>
+          <wrench>-0 0 -0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='cardboard_box_clone_2_clone_2'>
+        <pose>-1.76115 3.70729 0.149 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-1.76115 3.70729 0.149 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 -0 -0 0 -0 0</acceleration>
+          <wrench>0 -0 -0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='cardboard_box_clone_2_clone_3'>
+        <pose>-2.38031 3.71118 0.149 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-2.38031 3.71118 0.149 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 -0 0 0 -0 0</acceleration>
+          <wrench>0 -0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='cardboard_box_clone_2_clone_3_clone'>
+        <pose>-4.25106 5.43504 0.149 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-4.25106 5.43504 0.149 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 -0 0 0 -0 0</acceleration>
+          <wrench>0 -0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='cardboard_box_clone_3'>
+        <pose>9.59016 4.43831 0.149 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>9.59016 4.43831 0.149 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0 -0 -0 0 -0 0</acceleration>
+          <wrench>-0 -0 -0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='cardboard_box_clone_4'>
+        <pose>9.59259 3.96789 0.149 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>9.59259 3.96789 0.149 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -0 0 -0 0</acceleration>
+          <wrench>0 0 -0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='cardboard_box_clone_5'>
+        <pose>9.07184 4.09363 0.149 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>9.07184 4.09363 0.149 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 -0 0 -0 0</acceleration>
+          <wrench>0 0 -0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='cardboard_box_clone_6'>
+        <pose>9.62555 3.52528 0.149 0 0 -3e-06</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>9.62555 3.52528 0.149 0 0 -3e-06</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>1e-05 4e-06 -5.2e-05 -2.2e-05 6.9e-05 -6e-06</acceleration>
+          <wrench>2.1e-05 8e-06 -0.000103 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='cardboard_box_clone_7'>
+        <pose>8.77308 -1.33689 0.149 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>8.77308 -1.33689 0.149 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0 -0 0 0 -0 0</acceleration>
+          <wrench>-0 -0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='cardboard_box_clone_8'>
+        <pose>8.07308 -0.958942 0.149 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>8.07308 -0.958942 0.149 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0 -0 0 0 -0 0</acceleration>
+          <wrench>-0 -0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='cardboard_box_clone_9'>
+        <pose>7.43089 -1.30297 0.149 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>7.43089 -1.30297 0.149 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-0 0 0 0 -0 0</acceleration>
+          <wrench>-0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='first_2015_trash_can'>
-        <pose>9.15373 5.32015 -1e-05 -3e-06 1.5e-05 -0.000713</pose>
+        <pose>9.15394 5.32005 -1.1e-05 -3.1e-05 4e-06 -0.001839</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose>9.15373 5.32015 -1e-05 -3e-06 1.5e-05 -0.000713</pose>
+          <pose>9.15394 5.32005 -1.1e-05 -3.1e-05 4e-06 -0.001839</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 -9.8 -0 -0 -0</acceleration>
-          <wrench>0 0 -47.3414 0 -0 0</wrench>
+          <acceleration>4.67082 8.95864 15.2092 0.80873 0.13173 0.0278</acceleration>
+          <wrench>22.5636 43.277 73.4719 0 -0 0</wrench>
         </link>
       </model>
       <model name='ground_plane'>
@@ -1083,8 +1337,28 @@
         <link name='link'>
           <pose>8.25326 2.01705 0 -0 1e-06 -9.8e-05</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>-2.09543 -0.002689 1.00039 -3.13928 -0.935831 3.14151</acceleration>
-          <wrench>-167.634 -0.215131 80.0309 0 -0 0</wrench>
+          <acceleration>-2.09543 0.0031 1.00039 3.13886 -0.935831 -3.14151</acceleration>
+          <wrench>-167.634 0.247974 80.0308 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='person_standing_clone'>
+        <pose>0.284115 3.86841 0 0 1e-06 2</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0.284115 3.86841 0 0 1e-06 2</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0.873455 -1.90466 1.00011 1.93834 0.920129 -6.1e-05</acceleration>
+          <wrench>69.8764 -152.373 80.0086 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='person_standing_clone_clone'>
+        <pose>5.48397 5.74478 -2e-06 -0 -9e-06 0.499815</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>5.48397 5.74478 -2e-06 -0 -9e-06 0.499815</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>-1.58678 -0.868654 -0.476129 -2.25845 -1.47076 -3.14049</acceleration>
+          <wrench>-126.943 -69.4923 -38.0903 0 -0 0</wrench>
         </link>
       </model>
       <model name='pickup'>
@@ -1202,67 +1476,67 @@
         </link>
       </model>
       <model name='waffle_pi'>
-        <pose>4.53969 7.1896 0.00789 -9e-06 0.006195 1.62031</pose>
+        <pose>4.53968 7.18958 0.007921 6e-06 0.006203 1.62112</pose>
         <scale>1 1 1</scale>
         <link name='base_footprint'>
-          <pose>4.53969 7.1896 0.00789 -9e-06 0.006195 1.62031</pose>
-          <velocity>4.5e-05 2.2e-05 -0.084134 -0.002174 -0.0002 -1.5e-05</velocity>
-          <acceleration>-0.000145 0.007186 2.60628 -0.618078 -0.029907 8.1e-05</acceleration>
-          <wrench>-0.000145 0.007186 2.60628 0 -0 0</wrench>
+          <pose>4.53968 7.18958 0.007921 6e-06 0.006203 1.62112</pose>
+          <velocity>4.6e-05 4e-05 -0.084551 -0.003232 2.1e-05 -1.5e-05</velocity>
+          <acceleration>-5.9e-05 -0.002716 -1.04087 0.254291 0.012619 -1.5e-05</acceleration>
+          <wrench>-5.9e-05 -0.002716 -1.04087 0 -0 0</wrench>
         </link>
         <link name='base_link'>
-          <pose>4.53969 7.1896 0.007895 -9e-06 0.006195 1.62031</pose>
-          <velocity>4.5e-05 2.3e-05 -0.084955 -0.002206 -0.000202 -1.5e-05</velocity>
-          <acceleration>-0.001591 0.037156 2.63996 -0.618052 -0.029908 7.6e-05</acceleration>
-          <wrench>-0.002185 0.051012 3.62443 0 -0 0</wrench>
+          <pose>4.53968 7.18958 0.007925 6e-06 0.006203 1.62112</pose>
+          <velocity>4.7e-05 4e-05 -0.085398 -0.003258 1.9e-05 -1.6e-05</velocity>
+          <acceleration>0.00055 -0.015025 -1.05418 0.254375 0.012628 -1.5e-05</acceleration>
+          <wrench>0.000755 -0.020628 -1.44729 0 -0 0</wrench>
         </link>
         <link name='base_scan'>
-          <pose>4.53969 7.1896 0.007895 -9e-06 0.006195 1.62031</pose>
-          <velocity>4.6e-05 2.3e-05 -0.084863 -0.002193 -0.000202 -1.6e-05</velocity>
-          <acceleration>-0.003476 0.076162 2.63347 -0.619488 -0.029984 7.9e-05</acceleration>
-          <wrench>-0.000396 0.008683 0.300216 0 -0 0</wrench>
+          <pose>4.53968 7.18958 0.007925 6e-06 0.006203 1.62112</pose>
+          <velocity>4.7e-05 4e-05 -0.085301 -0.003254 1.8e-05 -1.6e-05</velocity>
+          <acceleration>0.001342 -0.031031 -1.05135 0.254348 0.012632 -1.3e-05</acceleration>
+          <wrench>0.000153 -0.003538 -0.119854 0 -0 0</wrench>
         </link>
         <link name='camera_link'>
-          <pose>4.53969 7.1896 0.00789 -9e-06 0.006196 1.62031</pose>
-          <velocity>4.5e-05 2.7e-05 -0.084103 -0.002106 -0.000197 -1.6e-05</velocity>
-          <acceleration>-0.00014 0.007148 2.60688 -0.618868 -0.029947 7.8e-05</acceleration>
-          <wrench>-0.00014 0.007148 2.60688 0 -0 0</wrench>
+          <pose>4.53968 7.18958 0.007921 6e-06 0.006204 1.62112</pose>
+          <velocity>4.6e-05 4.4e-05 -0.084516 -0.003171 2.3e-05 -1.6e-05</velocity>
+          <acceleration>-6.1e-05 -0.002733 -1.04099 0.254072 0.01261 -1.4e-05</acceleration>
+          <wrench>-6.1e-05 -0.002733 -1.04099 0 -0 0</wrench>
         </link>
         <link name='camera_rgb_optical_frame'>
-          <pose>4.5359 7.26608 0.100417 -9e-06 0.006196 1.62031</pose>
-          <velocity>2.9e-05 0.000221 -0.084238 -0.002098 -0.000197 -1.5e-05</velocity>
-          <acceleration>-0.005698 0.121799 2.5125 -0.619324 -0.029973 8.1e-05</acceleration>
-          <wrench>-0.000199 0.004263 0.087938 0 -0 0</wrench>
+          <pose>4.53583 7.26606 0.100447 6e-06 0.006204 1.62112</pose>
+          <velocity>5.1e-05 0.000337 -0.084729 -0.003166 2.3e-05 -1.5e-05</velocity>
+          <acceleration>0.002272 -0.049748 -1.00213 0.254051 0.012612 -1.6e-05</acceleration>
+          <wrench>8e-05 -0.001741 -0.035075 0 -0 0</wrench>
         </link>
         <link name='caster_back_left_link'>
-          <pose>4.48453 7.00963 0.004991 0.021208 0.306758 1.68871</pose>
-          <velocity>3.3e-05 1.6e-05 -0.080732 -0.003173 0.00662 0</velocity>
-          <acceleration>3e-05 -0.000833 2.14537 0.171795 0.01408 0</acceleration>
-          <wrench>0 -1e-06 0.002145 0 -0 0</wrench>
+          <pose>4.48467 7.00956 0.005024 -1.52717 -0.395523 1.78239</pose>
+          <velocity>4.3e-05 3.1e-05 -0.084796 -0.004163 0.006882 -0</velocity>
+          <acceleration>0.000179 -0.001754 -1.0865 0 -0 0</acceleration>
+          <wrench>0 -2e-06 -0.001086 0 -0 0</wrench>
         </link>
         <link name='caster_back_right_link'>
-          <pose>4.61237 7.01596 0.004992 2.86904 0.796234 -1.45054</pose>
-          <velocity>2.9e-05 6e-06 -0.080687 -0.001126 0.005774 0</velocity>
-          <acceleration>-5.5e-05 -0.001003 2.14746 0.20986 -0.004457 0</acceleration>
-          <wrench>-0 -1e-06 0.002147 0 -0 0</wrench>
+          <pose>4.61251 7.016 0.005023 -0.903276 -0.608199 -0.726068</pose>
+          <velocity>4.4e-05 2.9e-05 -0.08482 -0.002136 0.006049 0</velocity>
+          <acceleration>0.000133 -0.001872 -1.08646 0 -0 0</acceleration>
+          <wrench>0 -2e-06 -0.001086 0 -0 0</wrench>
         </link>
         <link name='imu_link'>
-          <pose>4.53969 7.1896 0.00789 -9e-06 0.006195 1.62031</pose>
-          <velocity>4.6e-05 2.8e-05 -0.084132 -0.002097 -0.000197 -1.6e-05</velocity>
-          <acceleration>-0.000134 0.007065 2.60681 -0.620938 -0.030052 7.6e-05</acceleration>
-          <wrench>-0.000134 0.007065 2.60681 0 -0 0</wrench>
+          <pose>4.53968 7.18958 0.007921 6e-06 0.006204 1.62112</pose>
+          <velocity>4.7e-05 4.4e-05 -0.084546 -0.003177 2.2e-05 -1.7e-05</velocity>
+          <acceleration>-6.3e-05 -0.002733 -1.04088 0.254091 0.012615 -1.1e-05</acceleration>
+          <wrench>-6.3e-05 -0.002733 -1.04088 0 -0 0</wrench>
         </link>
         <link name='wheel_left_link'>
-          <pose>4.53964 7.19054 0.00792 -9e-06 -0.035041 1.62028</pose>
-          <velocity>-2e-06 2e-05 -0.086915 -0.002206 -0.000177 -1.4e-05</velocity>
-          <acceleration>-0.000983 0.0204 2.59175 -0.618153 -0.029799 0.000354</acceleration>
-          <wrench>-2.8e-05 0.000581 0.073862 0 -0 0</wrench>
+          <pose>4.53963 7.19061 0.007953 7e-06 -0.039078 1.62108</pose>
+          <velocity>1e-06 3.1e-05 -0.087323 -0.003256 4.4e-05 -1.4e-05</velocity>
+          <acceleration>0.000413 -0.008395 -1.03136 0.254386 0.012531 -0.000124</acceleration>
+          <wrench>1.2e-05 -0.000239 -0.029393 0 -0 0</wrench>
         </link>
         <link name='wheel_right_link'>
-          <pose>4.54084 7.16667 0.030305 0.024615 1.53983 1.6457</pose>
-          <velocity>-7e-06 7.4e-05 -0.086851 -0.002211 -0.000187 -1.6e-05</velocity>
-          <acceleration>-0.000994 0.020403 2.59156 -0.618247 -0.030344 0.000157</acceleration>
-          <wrench>-2.8e-05 0.000581 0.073857 0 -0 0</wrench>
+          <pose>4.54086 7.16664 0.030401 0.027771 1.5427 1.64967</pose>
+          <velocity>1e-06 0.000108 -0.087243 -0.003262 3.2e-05 -1.6e-05</velocity>
+          <acceleration>0.000415 -0.008395 -1.0314 0.25439 0.012678 -3e-05</acceleration>
+          <wrench>1.2e-05 -0.000239 -0.029394 0 -0 0</wrench>
         </link>
       </model>
       <light name='sun'>
@@ -2983,6 +3257,1887 @@
         <kinematic>0</kinematic>
       </link>
       <static>1</static>
+    </model>
+    <model name='cafe_table'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='surface'>
+          <pose>0 0 0.755 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.913 0.913 0.04</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='column'>
+          <pose>0 0 0.37 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.042 0.042 0.74</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='base'>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.56 0.56 0.04</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://cafe_table/meshes/cafe_table.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-0.885427 -3.3401 0 0 -0 0</pose>
+    </model>
+    <model name='cafe_table_0'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='surface'>
+          <pose>0 0 0.755 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.913 0.913 0.04</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='column'>
+          <pose>0 0 0.37 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.042 0.042 0.74</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='base'>
+          <pose>0 0 0.02 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.56 0.56 0.04</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://cafe_table/meshes/cafe_table.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0.051698 -3.33353 0 0 -0 0</pose>
+    </model>
+    <model name='cardboard_box'>
+      <pose>-5.50388 0.49795 0.15 0 -0 0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>2</mass>
+          <inertia>
+            <ixx>0.0416667</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0566667</iyy>
+            <iyz>0</iyz>
+            <izz>0.0683333</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.5 0.4 0.3</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <kp>1e+07</kp>
+                <kd>1</kd>
+                <min_depth>0.001</min_depth>
+                <max_vel>0.1</max_vel>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <pose>0 0 -0.15 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/cardboard box/3/files/meshes/cardboard_box.dae</uri>
+              <scale>1.25932 1.00745 0.755591</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='cardboard_box_clone'>
+      <pose>-5.48606 1.01465 0.149513 2e-06 -2e-06 -0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>2</mass>
+          <inertia>
+            <ixx>0.0416667</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0566667</iyy>
+            <iyz>0</iyz>
+            <izz>0.0683333</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.5 0.4 0.3</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <kp>1e+07</kp>
+                <kd>1</kd>
+                <min_depth>0.001</min_depth>
+                <max_vel>0.1</max_vel>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <pose>0 0 -0.15 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/cardboard box/3/files/meshes/cardboard_box.dae</uri>
+              <scale>1.25932 1.00745 0.755591</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='cardboard_box_clone_0'>
+      <pose>5.48496 -3.58118 0.149513 2e-06 -2e-06 -0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>2</mass>
+          <inertia>
+            <ixx>0.0416667</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0566667</iyy>
+            <iyz>0</iyz>
+            <izz>0.0683333</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.5 0.4 0.3</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <kp>1e+07</kp>
+                <kd>1</kd>
+                <min_depth>0.001</min_depth>
+                <max_vel>0.1</max_vel>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <pose>0 0 -0.15 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/cardboard box/3/files/meshes/cardboard_box.dae</uri>
+              <scale>1.25932 1.00745 0.755591</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='cardboard_box_clone_1'>
+      <pose>4.98579 -3.14911 0.149513 2e-06 -2e-06 -0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>2</mass>
+          <inertia>
+            <ixx>0.0416667</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0566667</iyy>
+            <iyz>0</iyz>
+            <izz>0.0683333</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.5 0.4 0.3</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <kp>1e+07</kp>
+                <kd>1</kd>
+                <min_depth>0.001</min_depth>
+                <max_vel>0.1</max_vel>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <pose>0 0 -0.15 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/cardboard box/3/files/meshes/cardboard_box.dae</uri>
+              <scale>1.25932 1.00745 0.755591</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='cardboard_box_clone_2'>
+      <pose>4.45481 -3.51905 0.149513 2e-06 -2e-06 -0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>2</mass>
+          <inertia>
+            <ixx>0.0416667</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0566667</iyy>
+            <iyz>0</iyz>
+            <izz>0.0683333</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.5 0.4 0.3</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <kp>1e+07</kp>
+                <kd>1</kd>
+                <min_depth>0.001</min_depth>
+                <max_vel>0.1</max_vel>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <pose>0 0 -0.15 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/cardboard box/3/files/meshes/cardboard_box.dae</uri>
+              <scale>1.25932 1.00745 0.755591</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='cardboard_box_clone_3'>
+      <pose>9.59016 4.43831 0.149513 2e-06 -2e-06 -0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>2</mass>
+          <inertia>
+            <ixx>0.0416667</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0566667</iyy>
+            <iyz>0</iyz>
+            <izz>0.0683333</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.5 0.4 0.3</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <kp>1e+07</kp>
+                <kd>1</kd>
+                <min_depth>0.001</min_depth>
+                <max_vel>0.1</max_vel>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <pose>0 0 -0.15 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/cardboard box/3/files/meshes/cardboard_box.dae</uri>
+              <scale>1.25932 1.00745 0.755591</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='cardboard_box_clone_4'>
+      <pose>9.59259 3.96789 0.149513 2e-06 -2e-06 -0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>2</mass>
+          <inertia>
+            <ixx>0.0416667</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0566667</iyy>
+            <iyz>0</iyz>
+            <izz>0.0683333</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.5 0.4 0.3</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <kp>1e+07</kp>
+                <kd>1</kd>
+                <min_depth>0.001</min_depth>
+                <max_vel>0.1</max_vel>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <pose>0 0 -0.15 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/cardboard box/3/files/meshes/cardboard_box.dae</uri>
+              <scale>1.25932 1.00745 0.755591</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='cardboard_box_clone_5'>
+      <pose>9.07184 4.09363 0.149513 2e-06 -2e-06 -0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>2</mass>
+          <inertia>
+            <ixx>0.0416667</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0566667</iyy>
+            <iyz>0</iyz>
+            <izz>0.0683333</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.5 0.4 0.3</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <kp>1e+07</kp>
+                <kd>1</kd>
+                <min_depth>0.001</min_depth>
+                <max_vel>0.1</max_vel>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <pose>0 0 -0.15 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/cardboard box/3/files/meshes/cardboard_box.dae</uri>
+              <scale>1.25932 1.00745 0.755591</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='cardboard_box_clone_6'>
+      <pose>9.63059 3.52528 0.149513 2e-06 -2e-06 -0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>2</mass>
+          <inertia>
+            <ixx>0.0416667</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0566667</iyy>
+            <iyz>0</iyz>
+            <izz>0.0683333</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.5 0.4 0.3</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <kp>1e+07</kp>
+                <kd>1</kd>
+                <min_depth>0.001</min_depth>
+                <max_vel>0.1</max_vel>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <pose>0 0 -0.15 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/cardboard box/3/files/meshes/cardboard_box.dae</uri>
+              <scale>1.25932 1.00745 0.755591</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='cardboard_box_clone_7'>
+      <pose>8.77308 -1.33689 0.149513 2e-06 -2e-06 -0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>2</mass>
+          <inertia>
+            <ixx>0.0416667</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0566667</iyy>
+            <iyz>0</iyz>
+            <izz>0.0683333</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.5 0.4 0.3</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <kp>1e+07</kp>
+                <kd>1</kd>
+                <min_depth>0.001</min_depth>
+                <max_vel>0.1</max_vel>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <pose>0 0 -0.15 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/cardboard box/3/files/meshes/cardboard_box.dae</uri>
+              <scale>1.25932 1.00745 0.755591</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='cardboard_box_clone_8'>
+      <pose>8.07308 -0.958942 0.149513 2e-06 -2e-06 -0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>2</mass>
+          <inertia>
+            <ixx>0.0416667</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0566667</iyy>
+            <iyz>0</iyz>
+            <izz>0.0683333</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.5 0.4 0.3</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <kp>1e+07</kp>
+                <kd>1</kd>
+                <min_depth>0.001</min_depth>
+                <max_vel>0.1</max_vel>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <pose>0 0 -0.15 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/cardboard box/3/files/meshes/cardboard_box.dae</uri>
+              <scale>1.25932 1.00745 0.755591</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='cardboard_box_clone_9'>
+      <pose>7.43089 -1.30297 0.149513 2e-06 -2e-06 -0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>2</mass>
+          <inertia>
+            <ixx>0.0416667</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0566667</iyy>
+            <iyz>0</iyz>
+            <izz>0.0683333</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.5 0.4 0.3</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <kp>1e+07</kp>
+                <kd>1</kd>
+                <min_depth>0.001</min_depth>
+                <max_vel>0.1</max_vel>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <pose>0 0 -0.15 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/cardboard box/3/files/meshes/cardboard_box.dae</uri>
+              <scale>1.25932 1.00745 0.755591</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='aws_robomaker_warehouse_PalletJackB_01'>
+      <link name='link'>
+        <inertial>
+          <mass>2</mass>
+          <inertia>
+            <ixx>0.277</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.452</iyy>
+            <iyz>0</iyz>
+            <izz>0.268</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>/home/brendan/.ignition/fuel/fuel.ignitionrobotics.org/613bcm/models/aws_robomaker_warehouse_palletjackb_01/1/meshes/aws_robomaker_warehouse_PalletJackB_01_collision.DAE</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.2</mu>
+                <mu2>0.2</mu2>
+                <fdir1>0 0 0</fdir1>
+                <slip1>0</slip1>
+                <slip2>0</slip2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>/home/brendan/.ignition/fuel/fuel.ignitionrobotics.org/613bcm/models/aws_robomaker_warehouse_palletjackb_01/1/meshes/aws_robomaker_warehouse_PalletJackB_01_visual.DAE</uri>
+            </mesh>
+          </geometry>
+          <meta>
+            <layer>1</layer>
+          </meta>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-3.00544 -0.171045 0 0 -0 0</pose>
+    </model>
+    <model name='aws_robomaker_warehouse_PalletJackB_01_0'>
+      <link name='link'>
+        <inertial>
+          <mass>2</mass>
+          <inertia>
+            <ixx>0.277</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.452</iyy>
+            <iyz>0</iyz>
+            <izz>0.268</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>/home/brendan/.ignition/fuel/fuel.ignitionrobotics.org/613bcm/models/aws_robomaker_warehouse_palletjackb_01/1/meshes/aws_robomaker_warehouse_PalletJackB_01_collision.DAE</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.2</mu>
+                <mu2>0.2</mu2>
+                <fdir1>0 0 0</fdir1>
+                <slip1>0</slip1>
+                <slip2>0</slip2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>/home/brendan/.ignition/fuel/fuel.ignitionrobotics.org/613bcm/models/aws_robomaker_warehouse_palletjackb_01/1/meshes/aws_robomaker_warehouse_PalletJackB_01_visual.DAE</uri>
+            </mesh>
+          </geometry>
+          <meta>
+            <layer>1</layer>
+          </meta>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>6.01684 -1.00646 0 0 -0 0</pose>
+    </model>
+    <model name='Mecanum lift' xmlns:ignition='https://ignitionrobotics.org/schema'>
+      <link name='chassis'>
+        <inertial>
+          <mass>1.14395</mass>
+          <inertia>
+            <ixx>0.126164</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.416519</iyy>
+            <iyz>0</iyz>
+            <izz>0.481014</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='scissor'>
+          <pose>-0.03 -0.132 0.708 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2.04 0.936 0.6</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='bar_1'>
+          <pose>-0.042 0.294 1.98 0 1.57 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.03</radius>
+              <length>1.8</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='bar_2'>
+          <pose>-0.042 0.294 1.578 0 1.57 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.03</radius>
+              <length>1.8</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='bar_3'>
+          <pose>-0.042 -0.558 1.578 0 1.57 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.03</radius>
+              <length>1.8</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='bar_4'>
+          <pose>-0.042 -0.558 1.98 0 1.57 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.03</radius>
+              <length>1.8</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <pose>0 0 -0.084 1.57 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>0.6 0.6 0.6</scale>
+              <uri>/home/brendan/.ignition/fuel/fuel.ignitionrobotics.org/openrobotics/models/mecanum lift/5/meshes/MecanumLift.dae</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>1 1 1 1</specular>
+            <pbr>
+              <metal>
+                <albedo_map>materials/textures/Forklift_Forklift_BaseColor.png</albedo_map>
+                <normal_map>materials/textures/Forklift_Forklift_Normal.png</normal_map>
+                <metalness_map>materials/textures/Forklift_Forklift_Metallic.png</metalness_map>
+                <roughness_map>materials/textures/Forklift_Forklift_Roughness.png</roughness_map>
+                <environment_map>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/Reflective table/1/files/materials/textures/DepotEnvMap.dds</environment_map>
+              </metal>
+            </pbr>
+            <script>
+              <uri>/home/brendan/.ignition/fuel/fuel.ignitionrobotics.org/openrobotics/models/mecanum lift/5/materials/scripts/</uri>
+              <uri>/home/brendan/.ignition/fuel/fuel.ignitionrobotics.org/openrobotics/models/mecanum lift/5/materials/textures/</uri>
+              <name>UrbanTile/Forklift_Diffuse</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='front_right_wheel'>
+        <pose>0.858 -0.552 0.186 0 -0 0</pose>
+        <inertial>
+          <mass>2</mass>
+          <inertia>
+            <ixx>0.145833</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.145833</iyy>
+            <iyz>0</iyz>
+            <izz>0.125</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <sphere>
+              <radius>0.18</radius>
+            </sphere>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>0</mu2>
+                <fdir1 ignition:expressed_in='chassis'>1 1 0</fdir1>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>/home/brendan/.ignition/fuel/fuel.ignitionrobotics.org/openrobotics/models/mecanum lift/5/meshes/mecanum_wheel_right.STL</uri>
+              <scale>0.0036 0.0036 0.0036</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>1 1 1 1</specular>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='rear_right_wheel'>
+        <pose>-0.93 -0.552 0.186 0 -0 0</pose>
+        <inertial>
+          <mass>2</mass>
+          <inertia>
+            <ixx>0.145833</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.145833</iyy>
+            <iyz>0</iyz>
+            <izz>0.125</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <sphere>
+              <radius>0.18</radius>
+            </sphere>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>0</mu2>
+                <fdir1 ignition:expressed_in='chassis'>1 -1 0</fdir1>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>/home/brendan/.ignition/fuel/fuel.ignitionrobotics.org/openrobotics/models/mecanum lift/5/meshes/mecanum_wheel_left.STL</uri>
+              <scale>0.0036 0.0036 0.0036</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>1 1 1 1</specular>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='front_left_wheel'>
+        <pose>0.858 0.282 0.186 0 -0 0</pose>
+        <inertial>
+          <mass>2</mass>
+          <inertia>
+            <ixx>0.145833</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.145833</iyy>
+            <iyz>0</iyz>
+            <izz>0.125</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <sphere>
+              <radius>0.18</radius>
+            </sphere>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>0</mu2>
+                <fdir1 ignition:expressed_in='chassis'>1 -1 0</fdir1>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>/home/brendan/.ignition/fuel/fuel.ignitionrobotics.org/openrobotics/models/mecanum lift/5/meshes/mecanum_wheel_left.STL</uri>
+              <scale>0.0036 0.0036 0.0036</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>1 1 1 1</specular>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='rear_left_wheel'>
+        <pose>-0.93 0.282 0.186 0 -0 0</pose>
+        <inertial>
+          <mass>2</mass>
+          <inertia>
+            <ixx>0.145833</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.145833</iyy>
+            <iyz>0</iyz>
+            <izz>0.125</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <sphere>
+              <radius>0.18</radius>
+            </sphere>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>0</mu2>
+                <fdir1 ignition:expressed_in='chassis'>1 1 0</fdir1>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>/home/brendan/.ignition/fuel/fuel.ignitionrobotics.org/openrobotics/models/mecanum lift/5/meshes/mecanum_wheel_right.STL</uri>
+              <scale>0.0036 0.0036 0.0036</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+            <specular>1 1 1 1</specular>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='front_left_wheel_joint' type='revolute'>
+        <parent>chassis</parent>
+        <child>front_left_wheel</child>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <joint name='front_right_wheel_joint' type='revolute'>
+        <parent>chassis</parent>
+        <child>front_right_wheel</child>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <joint name='rear_left_wheel_joint' type='revolute'>
+        <parent>chassis</parent>
+        <child>rear_left_wheel</child>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <joint name='rear_right_wheel_joint' type='revolute'>
+        <parent>chassis</parent>
+        <child>rear_right_wheel</child>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <plugin name='ignition::gazebo::systems::MecanumDrive' filename='ignition-gazebo-mecanum-drive-system'>
+        <front_left_joint>front_left_wheel_joint</front_left_joint>
+        <back_left_joint>rear_left_wheel_joint</back_left_joint>
+        <front_right_joint>front_right_wheel_joint</front_right_joint>
+        <back_right_joint>rear_right_wheel_joint</back_right_joint>
+        <wheel_separation>0.834</wheel_separation>
+        <wheelbase>1.788</wheelbase>
+        <wheel_radius>0.18</wheel_radius>
+      </plugin>
+      <pose>1.77596 0.897183 0 0 -0 0</pose>
+    </model>
+    <model name='cardboard_box_clone_2_clone'>
+      <pose>-1.58599 -0.560108 0.149 0 -0 0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>2</mass>
+          <inertia>
+            <ixx>0.0416667</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0566667</iyy>
+            <iyz>0</iyz>
+            <izz>0.0683333</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.5 0.4 0.3</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <kp>1e+07</kp>
+                <kd>1</kd>
+                <min_depth>0.001</min_depth>
+                <max_vel>0.1</max_vel>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <pose>0 0 -0.15 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/cardboard box/3/files/meshes/cardboard_box.dae</uri>
+              <scale>1.25932 1.00745 0.755591</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='cardboard_box_clone_2_clone_0'>
+      <pose>-1.61214 -0.119262 0.149 0 -0 0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>2</mass>
+          <inertia>
+            <ixx>0.0416667</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0566667</iyy>
+            <iyz>0</iyz>
+            <izz>0.0683333</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.5 0.4 0.3</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <kp>1e+07</kp>
+                <kd>1</kd>
+                <min_depth>0.001</min_depth>
+                <max_vel>0.1</max_vel>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <pose>0 0 -0.15 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/cardboard box/3/files/meshes/cardboard_box.dae</uri>
+              <scale>1.25932 1.00745 0.755591</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='cardboard_box_clone_2_clone_1'>
+      <pose>-1.07041 -0.302048 0.149 0 -0 0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>2</mass>
+          <inertia>
+            <ixx>0.0416667</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0566667</iyy>
+            <iyz>0</iyz>
+            <izz>0.0683333</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.5 0.4 0.3</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <kp>1e+07</kp>
+                <kd>1</kd>
+                <min_depth>0.001</min_depth>
+                <max_vel>0.1</max_vel>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <pose>0 0 -0.15 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/cardboard box/3/files/meshes/cardboard_box.dae</uri>
+              <scale>1.25932 1.00745 0.755591</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='cardboard_box_clone_2_clone_2'>
+      <pose>-1.76115 3.70729 0.149 0 -0 0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>2</mass>
+          <inertia>
+            <ixx>0.0416667</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0566667</iyy>
+            <iyz>0</iyz>
+            <izz>0.0683333</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.5 0.4 0.3</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <kp>1e+07</kp>
+                <kd>1</kd>
+                <min_depth>0.001</min_depth>
+                <max_vel>0.1</max_vel>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <pose>0 0 -0.15 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/cardboard box/3/files/meshes/cardboard_box.dae</uri>
+              <scale>1.25932 1.00745 0.755591</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='cardboard_box_clone_2_clone_3'>
+      <pose>-2.38031 3.71118 0.149 0 -0 0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>2</mass>
+          <inertia>
+            <ixx>0.0416667</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0566667</iyy>
+            <iyz>0</iyz>
+            <izz>0.0683333</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.5 0.4 0.3</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <kp>1e+07</kp>
+                <kd>1</kd>
+                <min_depth>0.001</min_depth>
+                <max_vel>0.1</max_vel>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <pose>0 0 -0.15 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/cardboard box/3/files/meshes/cardboard_box.dae</uri>
+              <scale>1.25932 1.00745 0.755591</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='person_standing_clone'>
+      <link name='link'>
+        <inertial>
+          <pose>0 -0.1 0.95 0 -0 0</pose>
+          <mass>80</mass>
+          <inertia>
+            <ixx>24.88</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>25.73</iyy>
+            <iyz>0</iyz>
+            <izz>2.48</izz>
+          </inertia>
+        </inertial>
+        <collision name='bottom'>
+          <pose>0 -0.1 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.5 0.35 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='person'>
+          <pose>0 0 0.02 0.04 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>https://fuel.ignitionrobotics.org/1.0/abmohit/models/standing person/1/files/meshes/standing.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <pose>0 0 0.02 0.04 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>https://fuel.ignitionrobotics.org/1.0/abmohit/models/standing person/1/files/meshes/standing.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0.284115 3.86841 0 0 -1e-06 -9.8e-05</pose>
+    </model>
+    <model name='person_standing_clone_clone'>
+      <link name='link'>
+        <inertial>
+          <pose>0 -0.1 0.95 0 -0 0</pose>
+          <mass>80</mass>
+          <inertia>
+            <ixx>24.88</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>25.73</iyy>
+            <iyz>0</iyz>
+            <izz>2.48</izz>
+          </inertia>
+        </inertial>
+        <collision name='bottom'>
+          <pose>0 -0.1 0.01 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.5 0.35 0.02</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='person'>
+          <pose>0 0 0.02 0.04 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>https://fuel.ignitionrobotics.org/1.0/abmohit/models/standing person/1/files/meshes/standing.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <pose>0 0 0.02 0.04 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>https://fuel.ignitionrobotics.org/1.0/abmohit/models/standing person/1/files/meshes/standing.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>5.48577 5.76287 5e-06 1.9e-05 -0 2</pose>
+    </model>
+    <model name='cardboard_box_clone_2_clone_3_clone'>
+      <pose>-4.25106 5.43504 0.149 0 -0 0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>2</mass>
+          <inertia>
+            <ixx>0.0416667</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0566667</iyy>
+            <iyz>0</iyz>
+            <izz>0.0683333</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.5 0.4 0.3</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <kp>1e+07</kp>
+                <kd>1</kd>
+                <min_depth>0.001</min_depth>
+                <max_vel>0.1</max_vel>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <pose>0 0 -0.15 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/cardboard box/3/files/meshes/cardboard_box.dae</uri>
+              <scale>1.25932 1.00745 0.755591</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
     </model>
   </world>
 </sdf>
