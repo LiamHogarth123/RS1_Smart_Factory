@@ -14,6 +14,7 @@ int main(int argc, char** argv) {
     // Start the defaultStat function in a separate thread
     std::thread default_stat_thread([&controller_node]() {controller_node->Default_state();});
 
+
     // Spin the node to handle incoming messages
     rclcpp::spin(controller_node);
 

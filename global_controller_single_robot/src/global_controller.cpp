@@ -7,42 +7,24 @@
 Global_Controller::Global_Controller(const std::string &namespace_param) : Node("global_controller") {
 
     robot_status = false;
-
    
     // std::string path_topic = "trajectory"; 
     path_pub_ = this->create_publisher<nav_msgs::msg::Path>("trajectory", 10);
-    robot_status_sub = this->create_subscription<std_msgs::msg::Bool>("reached_goal", 10, std::bind(&Global_Controller::statusCallback, this, std::placeholders::_1));\
-    Shut_down_request = this->create_publisher<std_msgs::msg::Bool>("shut_down", 10);
 
+    robot_status_sub = this->create_subscription<std_msgs::msg::Bool>("reached_goal", 10, std::bind(&Global_Controller::statusCallback, this, std::placeholders::_1));\
+    
+    Shut_down_request = this->create_publisher<std_msgs::msg::Bool>("shut_down", 10);
+    
     map_subscription_ = this->create_subscription<nav_msgs::msg::OccupancyGrid>("map", 10, std::bind(&Global_Controller::mapCallback, this, std::placeholders::_1));
 
     map_data_recieved = false;
-    
-
-
-}
-
-
-
-
-
-void Global_Controller::mapCallback(const nav_msgs::msg::OccupancyGrid::SharedPtr msg){
-        RCLCPP_INFO(this->get_logger(), "Received a map with resolution: %f", msg->info.resolution);
-        RCLCPP_INFO(this->get_logger(), "Map width: %d, height: %d", msg->info.width, msg->info.height);
-        map = *msg;
-        map_data_recieved = true;
         
+
 }
 
 
 
 
-void Global_Controller::statusCallback(const std_msgs::msg::Bool::SharedPtr msg) {
-    if (msg->data) {
-        RCLCPP_INFO(this->get_logger(), "Goal reached, sending next trajectory.");
-        robot_status = true;
-    }
-}
 
 
 
@@ -54,22 +36,11 @@ void Global_Controller::Default_state(){
     rclcpp::Rate rate(10); // 10 Hz
     std_msgs::msg::Bool msg;
     int r = 0;
-    while (!map_data_recieved){
-        
-        if (r < 1){
-            std::cout << "first waiting" << std::endl;
-            r++;
-        }
-        rate.sleep();
-    }
 
 
 
-    // GPS.UpdateMapData(map, map_meta_data);
-    
-    // GPS.GeneratePRM(map, map.info, true);
-    
-
+    // initialising the path planning system - old code method
+    GPS.UpdateMapData(map);    
     
 
     
@@ -81,14 +52,17 @@ void Global_Controller::Default_state(){
     start.x = -2;
     start.y = 0.5;
 
+    //while (start service hasn't been sent){
+        // wait
+    // }
+
 
     
     
     for (int i = 0; i < goals.size(); i++){
+
         trajectory.clear();
-        trajectory.push_back(goals.at(i)); // convert this line to trajectory = PRM.genarate_path(Robot_odom, goals.at(i))
-        // trajectory.clear();
-        // trajectory = GPS.A_star_To_Goal(start, goals.at(i));
+        trajectory = GPS.A_star_To_Goal(start, goals.at(i));
         publishTrajectory(trajectory);
 
         int k = 0;
@@ -120,11 +94,12 @@ void Global_Controller::Default_state(){
             }
 
         }
-        // else {
+        else {
         // report missing package
         // maybe read organise goals with task allocation
-        // }
+        }
         
+
 
 
     }
@@ -154,6 +129,9 @@ void Global_Controller::Default_state(){
 
 
 
+// Note
+// Need to communicate robot's odom, status, AR info,
+// nav_msgs::msgs::Odometry, int or bool, AR info
 
 
 
@@ -162,8 +140,23 @@ void Global_Controller::Default_state(){
 
 
 
+// Ros communication functions
+////////////////////////////////////////////////////////////////////////////////////////
 
+void Global_Controller::mapCallback(const nav_msgs::msg::OccupancyGrid::SharedPtr msg){
+        RCLCPP_INFO(this->get_logger(), "Received a map with resolution: %f", msg->info.resolution);
+        RCLCPP_INFO(this->get_logger(), "Map width: %d, height: %d", msg->info.width, msg->info.height);
+        map = *msg;
+        map_data_recieved = true;
+        
+}
 
+void Global_Controller::statusCallback(const std_msgs::msg::Bool::SharedPtr msg) {
+    if (msg->data) {
+        RCLCPP_INFO(this->get_logger(), "Goal reached, sending next trajectory.");
+        robot_status = true;
+    }
+}
 
 
 

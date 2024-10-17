@@ -6,7 +6,7 @@
 
 Controller::Controller(const std::string &namespace_param)  : Node(namespace_param + "_controller"), namespace_param_(namespace_param) {
 
-  
+
   // Initialize your classes
   Turtlebot_SensorProcessing machine_vision_;
   turtlebot_control Turtlebot_GPS_;
@@ -50,19 +50,13 @@ void Controller::Default_state(){
 
   rclcpp::Rate rate(10); // 10 Hz
   bool active = true;
-  int o = 0;
+
 
   while (active){
       
-    if (o == 0){
-      std::cout << "looping" << std::endl; 
-      o++;
-    }
-    if (NewPath_){
-      
-      controlLoop();
-      o = 0;
-    }
+    //publish odom, status, and Ar Info if it is avaliable. 
+
+
 
     if (shutdown_request_){
       rclcpp::shutdown();
@@ -169,8 +163,8 @@ void Controller::controlLoop() {
 
 void Controller::shut_downCallback(const std_msgs::msg::Bool::SharedPtr msg) {
     if (msg->data) {
-
-        shutdown_request_ = true;
+      shutdown_request_ = true;
+      rclcpp::shutdown();
         // Add your logic to send the next goal or perform other actions
     }
 }
@@ -202,6 +196,7 @@ void Controller::pathCallback(const nav_msgs::msg::Path::SharedPtr msg) {
     path_ = msg;
     current_waypoint_ = 0;
     NewPath_ = true;
+    controlLoop();
 }
 
 void Controller::RGBCallback(const sensor_msgs::msg::Image::SharedPtr Msg){

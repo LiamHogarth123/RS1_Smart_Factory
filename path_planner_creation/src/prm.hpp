@@ -121,6 +121,7 @@ private:
     int numberOfPoints_;
     std::vector<cv::Point> path_points_withoutValidation;
     std::vector<cv::Point> path_points;
+    
 };
 
 #endif // PRM_HPP

@@ -4,25 +4,19 @@ from launch.actions import DeclareLaunchArgument
 from launch.substitutions import LaunchConfiguration, TextSubstitution
 
 def generate_launch_description():
+    # Declare the namespace argument
     namespace_arg = DeclareLaunchArgument(
-        'namespace', default_value='',
-        description='Namespace for the TurtleBot controller')
-    
-    map_yaml_arg = DeclareLaunchArgument(
-        'map_yaml', 
-        default_value='/home/liam/map.yaml',  # Provide the default path to your map.yaml file
-        description='Full path to the map YAML file to load')
+        'namespace',
+        default_value='',
+        description='Namespace for the TurtleBot controller'
+    )
 
+    # Return the launch description
     return LaunchDescription([
+        # Include the namespace argument in the launch description
         namespace_arg,
-          Node(
-            package='nav2_map_server',
-            executable='map_server',
-            name='map_server',
-            namespace=LaunchConfiguration('namespace'),
-            output='screen',
-            parameters=[{'yaml_filename': LaunchConfiguration('map_yaml')}]
-        ),
+        
+        # Define the global_controller node with namespace substitution
         Node(
             package='global_controller_single_robot',
             executable='global_controller',
@@ -31,6 +25,4 @@ def generate_launch_description():
             output='screen',
             arguments=[LaunchConfiguration('namespace')],
         ),
-      
     ])
-

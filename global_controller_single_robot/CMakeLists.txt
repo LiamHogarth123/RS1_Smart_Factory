@@ -10,6 +10,7 @@ find_package(sensor_msgs REQUIRED)
 find_package(marker_msgs REQUIRED)
 find_package(tf2_geometry_msgs REQUIRED)
 find_package(OpenCV REQUIRED)  # Find OpenCV package
+find_package(nlohmann_json REQUIRED)
 
 # Add executables and link libraries
 add_executable(global_controller
@@ -35,7 +36,9 @@ ament_target_dependencies(
 # Link OpenCV libraries to the executable
 target_link_libraries(global_controller
   ${OpenCV_LIBS}
+  nlohmann_json::nlohmann_json
 )
+
 
 # Install the executable
 install(TARGETS

@@ -48,7 +48,7 @@ private:
 
 
     Task_Allocation TA;
-    // PRM GPS;
+    Path_Planner GPS;
     bool map_data_recieved;
 
 

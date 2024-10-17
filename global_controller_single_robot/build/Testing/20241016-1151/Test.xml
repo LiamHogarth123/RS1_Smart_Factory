@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="(empty)"
+	BuildStamp="20241016-1151-Experimental"
+	Name="Liam-ROS2"
+	Generator="ctest-3.22.1"
+	CompilerName="/usr/bin/c++"
+	CompilerVersion="11.4.0"
+	OSName="Linux"
+	Hostname="Liam-ROS2"
+	OSRelease="6.8.0-45-generic"
+	OSVersion="#45~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Wed Sep 11 15:25:05 UTC 2"
+	OSPlatform="x86_64"
+	Is64Bits="1"
+	VendorString="GenuineIntel"
+	VendorID="Intel Corporation"
+	FamilyID="6"
+	ModelID="126"
+	ProcessorCacheSize="8192"
+	NumberOfLogicalCPU="8"
+	NumberOfPhysicalCPU="4"
+	TotalVirtualMemory="0"
+	TotalPhysicalMemory="15763"
+	LogicalProcessorsPerPhysical="2"
+	ProcessorClockFrequency="2446.61"
+	>
+	<Testing>
+		<StartDateTime>Oct 16 22:51 AEDT</StartDateTime>
+		<StartTestTime>1729079485</StartTestTime>
+		<TestList/>
+		<EndDateTime>Oct 16 22:51 AEDT</EndDateTime>
+		<EndTestTime>1729079485</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>

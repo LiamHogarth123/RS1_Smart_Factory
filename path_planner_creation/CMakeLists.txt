@@ -10,6 +10,8 @@ find_package(sensor_msgs REQUIRED)
 find_package(marker_msgs REQUIRED)
 find_package(tf2_geometry_msgs REQUIRED)
 find_package(OpenCV REQUIRED)  # Find OpenCV package
+find_package(nlohmann_json REQUIRED)
+
 
 # Add executables and link libraries
 add_executable(prm_creation 
@@ -20,6 +22,8 @@ add_executable(prm_creation
   # src/turtlebot_sensorprocessing.cpp
   # src/turtlebot_control_cal.cpp
 )
+
+# target_link_libraries(${PROJECT_NAME} nlohmann_json::nlohmann_json)
 
 # Link the executable to the necessary libraries
 ament_target_dependencies(
@@ -35,6 +39,7 @@ ament_target_dependencies(
 # Link OpenCV libraries to the executable
 target_link_libraries(prm_creation
   ${OpenCV_LIBS}
+  nlohmann_json::nlohmann_json
 )
 
 # Install the executable
