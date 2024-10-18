@@ -9,16 +9,10 @@ Global_Controller::Global_Controller(const std::string &namespace_param) : Node(
     robot_status = false;
    
     // std::string path_topic = "trajectory"; 
-    path_pub_ = this->create_publisher<nav_msgs::msg::Path>("trajectory", 10);
-
     robot_status_sub = this->create_subscription<std_msgs::msg::Bool>("reached_goal", 10, std::bind(&Global_Controller::statusCallback, this, std::placeholders::_1));\
-    
     Shut_down_request = this->create_publisher<std_msgs::msg::Bool>("shut_down", 10);
-    
     map_subscription_ = this->create_subscription<nav_msgs::msg::OccupancyGrid>("map", 10, std::bind(&Global_Controller::mapCallback, this, std::placeholders::_1));
-
     map_data_recieved = false;
-        
 
 }
 
@@ -42,6 +36,10 @@ void Global_Controller::Default_state(){
     // initialising the path planning system - old code method
     GPS.UpdateMapData(map);    
     
+    //add multiple turtlebots hear if needed
+    auto manager = std::make_shared<TurtleBotManager>("");
+    
+
 
     
     std::vector<geometry_msgs::msg::Point> goals = TA.get_job_list();
@@ -49,12 +47,12 @@ void Global_Controller::Default_state(){
     delievery_Location1.x = 0;
     delievery_Location1.y = 0;
     geometry_msgs::msg::Point start;
-    start.x = -2;
-    start.y = 0.5;
-
+    start = manager->GetCurrentOdom().pose.pose.position;
     //while (start service hasn't been sent){
         // wait
     // }
+
+    int package_id = 5;
 
 
     
@@ -63,31 +61,24 @@ void Global_Controller::Default_state(){
 
         trajectory.clear();
         trajectory = GPS.A_star_To_Goal(start, goals.at(i));
-        publishTrajectory(trajectory);
+        manager->publishTrajectory(trajectory);
 
-        int k = 0;
-        while (!robot_status){ // for multiple robot the below loop will run on a seperate thread. if synochous
-            if (k == 0){
-                std::cout << "waiting1" << std::endl;
-                k++;
-            }
+        while (!manager->get_status_bool()){ // for multiple robot the below loop will run on a seperate thread. if synochous
+           
             rate.sleep();
-
+            //Add listener for e-stop
         }
-        
+
+        Process_Package_AR_info(manager->GetARTag(), package_id);
         if (true){ // if (get_AR_Tag = true){
             trajectory.clear();
-            // trajectory = GPS.A_star_To_Goal(goals.at(i), delievery_Location1);
-            trajectory.push_back(delievery_Location1); // convert this line to trajectory = PRM.genarate_path(start, end);
+            trajectory = GPS.A_star_To_Goal(manager->GetCurrentOdom().pose.pose.position, delievery_Location1);
          
-            publishTrajectory(trajectory);
+            manager->publishTrajectory(trajectory);
 
-            int j = 0;
-            while (!robot_status){
-                if (j == 0){
-                    std::cout << "waiting2" << std::endl;
-                    j++;
-                }
+         
+            while (!manager->get_status_bool()){
+         
 
             rate.sleep();
 
@@ -95,8 +86,7 @@ void Global_Controller::Default_state(){
 
         }
         else {
-        // report missing package
-        // maybe read organise goals with task allocation
+            // maybe read organise goals with task allocation
         }
         
 
@@ -112,6 +102,20 @@ void Global_Controller::Default_state(){
 
     rclcpp::shutdown();
 
+}
+
+
+bool Global_Controller::Process_Package_AR_info(int Found_tag, int expected_tag){
+    // if (Found_tag == expected_tag){
+    //     //log package is in transit
+    //     return true;
+    // }
+    // else {
+    //     //report missing package
+    // }
+
+
+    return true;
 }
 
 

@@ -7,6 +7,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/global_controller.dir/src/prm2.cpp.o.d"
   "CMakeFiles/global_controller.dir/src/task_allocation.cpp.o"
   "CMakeFiles/global_controller.dir/src/task_allocation.cpp.o.d"
+  "CMakeFiles/global_controller.dir/src/turtlebot_manager.cpp.o"
+  "CMakeFiles/global_controller.dir/src/turtlebot_manager.cpp.o.d"
   "global_controller"
   "global_controller.pdb"
 )

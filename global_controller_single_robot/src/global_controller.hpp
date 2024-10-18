@@ -12,7 +12,7 @@
 #include <std_msgs/msg/bool.hpp>
 
 
-
+#include "turtlebot_manager.hpp"
 #include "prm2.hpp"
 #include "task_allocation.hpp"
 
@@ -32,7 +32,7 @@ public:
 
 private:
   
-    
+    bool Process_Package_AR_info(int Found_tag, int expected_tag);
     bool robot_status;
 
     nav_msgs::msg::OccupancyGrid map;

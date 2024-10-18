@@ -306,6 +306,30 @@ src/task_allocation.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/global_controller.dir/build.make CMakeFiles/global_controller.dir/src/task_allocation.cpp.s
 .PHONY : src/task_allocation.cpp.s
 
+src/turtlebot_manager.o: src/turtlebot_manager.cpp.o
+.PHONY : src/turtlebot_manager.o
+
+# target to build an object file
+src/turtlebot_manager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/global_controller.dir/build.make CMakeFiles/global_controller.dir/src/turtlebot_manager.cpp.o
+.PHONY : src/turtlebot_manager.cpp.o
+
+src/turtlebot_manager.i: src/turtlebot_manager.cpp.i
+.PHONY : src/turtlebot_manager.i
+
+# target to preprocess a source file
+src/turtlebot_manager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/global_controller.dir/build.make CMakeFiles/global_controller.dir/src/turtlebot_manager.cpp.i
+.PHONY : src/turtlebot_manager.cpp.i
+
+src/turtlebot_manager.s: src/turtlebot_manager.cpp.s
+.PHONY : src/turtlebot_manager.s
+
+# target to generate assembly for a file
+src/turtlebot_manager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/global_controller.dir/build.make CMakeFiles/global_controller.dir/src/turtlebot_manager.cpp.s
+.PHONY : src/turtlebot_manager.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -334,6 +358,9 @@ help:
 	@echo "... src/task_allocation.o"
 	@echo "... src/task_allocation.i"
 	@echo "... src/task_allocation.s"
+	@echo "... src/turtlebot_manager.o"
+	@echo "... src/turtlebot_manager.i"
+	@echo "... src/turtlebot_manager.s"
 .PHONY : help
 
 

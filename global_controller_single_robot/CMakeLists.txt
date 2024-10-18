@@ -11,6 +11,7 @@ find_package(marker_msgs REQUIRED)
 find_package(tf2_geometry_msgs REQUIRED)
 find_package(OpenCV REQUIRED)  # Find OpenCV package
 find_package(nlohmann_json REQUIRED)
+find_package(warehouse_robot_msgs REQUIRED)
 
 # Add executables and link libraries
 add_executable(global_controller
@@ -18,6 +19,7 @@ add_executable(global_controller
   src/main.cpp
   src/task_allocation.cpp
   src/prm2.cpp
+  src/turtlebot_manager.cpp
   # src/turtlebot_sensorprocessing.cpp
   # src/turtlebot_control_cal.cpp
 )
@@ -31,6 +33,7 @@ ament_target_dependencies(
   sensor_msgs
   marker_msgs
   tf2_geometry_msgs
+  warehouse_robot_msgs
 )
 
 # Link OpenCV libraries to the executable

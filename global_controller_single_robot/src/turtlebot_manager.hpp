@@ -8,43 +8,44 @@
 #include <sensor_msgs/msg/image.hpp>
 #include "marker_msgs/msg/marker.hpp"
 // #include "std_msgs/msg/int16.hpp"
+#include "nav_msgs/msg/path.hpp"
+#include "warehouse_robot_msgs/msg/robot_data.hpp"
+
 #include <string>
 #include <mutex>
 
-class DefaultTurtleBot : public rclcpp::Node
+class TurtleBotManager : public rclcpp::Node
 {
 public:
-    DefaultTurtleBot(const std::string& name);
-    void SendCmdTb1(const geometry_msgs::msg::Twist instructions);
+    TurtleBotManager(const std::string& name);
+    void robot_info_Callback(const warehouse_robot_msgs::msg::RobotData::SharedPtr msg);
+    // void robot_info_Callback(const warehouse_robot_msgs::msg::RobotData::SharedPtr msg);
     void robot_info_Callback(const nav_msgs::msg::Odometry::SharedPtr odomMsg);
     void publishTrajectory(std::vector<geometry_msgs::msg::Point> goals);
 
-    
 
     nav_msgs::msg::Odometry GetCurrentOdom();
     double GetCurrentSpeed();
-    marker_msgs::msg::Marker GetARTag();
+    int GetARTag();
+    std::string getStatus();
+    bool get_status_bool();
     
-    // std_msgs::msg::Int16 GetBoundaryStatus();
 
 private:
     std::string namespace_;
     std::shared_ptr<rclcpp::Node> node_; 
 
 
-    rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr cmd_vel_pub_;
-    rclcpp::Subscription<nav_msgs::msg::Odometry>::SharedPtr sub1_;
+    rclcpp::Subscription<warehouse_robot_msgs::msg::RobotData>::SharedPtr robot_info_sub;
     rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr path_pub_;
+
 
 
     std::mutex odom_locker_;
     
+    
+
     nav_msgs::msg::Odometry current_odom_;
-    marker_msgs::msg::Marker ar_tag_;
-    // std_msgs::msg::Int16 boundary_status_;
-
-
-
     int status;
     int AR_tag;
 

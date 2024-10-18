@@ -125,12 +125,27 @@ CMakeFiles/global_controller.dir/src/prm2.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/global_controller.dir/src/prm2.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/liam/git/RS1_Smart_Factory/global_controller_single_robot/src/prm2.cpp -o CMakeFiles/global_controller.dir/src/prm2.cpp.s
 
+CMakeFiles/global_controller.dir/src/turtlebot_manager.cpp.o: CMakeFiles/global_controller.dir/flags.make
+CMakeFiles/global_controller.dir/src/turtlebot_manager.cpp.o: ../src/turtlebot_manager.cpp
+CMakeFiles/global_controller.dir/src/turtlebot_manager.cpp.o: CMakeFiles/global_controller.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/liam/git/RS1_Smart_Factory/global_controller_single_robot/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/global_controller.dir/src/turtlebot_manager.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/global_controller.dir/src/turtlebot_manager.cpp.o -MF CMakeFiles/global_controller.dir/src/turtlebot_manager.cpp.o.d -o CMakeFiles/global_controller.dir/src/turtlebot_manager.cpp.o -c /home/liam/git/RS1_Smart_Factory/global_controller_single_robot/src/turtlebot_manager.cpp
+
+CMakeFiles/global_controller.dir/src/turtlebot_manager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/global_controller.dir/src/turtlebot_manager.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/liam/git/RS1_Smart_Factory/global_controller_single_robot/src/turtlebot_manager.cpp > CMakeFiles/global_controller.dir/src/turtlebot_manager.cpp.i
+
+CMakeFiles/global_controller.dir/src/turtlebot_manager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/global_controller.dir/src/turtlebot_manager.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/liam/git/RS1_Smart_Factory/global_controller_single_robot/src/turtlebot_manager.cpp -o CMakeFiles/global_controller.dir/src/turtlebot_manager.cpp.s
+
 # Object files for target global_controller
 global_controller_OBJECTS = \
 "CMakeFiles/global_controller.dir/src/global_controller.cpp.o" \
 "CMakeFiles/global_controller.dir/src/main.cpp.o" \
 "CMakeFiles/global_controller.dir/src/task_allocation.cpp.o" \
-"CMakeFiles/global_controller.dir/src/prm2.cpp.o"
+"CMakeFiles/global_controller.dir/src/prm2.cpp.o" \
+"CMakeFiles/global_controller.dir/src/turtlebot_manager.cpp.o"
 
 # External object files for target global_controller
 global_controller_EXTERNAL_OBJECTS =
@@ -139,13 +154,8 @@ global_controller: CMakeFiles/global_controller.dir/src/global_controller.cpp.o
 global_controller: CMakeFiles/global_controller.dir/src/main.cpp.o
 global_controller: CMakeFiles/global_controller.dir/src/task_allocation.cpp.o
 global_controller: CMakeFiles/global_controller.dir/src/prm2.cpp.o
+global_controller: CMakeFiles/global_controller.dir/src/turtlebot_manager.cpp.o
 global_controller: CMakeFiles/global_controller.dir/build.make
-global_controller: /opt/ros/humble/lib/libnav_msgs__rosidl_typesupport_fastrtps_c.so
-global_controller: /opt/ros/humble/lib/libnav_msgs__rosidl_typesupport_fastrtps_cpp.so
-global_controller: /opt/ros/humble/lib/libnav_msgs__rosidl_typesupport_introspection_c.so
-global_controller: /opt/ros/humble/lib/libnav_msgs__rosidl_typesupport_introspection_cpp.so
-global_controller: /opt/ros/humble/lib/libnav_msgs__rosidl_typesupport_cpp.so
-global_controller: /opt/ros/humble/lib/libnav_msgs__rosidl_generator_py.so
 global_controller: /opt/ros/humble/lib/libsensor_msgs__rosidl_typesupport_fastrtps_c.so
 global_controller: /opt/ros/humble/lib/libsensor_msgs__rosidl_typesupport_fastrtps_cpp.so
 global_controller: /opt/ros/humble/lib/libsensor_msgs__rosidl_typesupport_introspection_c.so
@@ -157,6 +167,12 @@ global_controller: /opt/ros/humble/lib/libmarker_msgs__rosidl_typesupport_intros
 global_controller: /opt/ros/humble/lib/libmarker_msgs__rosidl_typesupport_introspection_cpp.so
 global_controller: /opt/ros/humble/lib/libmarker_msgs__rosidl_typesupport_cpp.so
 global_controller: /opt/ros/humble/lib/libmarker_msgs__rosidl_generator_py.so
+global_controller: /home/liam/ros2_ws/install/warehouse_robot_msgs/lib/libwarehouse_robot_msgs__rosidl_typesupport_fastrtps_c.so
+global_controller: /home/liam/ros2_ws/install/warehouse_robot_msgs/lib/libwarehouse_robot_msgs__rosidl_typesupport_fastrtps_cpp.so
+global_controller: /home/liam/ros2_ws/install/warehouse_robot_msgs/lib/libwarehouse_robot_msgs__rosidl_typesupport_introspection_c.so
+global_controller: /home/liam/ros2_ws/install/warehouse_robot_msgs/lib/libwarehouse_robot_msgs__rosidl_typesupport_introspection_cpp.so
+global_controller: /home/liam/ros2_ws/install/warehouse_robot_msgs/lib/libwarehouse_robot_msgs__rosidl_typesupport_cpp.so
+global_controller: /home/liam/ros2_ws/install/warehouse_robot_msgs/lib/libwarehouse_robot_msgs__rosidl_generator_py.so
 global_controller: /usr/lib/x86_64-linux-gnu/libopencv_stitching.so.4.5.4d
 global_controller: /usr/lib/x86_64-linux-gnu/libopencv_alphamat.so.4.5.4d
 global_controller: /usr/lib/x86_64-linux-gnu/libopencv_aruco.so.4.5.4d
@@ -192,8 +208,6 @@ global_controller: /usr/lib/x86_64-linux-gnu/libopencv_viz.so.4.5.4d
 global_controller: /usr/lib/x86_64-linux-gnu/libopencv_wechat_qrcode.so.4.5.4d
 global_controller: /usr/lib/x86_64-linux-gnu/libopencv_xobjdetect.so.4.5.4d
 global_controller: /usr/lib/x86_64-linux-gnu/libopencv_xphoto.so.4.5.4d
-global_controller: /opt/ros/humble/lib/libnav_msgs__rosidl_typesupport_c.so
-global_controller: /opt/ros/humble/lib/libnav_msgs__rosidl_generator_c.so
 global_controller: /opt/ros/humble/lib/libsensor_msgs__rosidl_typesupport_c.so
 global_controller: /opt/ros/humble/lib/libsensor_msgs__rosidl_generator_c.so
 global_controller: /opt/ros/humble/lib/libsensor_msgs__rosidl_typesupport_cpp.so
@@ -240,65 +254,75 @@ global_controller: /opt/ros/humble/lib/libament_index_cpp.so
 global_controller: /opt/ros/humble/lib/librcl_logging_spdlog.so
 global_controller: /opt/ros/humble/lib/librcl_logging_interface.so
 global_controller: /opt/ros/humble/lib/libtf2_msgs__rosidl_typesupport_fastrtps_c.so
-global_controller: /opt/ros/humble/lib/libgeometry_msgs__rosidl_typesupport_fastrtps_c.so
-global_controller: /opt/ros/humble/lib/libstd_msgs__rosidl_typesupport_fastrtps_c.so
 global_controller: /opt/ros/humble/lib/libaction_msgs__rosidl_typesupport_fastrtps_c.so
-global_controller: /opt/ros/humble/lib/libbuiltin_interfaces__rosidl_typesupport_fastrtps_c.so
 global_controller: /opt/ros/humble/lib/libunique_identifier_msgs__rosidl_typesupport_fastrtps_c.so
-global_controller: /opt/ros/humble/lib/librosidl_typesupport_fastrtps_c.so
 global_controller: /opt/ros/humble/lib/libtf2_msgs__rosidl_typesupport_introspection_c.so
-global_controller: /opt/ros/humble/lib/libgeometry_msgs__rosidl_typesupport_introspection_c.so
-global_controller: /opt/ros/humble/lib/libstd_msgs__rosidl_typesupport_introspection_c.so
 global_controller: /opt/ros/humble/lib/libaction_msgs__rosidl_typesupport_introspection_c.so
-global_controller: /opt/ros/humble/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_c.so
 global_controller: /opt/ros/humble/lib/libunique_identifier_msgs__rosidl_typesupport_introspection_c.so
 global_controller: /opt/ros/humble/lib/libtf2_msgs__rosidl_typesupport_fastrtps_cpp.so
+global_controller: /opt/ros/humble/lib/libaction_msgs__rosidl_typesupport_fastrtps_cpp.so
+global_controller: /opt/ros/humble/lib/libunique_identifier_msgs__rosidl_typesupport_fastrtps_cpp.so
+global_controller: /opt/ros/humble/lib/libtf2_msgs__rosidl_typesupport_introspection_cpp.so
+global_controller: /opt/ros/humble/lib/libaction_msgs__rosidl_typesupport_introspection_cpp.so
+global_controller: /opt/ros/humble/lib/libunique_identifier_msgs__rosidl_typesupport_introspection_cpp.so
+global_controller: /opt/ros/humble/lib/libtf2_msgs__rosidl_typesupport_cpp.so
+global_controller: /opt/ros/humble/lib/libaction_msgs__rosidl_typesupport_cpp.so
+global_controller: /opt/ros/humble/lib/libunique_identifier_msgs__rosidl_typesupport_cpp.so
+global_controller: /opt/ros/humble/lib/libtf2_msgs__rosidl_generator_py.so
+global_controller: /opt/ros/humble/lib/libtf2_msgs__rosidl_typesupport_c.so
+global_controller: /opt/ros/humble/lib/libtf2_msgs__rosidl_generator_c.so
+global_controller: /opt/ros/humble/lib/libaction_msgs__rosidl_generator_py.so
+global_controller: /opt/ros/humble/lib/libaction_msgs__rosidl_typesupport_c.so
+global_controller: /opt/ros/humble/lib/libaction_msgs__rosidl_generator_c.so
+global_controller: /opt/ros/humble/lib/libunique_identifier_msgs__rosidl_generator_py.so
+global_controller: /opt/ros/humble/lib/libunique_identifier_msgs__rosidl_typesupport_c.so
+global_controller: /opt/ros/humble/lib/libunique_identifier_msgs__rosidl_generator_c.so
+global_controller: /opt/ros/humble/lib/libnav_msgs__rosidl_typesupport_fastrtps_c.so
+global_controller: /opt/ros/humble/lib/libgeometry_msgs__rosidl_typesupport_fastrtps_c.so
+global_controller: /opt/ros/humble/lib/libstd_msgs__rosidl_typesupport_fastrtps_c.so
+global_controller: /opt/ros/humble/lib/libbuiltin_interfaces__rosidl_typesupport_fastrtps_c.so
+global_controller: /opt/ros/humble/lib/librosidl_typesupport_fastrtps_c.so
+global_controller: /opt/ros/humble/lib/libnav_msgs__rosidl_typesupport_fastrtps_cpp.so
 global_controller: /opt/ros/humble/lib/libgeometry_msgs__rosidl_typesupport_fastrtps_cpp.so
 global_controller: /opt/ros/humble/lib/libstd_msgs__rosidl_typesupport_fastrtps_cpp.so
-global_controller: /opt/ros/humble/lib/libaction_msgs__rosidl_typesupport_fastrtps_cpp.so
 global_controller: /opt/ros/humble/lib/libbuiltin_interfaces__rosidl_typesupport_fastrtps_cpp.so
-global_controller: /opt/ros/humble/lib/libunique_identifier_msgs__rosidl_typesupport_fastrtps_cpp.so
 global_controller: /opt/ros/humble/lib/librosidl_typesupport_fastrtps_cpp.so
 global_controller: /opt/ros/humble/lib/libfastcdr.so.1.0.24
 global_controller: /opt/ros/humble/lib/librmw.so
-global_controller: /opt/ros/humble/lib/libtf2_msgs__rosidl_typesupport_introspection_cpp.so
+global_controller: /opt/ros/humble/lib/libnav_msgs__rosidl_typesupport_introspection_c.so
+global_controller: /opt/ros/humble/lib/libgeometry_msgs__rosidl_typesupport_introspection_c.so
+global_controller: /opt/ros/humble/lib/libstd_msgs__rosidl_typesupport_introspection_c.so
+global_controller: /opt/ros/humble/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_c.so
+global_controller: /opt/ros/humble/lib/libnav_msgs__rosidl_typesupport_introspection_cpp.so
 global_controller: /opt/ros/humble/lib/libgeometry_msgs__rosidl_typesupport_introspection_cpp.so
 global_controller: /opt/ros/humble/lib/libstd_msgs__rosidl_typesupport_introspection_cpp.so
-global_controller: /opt/ros/humble/lib/libaction_msgs__rosidl_typesupport_introspection_cpp.so
 global_controller: /opt/ros/humble/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_cpp.so
-global_controller: /opt/ros/humble/lib/libunique_identifier_msgs__rosidl_typesupport_introspection_cpp.so
 global_controller: /opt/ros/humble/lib/librosidl_typesupport_introspection_cpp.so
 global_controller: /opt/ros/humble/lib/librosidl_typesupport_introspection_c.so
-global_controller: /opt/ros/humble/lib/libtf2_msgs__rosidl_typesupport_cpp.so
+global_controller: /opt/ros/humble/lib/libnav_msgs__rosidl_typesupport_cpp.so
 global_controller: /opt/ros/humble/lib/libgeometry_msgs__rosidl_typesupport_cpp.so
 global_controller: /opt/ros/humble/lib/libstd_msgs__rosidl_typesupport_cpp.so
-global_controller: /opt/ros/humble/lib/libaction_msgs__rosidl_typesupport_cpp.so
 global_controller: /opt/ros/humble/lib/libbuiltin_interfaces__rosidl_typesupport_cpp.so
-global_controller: /opt/ros/humble/lib/libunique_identifier_msgs__rosidl_typesupport_cpp.so
 global_controller: /opt/ros/humble/lib/librosidl_typesupport_cpp.so
-global_controller: /opt/ros/humble/lib/libtf2_msgs__rosidl_generator_py.so
+global_controller: /opt/ros/humble/lib/libnav_msgs__rosidl_generator_py.so
 global_controller: /opt/ros/humble/lib/libgeometry_msgs__rosidl_generator_py.so
-global_controller: /opt/ros/humble/lib/libstd_msgs__rosidl_generator_py.so
-global_controller: /opt/ros/humble/lib/libtf2_msgs__rosidl_typesupport_c.so
+global_controller: /home/liam/ros2_ws/install/warehouse_robot_msgs/lib/libwarehouse_robot_msgs__rosidl_typesupport_c.so
+global_controller: /opt/ros/humble/lib/libnav_msgs__rosidl_typesupport_c.so
 global_controller: /opt/ros/humble/lib/libgeometry_msgs__rosidl_typesupport_c.so
-global_controller: /opt/ros/humble/lib/libstd_msgs__rosidl_typesupport_c.so
-global_controller: /opt/ros/humble/lib/libtf2_msgs__rosidl_generator_c.so
+global_controller: /home/liam/ros2_ws/install/warehouse_robot_msgs/lib/libwarehouse_robot_msgs__rosidl_generator_c.so
+global_controller: /opt/ros/humble/lib/libnav_msgs__rosidl_generator_c.so
 global_controller: /opt/ros/humble/lib/libgeometry_msgs__rosidl_generator_c.so
-global_controller: /opt/ros/humble/lib/libstd_msgs__rosidl_generator_c.so
-global_controller: /opt/ros/humble/lib/libaction_msgs__rosidl_generator_py.so
+global_controller: /opt/ros/humble/lib/libstd_msgs__rosidl_generator_py.so
 global_controller: /opt/ros/humble/lib/libbuiltin_interfaces__rosidl_generator_py.so
-global_controller: /opt/ros/humble/lib/libaction_msgs__rosidl_typesupport_c.so
+global_controller: /opt/ros/humble/lib/libstd_msgs__rosidl_typesupport_c.so
 global_controller: /opt/ros/humble/lib/libbuiltin_interfaces__rosidl_typesupport_c.so
-global_controller: /opt/ros/humble/lib/libaction_msgs__rosidl_generator_c.so
+global_controller: /opt/ros/humble/lib/libstd_msgs__rosidl_generator_c.so
 global_controller: /opt/ros/humble/lib/libbuiltin_interfaces__rosidl_generator_c.so
-global_controller: /opt/ros/humble/lib/libunique_identifier_msgs__rosidl_generator_py.so
-global_controller: /usr/lib/x86_64-linux-gnu/libpython3.10.so
-global_controller: /opt/ros/humble/lib/libunique_identifier_msgs__rosidl_typesupport_c.so
 global_controller: /opt/ros/humble/lib/librosidl_typesupport_c.so
 global_controller: /opt/ros/humble/lib/librcpputils.so
-global_controller: /opt/ros/humble/lib/libunique_identifier_msgs__rosidl_generator_c.so
 global_controller: /opt/ros/humble/lib/librosidl_runtime_c.so
 global_controller: /opt/ros/humble/lib/librcutils.so
+global_controller: /usr/lib/x86_64-linux-gnu/libpython3.10.so
 global_controller: /usr/lib/x86_64-linux-gnu/libopencv_highgui.so.4.5.4d
 global_controller: /usr/lib/x86_64-linux-gnu/libopencv_datasets.so.4.5.4d
 global_controller: /usr/lib/x86_64-linux-gnu/libopencv_plot.so.4.5.4d
@@ -319,7 +343,7 @@ global_controller: /usr/lib/x86_64-linux-gnu/libopencv_photo.so.4.5.4d
 global_controller: /usr/lib/x86_64-linux-gnu/libopencv_imgproc.so.4.5.4d
 global_controller: /usr/lib/x86_64-linux-gnu/libopencv_core.so.4.5.4d
 global_controller: CMakeFiles/global_controller.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/liam/git/RS1_Smart_Factory/global_controller_single_robot/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable global_controller"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/liam/git/RS1_Smart_Factory/global_controller_single_robot/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable global_controller"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/global_controller.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

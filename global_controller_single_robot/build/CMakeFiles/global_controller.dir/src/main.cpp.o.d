@@ -646,6 +646,11 @@ CMakeFiles/global_controller.dir/src/main.cpp.o: \
  /opt/ros/humble/include/std_msgs/std_msgs/msg/detail/bool__struct.hpp \
  /opt/ros/humble/include/std_msgs/std_msgs/msg/detail/bool__builder.hpp \
  /opt/ros/humble/include/std_msgs/std_msgs/msg/detail/bool__traits.hpp \
+ /home/liam/git/RS1_Smart_Factory/global_controller_single_robot/src/turtlebot_manager.hpp \
+ /home/liam/ros2_ws/install/warehouse_robot_msgs/include/warehouse_robot_msgs/warehouse_robot_msgs/msg/robot_data.hpp \
+ /home/liam/ros2_ws/install/warehouse_robot_msgs/include/warehouse_robot_msgs/warehouse_robot_msgs/msg/detail/robot_data__struct.hpp \
+ /home/liam/ros2_ws/install/warehouse_robot_msgs/include/warehouse_robot_msgs/warehouse_robot_msgs/msg/detail/robot_data__builder.hpp \
+ /home/liam/ros2_ws/install/warehouse_robot_msgs/include/warehouse_robot_msgs/warehouse_robot_msgs/msg/detail/robot_data__traits.hpp \
  /home/liam/git/RS1_Smart_Factory/global_controller_single_robot/src/prm2.hpp \
  /usr/include/opencv4/opencv2/opencv.hpp \
  /usr/include/opencv4/opencv2/opencv_modules.hpp \
