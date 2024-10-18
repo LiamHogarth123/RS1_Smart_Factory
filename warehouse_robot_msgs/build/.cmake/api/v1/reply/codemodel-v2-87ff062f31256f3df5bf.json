@@ -1,0 +1,233 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-a03ead5c967c9577ba76.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17
+					]
+				},
+				{
+					"build" : "warehouse_robot_msgs__py",
+					"jsonFile" : "directory-warehouse_robot_msgs__py-Debug-1249f84727e9f9aee944.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "build/warehouse_robot_msgs__py",
+					"targetIndexes" : 
+					[
+						5
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1
+					],
+					"name" : "warehouse_robot_msgs",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ament_cmake_python_build_warehouse_robot_msgs_egg::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ament_cmake_python_build_warehouse_robot_msgs_egg-Debug-f2321e4ef5f89f3653ce.json",
+					"name" : "ament_cmake_python_build_warehouse_robot_msgs_egg",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ament_cmake_python_copy_warehouse_robot_msgs::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ament_cmake_python_copy_warehouse_robot_msgs-Debug-c37408efcc98fdcdd0a4.json",
+					"name" : "ament_cmake_python_copy_warehouse_robot_msgs",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-Debug-52334c10f706de3084c8.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "warehouse_robot_msgs::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-warehouse_robot_msgs-Debug-5c0cda9e934fe67191a2.json",
+					"name" : "warehouse_robot_msgs",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "warehouse_robot_msgs__cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-warehouse_robot_msgs__cpp-Debug-1c838ed8755342afaf62.json",
+					"name" : "warehouse_robot_msgs__cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "warehouse_robot_msgs__py::@8723ff279f647ea45291",
+					"jsonFile" : "target-warehouse_robot_msgs__py-Debug-4cb4a935f2458585345c.json",
+					"name" : "warehouse_robot_msgs__py",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "warehouse_robot_msgs__rosidl_generator_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-warehouse_robot_msgs__rosidl_generator_c-Debug-6ca96c1cb9bca7f85348.json",
+					"name" : "warehouse_robot_msgs__rosidl_generator_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "warehouse_robot_msgs__rosidl_generator_py::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-warehouse_robot_msgs__rosidl_generator_py-Debug-4a5019fbc3c6c6c895f4.json",
+					"name" : "warehouse_robot_msgs__rosidl_generator_py",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "warehouse_robot_msgs__rosidl_typesupport_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-warehouse_robot_msgs__rosidl_typesupport_c-Debug-7fe8ed97ea2b609ac68c.json",
+					"name" : "warehouse_robot_msgs__rosidl_typesupport_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "warehouse_robot_msgs__rosidl_typesupport_c__pyext::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-warehouse_robot_msgs__rosidl_typesupport_c__pyext-Debug-cd2e38b60d5ef16865fd.json",
+					"name" : "warehouse_robot_msgs__rosidl_typesupport_c__pyext",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "warehouse_robot_msgs__rosidl_typesupport_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-warehouse_robot_msgs__rosidl_typesupport_cpp-Debug-5781786c751aafbce527.json",
+					"name" : "warehouse_robot_msgs__rosidl_typesupport_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "warehouse_robot_msgs__rosidl_typesupport_fastrtps_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-warehouse_robot_msgs__rosidl_typesupport_fastrtps_c-Debug-6c38a475f8d4239968bd.json",
+					"name" : "warehouse_robot_msgs__rosidl_typesupport_fastrtps_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "warehouse_robot_msgs__rosidl_typesupport_fastrtps_c__pyext::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-warehouse_robot_msgs__rosidl_typesupport_fastrtps_c__pyext-Debug-13f4fb33ad9d9f1981ea.json",
+					"name" : "warehouse_robot_msgs__rosidl_typesupport_fastrtps_c__pyext",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "warehouse_robot_msgs__rosidl_typesupport_fastrtps_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-warehouse_robot_msgs__rosidl_typesupport_fastrtps_cpp-Debug-50db48cfe91b0a594d7d.json",
+					"name" : "warehouse_robot_msgs__rosidl_typesupport_fastrtps_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "warehouse_robot_msgs__rosidl_typesupport_introspection_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-warehouse_robot_msgs__rosidl_typesupport_introspection_c-Debug-dd3c8ab691cbc1117428.json",
+					"name" : "warehouse_robot_msgs__rosidl_typesupport_introspection_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "warehouse_robot_msgs__rosidl_typesupport_introspection_c__pyext::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-warehouse_robot_msgs__rosidl_typesupport_introspection_c__pyext-Debug-ed9503c08c8bad457535.json",
+					"name" : "warehouse_robot_msgs__rosidl_typesupport_introspection_c__pyext",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "warehouse_robot_msgs__rosidl_typesupport_introspection_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-warehouse_robot_msgs__rosidl_typesupport_introspection_cpp-Debug-b0ea90d6638731ac6347.json",
+					"name" : "warehouse_robot_msgs__rosidl_typesupport_introspection_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "warehouse_robot_msgs_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-warehouse_robot_msgs_uninstall-Debug-317e03195e581efc2387.json",
+					"name" : "warehouse_robot_msgs_uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/liam/ros2_ws/src/warehouse_robot_msgs/build",
+		"source" : "/home/liam/ros2_ws/src/warehouse_robot_msgs"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

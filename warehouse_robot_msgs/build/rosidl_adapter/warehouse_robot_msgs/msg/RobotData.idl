@@ -1,0 +1,26 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from warehouse_robot_msgs/msg/RobotData.msg
+// generated code does not contain a copyright notice
+
+#include "geometry_msgs/msg/Pose.idl"
+#include "nav_msgs/msg/Odometry.idl"
+
+module warehouse_robot_msgs {
+  module msg {
+    @verbatim (language="comment", text=
+      "RobotData.msg")
+    struct RobotData {
+      @verbatim (language="comment", text=
+        "Odometry data")
+      nav_msgs::msg::Odometry odom;
+
+      @verbatim (language="comment", text=
+        "Status string")
+      string status;
+
+      @verbatim (language="comment", text=
+        "AR tag position (pose)")
+      geometry_msgs::msg::Pose ar_tag_pose;
+    };
+  };
+};

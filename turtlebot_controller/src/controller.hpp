@@ -93,6 +93,9 @@ private:
     double current_speed_;
 
 
+    geometry_msgs::msg::Twist zero_trajectory;
+
+
 
 
 

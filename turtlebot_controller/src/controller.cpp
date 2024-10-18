@@ -35,6 +35,15 @@ Controller::Controller(const std::string &namespace_param)  : Node(namespace_par
   sub2_ = this->create_subscription<sensor_msgs::msg::LaserScan>("scan", 10, std::bind(&Controller::LidaCallback, this, std::placeholders::_1));
   sub3_ = this->create_subscription<sensor_msgs::msg::Image>("camera/rgb/image_raw", 10, std::bind(&Controller::RGBCallback, this, std::placeholders::_1));
   sub4_ = this->create_subscription<sensor_msgs::msg::Image>("camera/depth/image_raw", 10, std::bind(&Controller::ImageDepthCallback, this, std::placeholders::_1));
+
+
+
+  zero_trajectory.angular.x = 0; 
+  zero_trajectory.angular.y = 0;
+  zero_trajectory.angular.z = 0;
+  zero_trajectory.linear.x = 0;
+  zero_trajectory.linear.y = 0;
+
 }
 
 
@@ -78,7 +87,6 @@ void Controller::controlLoop() {
     geometry_msgs::msg::Point goal;
     geometry_msgs::msg::Twist traj;
     std_msgs::msg::Bool msg;
-
     msg.data = false;  // Set the boolean value to true
     goal_pub_->publish(msg); 
 
@@ -98,26 +106,41 @@ void Controller::controlLoop() {
         // std::cout << "Control parameters updated for goal (x: " << goal.x << ", y: " << goal.y << ")" << std::endl;
 
         while (!Turtlebot_GPS_.goal_hit(goal, current_odom_)) {
-            traj = Turtlebot_GPS_.generate_trajectory();
-            // std::cout << "Generated trajectory: (linear.x: " << traj.linear.x << ", angular.z: " << traj.angular.z << ")" << std::endl;
+          traj = Turtlebot_GPS_.generate_trajectory();
 
-            SendCmdTb1(traj);
-            // std::cout << "Sent command to TurtleBot." << std::endl;
+          machine_vision_.findObstacle();
 
-            Turtlebot_GPS_.updateControlParam(goal, 0.5, current_odom_);
-            // std::cout << "Control parameters updated for goal (x: " << goal.x << ", y: " << goal.y << ")" << std::endl;
+          // std::cout << "Generated trajectory: (linear.x: " << traj.linear.x << ", angular.z: " << traj.angular.z << ")" << std::endl;
+
+          SendCmdTb1(traj);
+          // std::cout << "Sent command to TurtleBot." << std::endl;
+
+          Turtlebot_GPS_.updateControlParam(goal, 0.5, current_odom_);
+          // std::cout << "Control parameters updated for goal (x: " << goal.x << ", y: " << goal.y << ")" << std::endl;
         }
 
     }
 
-    std::cout << "Control loop finished." << std::endl;
-  traj.angular.x = 0; 
-  traj.angular.y = 0;
-  traj.angular.z = 0;
-  traj.linear.x = 0;
-  traj.linear.y = 0;
-  SendCmdTb1(traj);
+  std::cout << "Control loop finished." << std::endl;
+ 
+  SendCmdTb1(zero_trajectory);
+
+  //rotat the turtlebot looking for the AR tag information
+  // rotate turtleobot -90 degrees
+  // double Max_angle = 90;
+  // std::vector<int> found_tags;
+  // for (angle = -90; angle < Max_angle; angle+10){
+  //    found_tags = AR_TAG_DECTION_OBJECT.DECTECT_AR_FUNCTION(CURRENT_TURTLEBOT_IMAGE) 
+  //    if (!found_tags.empty()){
+  //        publish(AR_Info);
+  //        break;
+  //    }
+  // }
   
+
+
+
+
   msg.data = true;  // Set the boolean value to true
   goal_pub_->publish(msg); 
   goal_pub_->publish(msg); 
