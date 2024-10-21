@@ -32,8 +32,7 @@ geometry_msgs::msg::Point Turtlebot_SensorProcessing::polarToCart(unsigned int i
     return cart;
 }
 
-double Turtlebot_SensorProcessing::findObstacle()
-{
+double Turtlebot_SensorProcessing::findObstacle() {
     std::vector<std::pair<float, int>> scannedRange = scanningRange(90);
     double distance = 0;
     double midpoint = 0;
@@ -98,6 +97,8 @@ std::vector<std::pair<float, int>> Turtlebot_SensorProcessing::scanningRange(flo
 
     return combinedVector;
 }
+
+
 
 
 // ADD AR TAG REC

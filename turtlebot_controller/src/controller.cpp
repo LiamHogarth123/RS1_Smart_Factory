@@ -102,16 +102,30 @@ void Controller::controlLoop() {
   goal = path_->poses.at(0).pose.position;
   nav_msgs::msg::Path trajectory_path = *path_;
 
-  // firt aling the robots orination with first goal
-  //while (robot not align)
-  // Allign
 
-  //start driving loop
+  // firt aling the robots orination with first goal
+  double Desired_yaw = Calculate_desired_yaw(trajectory_path);
+
+  while (calculateYaw(current_odom_) - Desired_yaw > 0.5) {
+    traj.angular.x = 0.1; // optimise this so direction and speed is considered
+    SendCmdTb1(traj);
+  }
+  //stop the rotation
+  SendCmdTb1(zero_trajectory);
+  traj = zero_trajectory;
+  
+ 
+
+  //Once aligned start driving loop
+  ////////////////////////////////////////////////////////////////////////
   while (!goal_reached){ 
 
+    //find the current waypoint goal
     target_goal = findLookAheadPoint(trajectory_path, current_odom_.pose.pose.position, 0.5);
+    //setups PID calculation
     Turtlebot_GPS_.updateControlParam(target_goal, 0.1, current_odom_);
 
+    //If final Goal hit stop
     if (Turtlebot_GPS_.goal_hit(trajectory_path.poses.back().pose.position, current_odom_)){
       // end of goals reached
       goal_reached = true;
@@ -128,7 +142,7 @@ void Controller::controlLoop() {
 
   }
 
-   while (current_speed_ > 0){
+  while (current_speed_ > 0){
     SendCmdTb1(zero_trajectory);
     std::this_thread::sleep_for(std::chrono::milliseconds(20));
 
@@ -162,20 +176,25 @@ void Controller::controlLoop() {
 
 
 
-geometry_msgs::msg::Point Controller::findLookAheadPoint(nav_msgs::msg::Path path, geometry_msgs::msg::Point Current_goal, double tolerance){
-  // Add look ahead calculation
+geometry_msgs::msg::Point Controller::findLookAheadPoint(nav_msgs::msg::Path path, geometry_msgs::msg::Point Current_position, double tolerance){
+  
+  //give the turtlebots positions
+  //find the lookahead point based on the path of goals.
+  //if near the tolerance away from the end the look ahead point = end point. 
 
-  return Current_goal;
+
+
+  return Current_position;
+
 }
 
 
 
 void Controller::shut_downCallback(const std_msgs::msg::Bool::SharedPtr msg) {
-    if (msg->data) {
-      shutdown_request_ = true;
-      rclcpp::shutdown();
-        // Add your logic to send the next goal or perform other actions
-    }
+  if (msg->data) {
+    shutdown_request_ = true;
+    rclcpp::shutdown();
+  }
 }
 
 
@@ -183,7 +202,7 @@ void Controller::shut_downCallback(const std_msgs::msg::Bool::SharedPtr msg) {
 
 
 //Ros2 turtlebot control
-/////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////
 void Controller::SendCmdTb1(const geometry_msgs::msg::Twist instructions){
   cmd_vel_pub_->publish(instructions);
 } 
@@ -198,23 +217,19 @@ void Controller::Publish_robot_data(nav_msgs::msg::Odometry odom, int status, in
 }
 
 // Callbacks
-
+///////////////////////////////////////////////////////////////////////////////////
 void Controller::odomCallback(const nav_msgs::msg::Odometry::SharedPtr odomMsg) {
   std::lock_guard<std::mutex> lock(odom_locker_);
   current_odom_ = *odomMsg;
-  current_speed_ = std::sqrt(std::pow(odomMsg->twist.twist.linear.x, 2) +
-                               std::pow(odomMsg->twist.twist.linear.y, 2) +
-                               std::pow(odomMsg->twist.twist.linear.z, 2));
+  current_speed_ = std::sqrt(std::pow(odomMsg->twist.twist.linear.x, 2) + std::pow(odomMsg->twist.twist.linear.y, 2) + std::pow(odomMsg->twist.twist.linear.z, 2));
 }
 
 
-
 void Controller::pathCallback(const nav_msgs::msg::Path::SharedPtr msg) {
-    std::cout << "got data" << std::endl;
-    path_ = msg;
-    current_waypoint_ = 0;
-    NewPath_ = true;
-    controlLoop();
+  path_ = msg;
+  current_waypoint_ = 0;
+  NewPath_ = true;
+  controlLoop();
 }
 
 void Controller::RGBCallback(const sensor_msgs::msg::Image::SharedPtr Msg){
@@ -236,3 +251,36 @@ void Controller::guiderOdomCallback(const nav_msgs::msg::Odometry::SharedPtr odo
   std::lock_guard<std::mutex> lock(odom_locker2_);
   guider_odom_ = *odomMsg;
 }
+
+
+
+//Reused calculations
+///////////////////////////////////////////////////////////////////////////////////
+double Controller::calculateYaw(nav_msgs::msg::Odometry odometry_data){
+  // Extract quaternion from odometry data
+  double x = odometry_data.pose.pose.orientation.x;
+  double y = odometry_data.pose.pose.orientation.y;
+  double z = odometry_data.pose.pose.orientation.z;
+  double w = odometry_data.pose.pose.orientation.w;
+
+  // Convert quaternion to yaw (rotation around Z-axis)
+  double siny_cosp = 2.0 * (w * z + x * y);
+  double cosy_cosp = 1.0 - 2.0 * (y * y + z * z);
+  double yaw = std::atan2(siny_cosp, cosy_cosp);
+
+  return yaw; // Return yaw in radians
+}
+
+double Controller::Calculate_desired_yaw(nav_msgs::msg::Path path){
+  double path_yaw;
+
+  // complete calculations
+
+  return path_yaw;
+}
+
+
+double Controller::calculateDistance(const geometry_msgs::msg::Point& point1, const geometry_msgs::msg::Point& point2) {
+  return std::sqrt(std::pow(point2.x - point1.x, 2) + std::pow(point2.y - point1.y, 2));
+}
+

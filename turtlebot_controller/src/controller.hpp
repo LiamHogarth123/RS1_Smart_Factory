@@ -26,9 +26,12 @@ public:
 private:
     void pathCallback(const nav_msgs::msg::Path::SharedPtr msg);
     void controlLoop();
-    geometry_msgs::msg::Point findLookAheadPoint(nav_msgs::msg::Path path, geometry_msgs::msg::Point Current_goal, double tolerance);
+    geometry_msgs::msg::Point findLookAheadPoint(nav_msgs::msg::Path path, geometry_msgs::msg::Point Current_position, double tolerance);
     
-    
+    double calculateYaw(nav_msgs::msg::Odometry odometry_data);
+    double Calculate_desired_yaw(nav_msgs::msg::Path path);
+    double calculateDistance(const geometry_msgs::msg::Point& point1, const geometry_msgs::msg::Point& point2);
+
     
 
 
