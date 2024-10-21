@@ -98,7 +98,7 @@ void Controller::controlLoop() {
     return;
   }
 
-  
+    
   goal = path_->poses.at(0).pose.position;
   nav_msgs::msg::Path trajectory_path = *path_;
 
@@ -110,6 +110,7 @@ void Controller::controlLoop() {
     traj.angular.x = 0.1; // optimise this so direction and speed is considered
     SendCmdTb1(traj);
   }
+
   //stop the rotation
   SendCmdTb1(zero_trajectory);
   traj = zero_trajectory;
@@ -177,14 +178,29 @@ void Controller::controlLoop() {
 
 
 geometry_msgs::msg::Point Controller::findLookAheadPoint(nav_msgs::msg::Path path, geometry_msgs::msg::Point Current_position, double tolerance){
-  
-  //give the turtlebots positions
-  //find the lookahead point based on the path of goals.
-  //if near the tolerance away from the end the look ahead point = end point. 
+  geometry_msgs::msg::Point lookahead_point = Current_position;
 
+  // Iterate through the path points
+  for (const auto& pose_stamped : path.poses) {
+    geometry_msgs::msg::Point path_point = pose_stamped.pose.position;
 
+    // Calculate the distance between the current position and the path point
+    double distance_to_point = calculateDistance(Current_position, path_point);
 
-  return Current_position;
+    // If the distance is greater than the tolerance, this is our lookahead point
+    if (distance_to_point > tolerance) {
+      lookahead_point = path_point;
+      break;
+    }
+  }
+
+  // If we are near the end point (within the tolerance), set the lookahead point to the end of the path
+  geometry_msgs::msg::Point end_point = path.poses.back().pose.position;
+  double distance_to_end = calculateDistance(Current_position, end_point);
+  if (distance_to_end <= tolerance) {
+    lookahead_point = end_point;
+  }
+  return lookahead_point;
 
 }
 
