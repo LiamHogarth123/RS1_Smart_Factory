@@ -18,3 +18,10 @@ Advance stuff
 - implement path planning collision prediction aviodance
 - UR3 !!!!!!!!!!!!!!!!!
 
+
+## File directory and code structure
+- **global_controller_single_robot** loads the archived "path_planner_creation" map to generate paths
+- **path_planner_creation** creates a graph to store the enviroment location
+- **turtlebot_controller** controls a single robot to follow a given path
+- **warehouse_robot_msgs** comunicates status from single robot to parent controller
+- **World Files** gazebo files of the factory
