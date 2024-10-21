@@ -22,13 +22,13 @@ Controller::Controller(const std::string &namespace_param)  : Node(namespace_par
   goal_pub_ = this->create_publisher<std_msgs::msg::Bool>("reached_goal", 10);
   shut_down_request = this->create_subscription<std_msgs::msg::Bool>("shut_down", 10, std::bind(&Controller::shut_downCallback, this, std::placeholders::_1));\
 
-  
-
 
 
   // Turtlebot topics
   // Publish to the cmd_vel topic
   cmd_vel_pub_ = this->create_publisher<geometry_msgs::msg::Twist>("cmd_vel", 10);
+  robot_info_pub = this->create_publisher<warehouse_robot_msgs::msg::RobotData>("robot_data", 10);
+
 
   // Subscribe to other topics without manually adding the namespace
   sub1_ = this->create_subscription<nav_msgs::msg::Odometry>("odom", 10, std::bind(&Controller::odomCallback, this, std::placeholders::_1));
@@ -84,46 +84,56 @@ void Controller::Default_state(){
 
 
 void Controller::controlLoop() {
-    geometry_msgs::msg::Point goal;
-    geometry_msgs::msg::Twist traj;
-    std_msgs::msg::Bool msg;
-    msg.data = false;  // Set the boolean value to true
-    goal_pub_->publish(msg); 
+  geometry_msgs::msg::Point goal;
+  geometry_msgs::msg::Point target_goal;
+  geometry_msgs::msg::Twist traj;
+  bool goal_reached = false;
+  std_msgs::msg::Bool status_msg;
+  status_msg.data = false;  // Set the boolean value to true
+  goal_pub_->publish(status_msg); 
 
-    if (path_ == nullptr || path_->poses.empty()) {
-      return;
+
+
+  if (path_ == nullptr || path_->poses.empty()) {
+    return;
+  }
+
+  
+  goal = path_->poses.at(0).pose.position;
+  nav_msgs::msg::Path trajectory_path = *path_;
+
+  // firt aling the robots orination with first goal
+  //while (robot not align)
+  // Allign
+
+  //start driving loop
+  while (!goal_reached){ 
+
+    target_goal = findLookAheadPoint(trajectory_path, current_odom_.pose.pose.position, 0.5);
+    Turtlebot_GPS_.updateControlParam(target_goal, 0.1, current_odom_);
+
+    if (Turtlebot_GPS_.goal_hit(trajectory_path.poses.back().pose.position, current_odom_)){
+      // end of goals reached
+      goal_reached = true;
+      break;
     }
 
-    for (const auto& pose_stamped : path_->poses) {
-        // Access the pose
-        auto pose = pose_stamped.pose;
-        goal.x = pose.position.x;
-        goal.y = pose.position.y;
 
-        // std::cout << "New goal received: (x: " << goal.x << ", y: " << goal.y << ")" << std::endl;
+  //if all good
+  ///////////////////////////////////////////////////////////////////////////////////////////
+  traj = Turtlebot_GPS_.generate_trajectory();
+  SendCmdTb1(traj);
 
-        Turtlebot_GPS_.updateControlParam(goal, 0.1, current_odom_);
-        // std::cout << "Control parameters updated for goal (x: " << goal.x << ", y: " << goal.y << ")" << std::endl;
+  std::this_thread::sleep_for(std::chrono::milliseconds(200));
 
-        while (!Turtlebot_GPS_.goal_hit(goal, current_odom_)) {
-          traj = Turtlebot_GPS_.generate_trajectory();
+  }
 
-          machine_vision_.findObstacle();
+   while (current_speed_ > 0){
+    SendCmdTb1(zero_trajectory);
+    std::this_thread::sleep_for(std::chrono::milliseconds(20));
 
-          // std::cout << "Generated trajectory: (linear.x: " << traj.linear.x << ", angular.z: " << traj.angular.z << ")" << std::endl;
+  }
 
-          SendCmdTb1(traj);
-          // std::cout << "Sent command to TurtleBot." << std::endl;
-
-          Turtlebot_GPS_.updateControlParam(goal, 0.5, current_odom_);
-          // std::cout << "Control parameters updated for goal (x: " << goal.x << ", y: " << goal.y << ")" << std::endl;
-        }
-
-    }
-
-  std::cout << "Control loop finished." << std::endl;
- 
-  SendCmdTb1(zero_trajectory);
 
   //rotat the turtlebot looking for the AR tag information
   // rotate turtleobot -90 degrees
@@ -133,7 +143,7 @@ void Controller::controlLoop() {
   //    found_tags = AR_TAG_DECTION_OBJECT.DECTECT_AR_FUNCTION(CURRENT_TURTLEBOT_IMAGE) 
   //    if (!found_tags.empty()){
   //        publish(AR_Info);
-  //        break;
+  //        break; 
   //    }
   // }
   
@@ -141,10 +151,10 @@ void Controller::controlLoop() {
 
 
 
-  msg.data = true;  // Set the boolean value to true
-  goal_pub_->publish(msg); 
-  goal_pub_->publish(msg); 
-  goal_pub_->publish(msg); 
+  status_msg.data = true;  // Set the boolean value to true
+  Publish_robot_data(current_odom_, 0, 0);
+  Publish_robot_data(current_odom_, 0, 0);
+ 
   NewPath_ = false;
 }
 
@@ -152,35 +162,11 @@ void Controller::controlLoop() {
 
 
 
+geometry_msgs::msg::Point Controller::findLookAheadPoint(nav_msgs::msg::Path path, geometry_msgs::msg::Point Current_goal, double tolerance){
+  // Add look ahead calculation
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  return Current_goal;
+}
 
 
 
@@ -201,6 +187,15 @@ void Controller::shut_downCallback(const std_msgs::msg::Bool::SharedPtr msg) {
 void Controller::SendCmdTb1(const geometry_msgs::msg::Twist instructions){
   cmd_vel_pub_->publish(instructions);
 } 
+
+
+void Controller::Publish_robot_data(nav_msgs::msg::Odometry odom, int status, int Ar_tag_info) {
+  warehouse_robot_msgs::msg::RobotData msg;
+  msg.odom = odom;
+  msg.status = status; 
+  msg.ar_tag_id = Ar_tag_info;
+  robot_info_pub->publish(msg);
+}
 
 // Callbacks
 

@@ -22,7 +22,7 @@
 
 class Global_Controller : public rclcpp::Node {
 public:
-    Global_Controller(const std::string &namespace_param);
+    Global_Controller(const int &num_robots);
     void Default_state();
     void statusCallback(const std_msgs::msg::Bool::SharedPtr msg);
     void mapCallback(const nav_msgs::msg::OccupancyGrid::SharedPtr msg);

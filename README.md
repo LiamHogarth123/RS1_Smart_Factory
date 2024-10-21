@@ -1,5 +1,7 @@
 # Smart_Factory_System
 
+need to installls
+sudo apt install ros-humble-apriltag
 
 
 To do list

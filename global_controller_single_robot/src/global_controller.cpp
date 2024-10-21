@@ -4,15 +4,24 @@
 #include <cmath>
 #include <std_msgs/msg/bool.hpp>
 
-Global_Controller::Global_Controller(const std::string &namespace_param) : Node("global_controller") {
-
+Global_Controller::Global_Controller(const int &num_robots) : Node("global_controller") {
     robot_status = false;
+   
    
     // std::string path_topic = "trajectory"; 
     robot_status_sub = this->create_subscription<std_msgs::msg::Bool>("reached_goal", 10, std::bind(&Global_Controller::statusCallback, this, std::placeholders::_1));\
     Shut_down_request = this->create_publisher<std_msgs::msg::Bool>("shut_down", 10);
     map_subscription_ = this->create_subscription<nav_msgs::msg::OccupancyGrid>("map", 10, std::bind(&Global_Controller::mapCallback, this, std::placeholders::_1));
     map_data_recieved = false;
+
+    // this->declare_parameter<int>("number_of_robots");
+
+    // if (this->get_parameter("number_of_robots", number_of_robots_)) {
+    //     RCLCPP_INFO(this->get_logger(), "Number of robots set to: %d", number_of_robots_);
+    // } else {
+    //     RCLCPP_WARN(this->get_logger(), "Parameter 'number_of_robots' not set, using default value.");
+    //     number_of_robots_ = 1;  // Optionally set a default value in case it's not set
+    // }
 
 }
 
@@ -22,41 +31,47 @@ Global_Controller::Global_Controller(const std::string &namespace_param) : Node(
 
 
 
-
-void Global_Controller::Default_state(){
-    
-
+void Global_Controller::Default_state() {
     std::vector<geometry_msgs::msg::Point> trajectory;
     rclcpp::Rate rate(10); // 10 Hz
     std_msgs::msg::Bool msg;
     int r = 0;
 
+    // Waiting for map data to be received
+    while (!map_data_recieved) {
+        rate.sleep();
+        std::cout << "Waiting for map data..." << std::endl;
+    }
 
+    // Once map data is received, initialize the path planning system
+    std::cout << "Map data received. Initializing path planning system..." << std::endl;
+    GPS.UpdateMapData(map);
 
-    // initialising the path planning system - old code method
-    GPS.UpdateMapData(map);    
-    
-    //add multiple turtlebots hear if needed
+    // Create the TurtleBot manager
+    std::cout << "Creating TurtleBot manager..." << std::endl;
     auto manager = std::make_shared<TurtleBotManager>("");
-    
 
-
-    
+    // Get the job list (goals)
     std::vector<geometry_msgs::msg::Point> goals = TA.get_job_list();
+    std::cout << "Number of goals retrieved: " << goals.size() << std::endl;
+
+    // Print the retrieved goals
+    for (size_t i = 0; i < goals.size(); ++i) {
+        std::cout << "Goal " << i + 1 << ": (" << goals[i].x << ", " << goals[i].y << ")" << std::endl;
+    }
+
+    // Initialize the delivery location and start point
     geometry_msgs::msg::Point delievery_Location1;
     delievery_Location1.x = 0;
     delievery_Location1.y = 0;
+
     geometry_msgs::msg::Point start;
     start = manager->GetCurrentOdom().pose.pose.position;
-    //while (start service hasn't been sent){
-        // wait
-    // }
+    std::cout << "Starting position: (" << start.x << ", " << start.y << ")" << std::endl;
 
     int package_id = 5;
 
 
-    
-    
     for (int i = 0; i < goals.size(); i++){
 
         trajectory.clear();

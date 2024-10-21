@@ -1,12 +1,12 @@
 #include "turtlebot_manager.hpp"
 
-TurtleBotManager::TurtleBotManager(const std::string& name) : Node(name), namespace_(name)  {    
+TurtleBotManager::TurtleBotManager(const std::string& name) : Node(name + "_turtlebot_manager_node"), namespace_(name)  {    
 
   path_pub_ = this->create_publisher<nav_msgs::msg::Path>("trajectory", 10);
 
 
   robot_info_sub = this->create_subscription<warehouse_robot_msgs::msg::RobotData>(
-    "robot/data", 
+    "robot_data", 
     10, 
     [this](const warehouse_robot_msgs::msg::RobotData::SharedPtr msg) {
         this->robot_info_Callback(msg);

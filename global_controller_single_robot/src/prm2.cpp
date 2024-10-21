@@ -115,52 +115,89 @@ std::vector<int> Path_Planner::findPathAStar(const std::unordered_map<int, Node>
 
 }
 
-
 std::vector<geometry_msgs::msg::Point> Path_Planner::A_star_To_Goal(geometry_msgs::msg::Point start, geometry_msgs::msg::Point goal)
 {
     std::vector<int> trajectory_node_ID;
-    
+
+    // Print the start and goal points
+    std::cout << "Start Point: (" << start.x << ", " << start.y << ")" << std::endl;
+    std::cout << "Goal Point: (" << goal.x << ", " << goal.y << ")" << std::endl;
+
     int start_Id = setGoalNode(start);
+
+    // Print the start node ID
+    std::cout << "Start Node ID: " << start_Id << std::endl;
 
     int Goal_Id = setGoalNode(goal);
 
+    // Print the goal node ID
+    std::cout << "Goal Node ID: " << Goal_Id << std::endl;
+
     trajectory_node_ID = findPathAStar(nodes_Graph, start_Id, Goal_Id);
+
+    // Print the IDs of the nodes in the trajectory
+    std::cout << "Trajectory Node IDs: ";
+    for (int x = 0; x < trajectory_node_ID.size(); x++) {
+        std::cout << trajectory_node_ID.at(x) << " ";
+    }
+    std::cout << std::endl;
+
     std::vector<geometry_msgs::msg::Point> trajectory;
 
+    // Print the conversion of nodes to points
     for (int x = 0; x < trajectory_node_ID.size(); x++) {
-        trajectory.push_back(convertNodeToPoint(Graph.at(trajectory_node_ID.at(x))));
+        geometry_msgs::msg::Point point = convertNodeToPoint(nodes_Graph.at(trajectory_node_ID.at(x)));
+        trajectory.push_back(point);
+        std::cout << "Converted Point: (" << point.x << ", " << point.y << ")" << std::endl;
     }
+
+    // Print the final goal point being added to the trajectory
     trajectory.push_back(goal);
+    std::cout << "Final Goal Point added to trajectory: (" << goal.x << ", " << goal.y << ")" << std::endl;
+
     return trajectory;
 }
-
-
 
 int Path_Planner::setGoalNode(geometry_msgs::msg::Point goal)
 {
     // Convert world coordinates to map coordinates
-    // std::cout << " Open---------------------------------------" << std::endl;
     geometry_msgs::msg::Point map_point;
     map_point.x = (goal.x - SlamMapData.info.origin.position.x) / SlamMapData.info.resolution;
     map_point.y = (goal.y - SlamMapData.info.origin.position.y) / SlamMapData.info.resolution;
 
-    // std::cout << "goal x" << goal.x << " y --" << goal.y << std::endl;
-    // std::cout << "map x" << map_point.x << " y --" << map_point.y << std::endl;
+    // Print goal and map coordinates
+    std::cout << "Goal coordinates: (" << goal.x << ", " << goal.y << ")" << std::endl;
+    std::cout << "Converted map coordinates: (" << map_point.x << ", " << map_point.y << ")" << std::endl;
 
     int closestNodeId = -1;
     float minDistance = std::numeric_limits<float>::infinity();
 
     // Iterate through all nodes in the graph to find the closest one
-    for (const auto &node : Graph)
+    for (const auto &node : nodes_Graph)
     {
-        float dx = node.x - map_point.x;
-        float dy = node.y - map_point.y;
+        float dx = node.second.x - map_point.x;
+        float dy = node.second.y - map_point.y;
         float distance = sqrt(dx * dx + dy * dy);
+
+        // Print distance from each node to the goal
+        std::cout << "Node ID: " << node.second.id << ", Node coordinates: (" << node.second.x << ", " << node.second.y << ")";
+        std::cout << ", Distance to goal: " << distance << std::endl;
+
         if (distance < minDistance)
         {
             minDistance = distance;
-            closestNodeId = node.id;
+            closestNodeId = node.second.id;
+
+            // Print updated closest node information
+            std::cout << "Updated closest node ID: " << closestNodeId << ", Distance: " << minDistance << std::endl;
         }
+    }
+
+    // Print final closest node ID and its distance
+    if (closestNodeId != -1) {
+        std::cout << "Final closest node ID: " << closestNodeId << ", Distance: " << minDistance << std::endl;
+    } else {
+        std::cout << "No valid node found!" << std::endl;
     }
 
     return closestNodeId;

@@ -13,7 +13,7 @@
 // #include "turtlebot.hpp"
 #include "turtlebot_sensorprocessing.hpp"
 #include "turtlebot_control_cal.hpp"
-
+#include "warehouse_robot_msgs/msg/robot_data.hpp"
 #include <std_msgs/msg/bool.hpp>
 
 
@@ -26,6 +26,7 @@ public:
 private:
     void pathCallback(const nav_msgs::msg::Path::SharedPtr msg);
     void controlLoop();
+    geometry_msgs::msg::Point findLookAheadPoint(nav_msgs::msg::Path path, geometry_msgs::msg::Point Current_goal, double tolerance);
     
     
     
@@ -49,6 +50,8 @@ private:
 
 
     //turtlebot_ros2 Communication
+    void Publish_robot_data(nav_msgs::msg::Odometry odom, int status, int Ar_tag_info);
+
     void SendCmdTb1(const geometry_msgs::msg::Twist instructions);
     void odomCallback(const nav_msgs::msg::Odometry::SharedPtr odomMsg);
     void LidaCallback(const sensor_msgs::msg::LaserScan::SharedPtr Msg);
@@ -58,6 +61,7 @@ private:
     void shut_downCallback(const std_msgs::msg::Bool::SharedPtr msg);
 
 
+    rclcpp::Publisher<warehouse_robot_msgs::msg::RobotData>::SharedPtr robot_info_pub;
     rclcpp::Subscription<nav_msgs::msg::Path>::SharedPtr path_sub_;
     rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr cmd_pub_;
     rclcpp::Publisher<std_msgs::msg::Bool>::SharedPtr goal_pub_;

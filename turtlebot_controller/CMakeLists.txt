@@ -9,6 +9,8 @@ find_package(nav_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(marker_msgs REQUIRED)
 find_package(tf2_geometry_msgs REQUIRED)
+find_package(warehouse_robot_msgs REQUIRED)
+
 
 # Add executables and link libraries
 add_executable(turtlebot_controller
@@ -28,6 +30,7 @@ ament_target_dependencies(
   sensor_msgs
   marker_msgs
   tf2_geometry_msgs
+  warehouse_robot_msgs
 )
 
 # Install the executable

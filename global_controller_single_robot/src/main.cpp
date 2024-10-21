@@ -5,14 +5,11 @@
 int main(int argc, char** argv) {
     rclcpp::init(argc, argv);
 
-    // Default namespace is empty
-    std::string namespace_param = "";
-    if (argc > 1) {
-        namespace_param = argv[1];
-    }
+ 
+    int number_of_robot_parameter;
 
     // Correct class name and usage
-    auto global_controller = std::make_shared<Global_Controller>(namespace_param);
+    auto global_controller = std::make_shared<Global_Controller>(number_of_robot_parameter);
 
     // Start the defaultStat function in a separate thread
     std::thread default_stat_thread([&global_controller]() {global_controller->Default_state();});
