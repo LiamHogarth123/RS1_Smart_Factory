@@ -14,7 +14,7 @@ find_package(nlohmann_json REQUIRED)
 find_package(warehouse_robot_msgs REQUIRED)
 
 # Add executables and link libraries
-add_executable(global_controller
+add_executable(global_controller_single_robot
   src/global_controller.cpp
   src/main.cpp
   src/task_allocation.cpp
@@ -26,7 +26,7 @@ add_executable(global_controller
 
 # Link the executable to the necessary libraries
 ament_target_dependencies(
-  global_controller
+  global_controller_single_robot
   rclcpp
   geometry_msgs
   nav_msgs
@@ -37,7 +37,7 @@ ament_target_dependencies(
 )
 
 # Link OpenCV libraries to the executable
-target_link_libraries(global_controller
+target_link_libraries(global_controller_single_robot
   ${OpenCV_LIBS}
   nlohmann_json::nlohmann_json
 )
@@ -45,7 +45,7 @@ target_link_libraries(global_controller
 
 # Install the executable
 install(TARGETS
-  global_controller
+  global_controller_single_robot
   DESTINATION lib/${PROJECT_NAME})
 
 # Install launch files

@@ -155,6 +155,10 @@ std::vector<geometry_msgs::msg::Point> Path_Planner::A_star_To_Goal(geometry_msg
     trajectory.push_back(goal);
     std::cout << "Final Goal Point added to trajectory: (" << goal.x << ", " << goal.y << ")" << std::endl;
 
+    path_id = trajectory_node_ID;
+    std::cout << path_id.size() << std::endl;
+    show_Prm();
+
     return trajectory;
 }
 
@@ -272,7 +276,7 @@ void Path_Planner::show_Prm()
     std::cout << "Show PRM Opens" << std::endl;
     cv::Mat MapImage = Load_Map();
     MapImage = visalise_prm(MapImage, nodes_Graph);
-    // MapImage = visalise_path(MapImage, path);
+    MapImage = visalise_path(MapImage, path_id);
     save_map(MapImage);
     // show_map(MapImage);
 }
@@ -283,10 +287,10 @@ cv::Mat Path_Planner::visalise_path(cv::Mat mapImage, std::vector<int> path) {
         return mapImage;
     }
 
-    for (int i = 0; i < path.size()-1; i++){
-        cv::Point start(nodes.at(path.at(i)).x, nodes.at(path.at(i)).y);
+    for (int i = 1; i < path.size(); i++){
+        cv::Point start(nodes_Graph.at(path.at(i-1)).x, nodes_Graph.at(path.at(i-1)).y);
 
-        cv::Point end(nodes.at(path.at(i+1)).x, nodes.at(path.at(i+1)).y);
+        cv::Point end(nodes_Graph.at(path.at(i)).x, nodes_Graph.at(path.at(i)).y);
 
         cv::line(mapImage, start, end, Line_colour, 1); // Draw the edge
     }

@@ -52,7 +52,6 @@ Controller::Controller(const std::string &namespace_param)  : Node(namespace_par
 
 
 
-
 // DEFAULT STATE
 //////////////////////////////////////////////////////
 void Controller::Default_state(){
@@ -60,26 +59,31 @@ void Controller::Default_state(){
   rclcpp::Rate rate(10); // 10 Hz
   bool active = true;
 
+  std::cout << "Entering Default State..." << std::endl;
 
   while (active){
       
-    //publish odom, status, and Ar Info if it is avaliable. 
+    //publish odom, status, and Ar Info if it is available.
+    std::cout << "Publishing odom, status, and AR info (if available)..." << std::endl;
+    Publish_robot_data(current_odom_, 0, -1);
 
+    if (NewPath_){
+      std::cout << "New Path detected, entering control loop..." << std::endl;
+        Publish_robot_data(current_odom_, 1, -1);
 
-
+      controlLoop();
+    }
     if (shutdown_request_){
+      std::cout << "Shutdown request received, shutting down..." << std::endl;
       rclcpp::shutdown();
-      active =false;
+      active = false;
       break;
-      rclcpp::shutdown();
     }
     rate.sleep();  // Sleep to prevent CPU hogging and allow callbacks to be processed
-
-
   }
 
+  std::cout << "Exiting Default State, shutting down..." << std::endl;
   rclcpp::shutdown();
-
 }
 
 
@@ -89,69 +93,82 @@ void Controller::controlLoop() {
   geometry_msgs::msg::Twist traj;
   bool goal_reached = false;
   std_msgs::msg::Bool status_msg;
-  status_msg.data = false;  // Set the boolean value to true
+  status_msg.data = false;  // Set the boolean value to false initially
   goal_pub_->publish(status_msg); 
 
-
+  std::cout << "Entering control loop..." << std::endl;
 
   if (path_ == nullptr || path_->poses.empty()) {
+    std::cout << "Path is null or empty, exiting control loop..." << std::endl;
     return;
   }
 
+  std::cout << "Path found, proceeding with alignment..." << std::endl;
     
   goal = path_->poses.at(0).pose.position;
   nav_msgs::msg::Path trajectory_path = *path_;
 
+  std::cout << "First goal at (" << goal.x << ", " << goal.y << ")" << std::endl;
 
-  // firt aling the robots orination with first goal
+  // first align the robot's orientation with the first goal
   double Desired_yaw = Calculate_desired_yaw(trajectory_path);
 
-  while (calculateYaw(current_odom_) - Desired_yaw > 0.5) {
-    traj.angular.x = 0.1; // optimise this so direction and speed is considered
+  std::cout << "Desired yaw: " << Desired_yaw << std::endl;
+
+  while (std::abs(calculateYaw(current_odom_) - Desired_yaw) > 0.5) {
+    std::cout << "Aligning robot: current yaw = " << calculateYaw(current_odom_) << std::endl;
+    traj.angular.z = 0.1;  // optimize this so direction and speed is considered
     SendCmdTb1(traj);
   }
 
-  //stop the rotation
+  std::cout << "Robot aligned with the first goal." << std::endl;
+
+  // Stop the rotation
   SendCmdTb1(zero_trajectory);
   traj = zero_trajectory;
-  
- 
 
-  //Once aligned start driving loop
+  // Once aligned, start driving loop
   ////////////////////////////////////////////////////////////////////////
+  std::cout << "Starting driving loop..." << std::endl;
   while (!goal_reached){ 
 
-    //find the current waypoint goal
+    // Find the current waypoint goal
     target_goal = findLookAheadPoint(trajectory_path, current_odom_.pose.pose.position, 0.5);
-    //setups PID calculation
-    Turtlebot_GPS_.updateControlParam(target_goal, 0.1, current_odom_);
+    std::cout << "Lookahead point at (" << target_goal.x << ", " << target_goal.y << ")" << std::endl;
 
-    //If final Goal hit stop
-    if (Turtlebot_GPS_.goal_hit(trajectory_path.poses.back().pose.position, current_odom_)){
-      // end of goals reached
+    // Setup PID calculation
+    Turtlebot_GPS_.updateControlParam(target_goal, 0.1, current_odom_);
+    std::cout << "PID control updated with target goal." << std::endl;
+
+    // If final goal is hit, stop
+    if (Turtlebot_GPS_.goal_hit(trajectory_path.poses.back().pose.position, current_odom_)) {
+      std::cout << "Final goal reached." << std::endl;
       goal_reached = true;
       break;
     }
 
+    // If all good
+    ///////////////////////////////////////////////////////////////////////////////////////////
+    traj = Turtlebot_GPS_.generate_trajectory();
+    std::cout << "Generated trajectory: linear.x = " << traj.linear.x << ", angular.z = " << traj.angular.z << std::endl;
+    SendCmdTb1(traj);
 
-  //if all good
-  ///////////////////////////////////////////////////////////////////////////////////////////
-  traj = Turtlebot_GPS_.generate_trajectory();
-  SendCmdTb1(traj);
-
-  std::this_thread::sleep_for(std::chrono::milliseconds(200));
+    std::this_thread::sleep_for(std::chrono::milliseconds(200));
 
   }
+
+  std::cout << "Stopping the TurtleBot, current speed: " << current_speed_ << std::endl;
 
   while (current_speed_ > 0){
     SendCmdTb1(zero_trajectory);
     std::this_thread::sleep_for(std::chrono::milliseconds(20));
-
+    std::cout << "Decelerating..." << std::endl;
   }
 
+  std::cout << "TurtleBot stopped." << std::endl;
 
-  //rotat the turtlebot looking for the AR tag information
-  // rotate turtleobot -90 degrees
+  // Rotate the TurtleBot looking for the AR tag information
+  // rotate TurtleBot -90 degrees
   // double Max_angle = 90;
   // std::vector<int> found_tags;
   // for (angle = -90; angle < Max_angle; angle+10){
@@ -161,19 +178,15 @@ void Controller::controlLoop() {
   //        break; 
   //    }
   // }
-  
 
-
-
+  std::cout << "Publishing final status and data..." << std::endl;
 
   status_msg.data = true;  // Set the boolean value to true
   Publish_robot_data(current_odom_, 0, 0);
   Publish_robot_data(current_odom_, 0, 0);
- 
+
   NewPath_ = false;
 }
-
-
 
 
 
@@ -245,7 +258,7 @@ void Controller::pathCallback(const nav_msgs::msg::Path::SharedPtr msg) {
   path_ = msg;
   current_waypoint_ = 0;
   NewPath_ = true;
-  controlLoop();
+  // controlLoop();
 }
 
 void Controller::RGBCallback(const sensor_msgs::msg::Image::SharedPtr Msg){

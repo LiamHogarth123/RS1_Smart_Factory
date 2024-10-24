@@ -38,7 +38,9 @@ void TurtleBotManager::publishTrajectory(std::vector<geometry_msgs::msg::Point> 
       pose.pose.orientation.z = 0.0;
       pose.pose.orientation.w = 1.0;
 
-      // Add the pose to the path
+      // Add the pose to the pathlock(odom_locker_);
+//     current_odom_ = *odomMsg.odom;
+//     current_speed_ = std::sqrt(std::
       path_msg->poses.push_back(pose);
   }
 
@@ -93,6 +95,19 @@ bool TurtleBotManager::get_status_bool(){
 
 void TurtleBotManager::robot_info_Callback(const warehouse_robot_msgs::msg::RobotData::SharedPtr msg) {
     // Process the RobotData message here
+  std::cout << "got robot_info" << std::endl;
+  std::lock_guard<std::mutex> lock(odom_locker_);
+  current_odom_ = msg->odom;
+  current_speed_ = std::sqrt(std::pow(current_odom_.twist.twist.linear.x, 2) +
+                              std::pow(current_odom_.twist.twist.linear.y, 2) +
+                              std::pow(current_odom_.twist.twist.linear.z, 2));
+
+  int status = msg->status;
+  int Artag_info = msg->ar_tag_id;
+
+
+// }
+
 }
 
 // Callbacks

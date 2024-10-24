@@ -36,6 +36,8 @@ void Global_Controller::Default_state() {
     rclcpp::Rate rate(10); // 10 Hz
     std_msgs::msg::Bool msg;
     int r = 0;
+    std::cout << "Creating TurtleBot manager..." << std::endl;
+    auto manager = std::make_shared<TurtleBotManager>("");
 
     // Waiting for map data to be received
     while (!map_data_recieved) {
@@ -47,9 +49,9 @@ void Global_Controller::Default_state() {
     std::cout << "Map data received. Initializing path planning system..." << std::endl;
     GPS.UpdateMapData(map);
 
-    // Create the TurtleBot manager
-    std::cout << "Creating TurtleBot manager..." << std::endl;
-    auto manager = std::make_shared<TurtleBotManager>("");
+    // // Create the TurtleBot manager
+    // std::cout << "Creating TurtleBot manager..." << std::endl;
+    // auto manager = std::make_shared<TurtleBotManager>("");
 
     // Get the job list (goals)
     std::vector<geometry_msgs::msg::Point> goals = TA.get_job_list();

@@ -79,7 +79,7 @@ def generate_launch_description():
         # Define the global_controller node with namespace substitution
         Node(
             package='global_controller_single_robot',
-            executable='global_controller',
+            executable='global_controller_single_robot',
             name='global_controller',
             # namespace=LaunchConfiguration('namespace'),
             output='screen',
