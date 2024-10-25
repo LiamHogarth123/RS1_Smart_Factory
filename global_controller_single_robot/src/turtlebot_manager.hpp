@@ -17,10 +17,12 @@
 class TurtleBotManager : public rclcpp::Node
 {
 public:
-    TurtleBotManager(const std::string& name);
+    TurtleBotManager(const std::string& name, int id);
     void robot_info_Callback(const warehouse_robot_msgs::msg::RobotData::SharedPtr msg);
     // void robot_info_Callback(const warehouse_robot_msgs::msg::RobotData::SharedPtr msg);
     void robot_info_Callback(const nav_msgs::msg::Odometry::SharedPtr odomMsg);
+    void customOdomCallback(const nav_msgs::msg::Odometry::SharedPtr odomMsg);
+
     void publishTrajectory(std::vector<geometry_msgs::msg::Point> goals);
 
 
@@ -31,12 +33,17 @@ public:
     bool get_status_bool();
     
 
+    bool odom_recieved;
+
+
 private:
     std::string namespace_;
     std::shared_ptr<rclcpp::Node> node_; 
+    bool data_recieved;
 
 
     rclcpp::Subscription<warehouse_robot_msgs::msg::RobotData>::SharedPtr robot_info_sub;
+    rclcpp::Subscription<nav_msgs::msg::Odometry>::SharedPtr back_odom_sub;
     rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr path_pub_;
 
 
@@ -50,6 +57,7 @@ private:
     int AR_tag;
 
     double current_speed_;
+
 };
 
 #endif // DEFAULT_TURTLEBOT_HPP

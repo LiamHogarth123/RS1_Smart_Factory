@@ -51,7 +51,7 @@ std::vector<int> Path_Planner::findPathAStar(const std::unordered_map<int, Node>
 
     // Ensure the start and finish nodes are valid
     if (map_nodes.find(start_id) == map_nodes.end() || map_nodes.find(finish_id) == map_nodes.end()) {
-        std::cerr << "Error: Invalid start or finish node ID." << std::endl;
+        // std::cerr << "Error: Invalid start or finish node ID." << std::endl;
         return {};
     }
 
@@ -71,11 +71,11 @@ std::vector<int> Path_Planner::findPathAStar(const std::unordered_map<int, Node>
         // Get the node with the lowest f_cost
         int current_id = open_set.top().second;
         open_set.pop();
-        std::cout << "Processing node: " << current_id << std::endl;
+        // std::cout << "Processing node: " << current_id << std::endl;
 
         // If we've reached the goal, reconstruct the path
         if (current_id == finish_id) {
-            std::cout << "Goal node " << finish_id << " reached." << std::endl;
+            // std::cout << "Goal node " << finish_id << " reached." << std::endl;
             std::vector<int> path;
             while (current_id != start_id) {
                 path.push_back(current_id);
@@ -83,7 +83,7 @@ std::vector<int> Path_Planner::findPathAStar(const std::unordered_map<int, Node>
             }
             path.push_back(start_id);
             std::reverse(path.begin(), path.end());
-            std::cout << "Path found: ";
+            // std::cout << "Path found: ";
             for (int id : path) {
                 std::cout << id << " ";
             }
@@ -95,11 +95,11 @@ std::vector<int> Path_Planner::findPathAStar(const std::unordered_map<int, Node>
         const Node& current_node = map_nodes.at(current_id);
         for (const auto& [neighbor_id, cost] : current_node.edges) {
             double tentative_g_cost = g_cost[current_id] + cost;
-            std::cout << "Checking neighbor " << neighbor_id << " with cost " << cost << std::endl;
+            // std::cout << "Checking neighbor " << neighbor_id << " with cost " << cost << std::endl;
 
             // If this path to neighbor is better, update
             if (tentative_g_cost < g_cost[neighbor_id]) {
-                std::cout << "Updating g_cost and came_from for neighbor " << neighbor_id << std::endl;
+                // std::cout << "Updating g_cost and came_from for neighbor " << neighbor_id << std::endl;
                 came_from[neighbor_id] = current_id;
                 g_cost[neighbor_id] = tentative_g_cost;
                 double f_cost = tentative_g_cost + heuristic(map_nodes.at(neighbor_id), map_nodes.at(finish_id));
@@ -184,8 +184,8 @@ int Path_Planner::setGoalNode(geometry_msgs::msg::Point goal)
         float distance = sqrt(dx * dx + dy * dy);
 
         // Print distance from each node to the goal
-        std::cout << "Node ID: " << node.second.id << ", Node coordinates: (" << node.second.x << ", " << node.second.y << ")";
-        std::cout << ", Distance to goal: " << distance << std::endl;
+        // std::cout << "Node ID: " << node.second.id << ", Node coordinates: (" << node.second.x << ", " << node.second.y << ")";
+        // std::cout << ", Distance to goal: " << distance << std::endl;
 
         if (distance < minDistance)
         {
@@ -193,7 +193,7 @@ int Path_Planner::setGoalNode(geometry_msgs::msg::Point goal)
             closestNodeId = node.second.id;
 
             // Print updated closest node information
-            std::cout << "Updated closest node ID: " << closestNodeId << ", Distance: " << minDistance << std::endl;
+            // std::cout << "Updated closest node ID: " << closestNodeId << ", Distance: " << minDistance << std::endl;
         }
     }
 

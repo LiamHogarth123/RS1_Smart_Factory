@@ -80,7 +80,7 @@ def generate_launch_description():
         Node(
             package='global_controller_single_robot',
             executable='global_controller_single_robot',
-            name='global_controller',
+            name='global_controller_launcher',
             # namespace=LaunchConfiguration('namespace'),
             output='screen',
             # arguments=[LaunchConfiguration('namespace')],

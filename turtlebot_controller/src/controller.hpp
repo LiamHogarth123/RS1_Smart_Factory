@@ -55,6 +55,8 @@ private:
     //turtlebot_ros2 Communication
     void Publish_robot_data(nav_msgs::msg::Odometry odom, int status, int Ar_tag_info);
 
+    void Publish_custom_odom(nav_msgs::msg::Odometry odom);
+
     void SendCmdTb1(const geometry_msgs::msg::Twist instructions);
     void odomCallback(const nav_msgs::msg::Odometry::SharedPtr odomMsg);
     void LidaCallback(const sensor_msgs::msg::LaserScan::SharedPtr Msg);
@@ -73,6 +75,8 @@ private:
 
 
     rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr cmd_vel_pub_;
+    rclcpp::Publisher<nav_msgs::msg::Odometry>::SharedPtr custom_odom_pub;
+
     rclcpp::Subscription<nav_msgs::msg::Odometry>::SharedPtr sub1_;
     rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr sub2_;
     rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr sub3_;

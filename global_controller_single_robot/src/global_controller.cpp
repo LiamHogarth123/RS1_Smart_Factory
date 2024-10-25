@@ -36,14 +36,19 @@ void Global_Controller::Default_state() {
     rclcpp::Rate rate(10); // 10 Hz
     std_msgs::msg::Bool msg;
     int r = 0;
+    
     std::cout << "Creating TurtleBot manager..." << std::endl;
-    auto manager = std::make_shared<TurtleBotManager>("");
-
+    auto manager = std::make_shared<TurtleBotManager>("bacon_bot", 1);
+    std::thread spin_thread([manager]() {rclcpp::spin(manager); });
     // Waiting for map data to be received
     while (!map_data_recieved) {
         rate.sleep();
         std::cout << "Waiting for map data..." << std::endl;
     }
+
+ 
+
+
 
     // Once map data is received, initialize the path planning system
     std::cout << "Map data received. Initializing path planning system..." << std::endl;
@@ -62,10 +67,12 @@ void Global_Controller::Default_state() {
         std::cout << "Goal " << i + 1 << ": (" << goals[i].x << ", " << goals[i].y << ")" << std::endl;
     }
 
+
+
     // Initialize the delivery location and start point
     geometry_msgs::msg::Point delievery_Location1;
     delievery_Location1.x = 0;
-    delievery_Location1.y = 0;
+    delievery_Location1.y = -2;
 
     geometry_msgs::msg::Point start;
     start = manager->GetCurrentOdom().pose.pose.position;
@@ -79,10 +86,13 @@ void Global_Controller::Default_state() {
         trajectory.clear();
         trajectory = GPS.A_star_To_Goal(start, goals.at(i));
         manager->publishTrajectory(trajectory);
-
+        std::this_thread::sleep_for(std::chrono::milliseconds(10000));
+        std::cout << "geeting status" << std::endl;
+        std::cout << manager->get_status_bool() << std::endl;
         while (!manager->get_status_bool()){ // for multiple robot the below loop will run on a seperate thread. if synochous
-           
             rate.sleep();
+            std::this_thread::sleep_for(std::chrono::milliseconds(500));
+
             //Add listener for e-stop
         }
 

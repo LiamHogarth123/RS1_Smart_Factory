@@ -1,16 +1,25 @@
 #include "turtlebot_manager.hpp"
 
-TurtleBotManager::TurtleBotManager(const std::string& name) : Node(name + "_turtlebot_manager_node"), namespace_(name)  {    
+TurtleBotManager::TurtleBotManager(const std::string& name, int id) : Node(name + "_turtlebot_manager_node_" + std::to_string(id)), namespace_(name) {    
+  data_recieved = false;
+
+  odom_recieved = false;
 
   path_pub_ = this->create_publisher<nav_msgs::msg::Path>("trajectory", 10);
 
+  std::cout << "subsciber_created" << std::endl;
+  back_odom_sub =  this->create_subscription<nav_msgs::msg::Odometry>("backup/odom", 10, std::bind(&TurtleBotManager::customOdomCallback, this, std::placeholders::_1));
+
+
 
   robot_info_sub = this->create_subscription<warehouse_robot_msgs::msg::RobotData>(
-    "robot_data", 
-    10, 
-    [this](const warehouse_robot_msgs::msg::RobotData::SharedPtr msg) {
-        this->robot_info_Callback(msg);
-    });
+      "/robot_data", 
+      10, 
+      std::bind(static_cast<void(TurtleBotManager::*)(const warehouse_robot_msgs::msg::RobotData::SharedPtr)>(&TurtleBotManager::robot_info_Callback), this, std::placeholders::_1)
+  );
+
+
+
 
 }
 
@@ -55,6 +64,8 @@ void TurtleBotManager::publishTrajectory(std::vector<geometry_msgs::msg::Point> 
 
 
 nav_msgs::msg::Odometry TurtleBotManager::GetCurrentOdom(){
+
+
   std::lock_guard<std::mutex> lock(odom_locker_);
   return current_odom_;
 }
@@ -83,11 +94,11 @@ std::string TurtleBotManager::getStatus() {
 }
 
 bool TurtleBotManager::get_status_bool(){
-  if (status == 0){
-    return true;
+  if (status == 1){
+    return false;
   }
   else {
-    return false;
+    return true;
   }
 }
 
@@ -95,18 +106,21 @@ bool TurtleBotManager::get_status_bool(){
 
 void TurtleBotManager::robot_info_Callback(const warehouse_robot_msgs::msg::RobotData::SharedPtr msg) {
     // Process the RobotData message here
-  std::cout << "got robot_info" << std::endl;
-  std::lock_guard<std::mutex> lock(odom_locker_);
+  // std::cout << "got robot_info" << std::endl;
+  data_recieved = true;
+  odom_recieved = true;
+  
+
+  // std::lock_guard<std::mutex> lock(odom_locker_);
   current_odom_ = msg->odom;
   current_speed_ = std::sqrt(std::pow(current_odom_.twist.twist.linear.x, 2) +
                               std::pow(current_odom_.twist.twist.linear.y, 2) +
                               std::pow(current_odom_.twist.twist.linear.z, 2));
 
-  int status = msg->status;
+  status = msg->status;
   int Artag_info = msg->ar_tag_id;
+  
 
-
-// }
 
 }
 
@@ -123,3 +137,12 @@ void TurtleBotManager::robot_info_Callback(const warehouse_robot_msgs::msg::Robo
 
 
 // }
+
+
+void TurtleBotManager::customOdomCallback(const nav_msgs::msg::Odometry::SharedPtr odomMsg) {
+  // std::lock_guard<std::mutex> lock(odom_locker_);
+  // std::cout << "got Odom_second topic" << std::endl;
+  odom_recieved = true;
+  current_odom_ = *odomMsg;
+  current_speed_ = std::sqrt(std::pow(odomMsg->twist.twist.linear.x, 2) + std::pow(odomMsg->twist.twist.linear.y, 2) + std::pow(odomMsg->twist.twist.linear.z, 2));
+}

@@ -20,6 +20,9 @@ Controller::Controller(const std::string &namespace_param)  : Node(namespace_par
   // Subscribe to the trajectory topic
   path_sub_ = this->create_subscription<nav_msgs::msg::Path>(path_topic, 10, std::bind(&Controller::pathCallback, this, std::placeholders::_1));
   goal_pub_ = this->create_publisher<std_msgs::msg::Bool>("reached_goal", 10);
+  custom_odom_pub = this->create_publisher<nav_msgs::msg::Odometry>("backup/odom", 10);
+
+
   shut_down_request = this->create_subscription<std_msgs::msg::Bool>("shut_down", 10, std::bind(&Controller::shut_downCallback, this, std::placeholders::_1));\
 
 
@@ -66,10 +69,11 @@ void Controller::Default_state(){
     //publish odom, status, and Ar Info if it is available.
     std::cout << "Publishing odom, status, and AR info (if available)..." << std::endl;
     Publish_robot_data(current_odom_, 0, -1);
+    Publish_custom_odom(current_odom_);
 
     if (NewPath_){
       std::cout << "New Path detected, entering control loop..." << std::endl;
-        Publish_robot_data(current_odom_, 1, -1);
+      Publish_robot_data(current_odom_, 1, -1);
 
       controlLoop();
     }
@@ -93,6 +97,12 @@ void Controller::controlLoop() {
   geometry_msgs::msg::Twist traj;
   bool goal_reached = false;
   std_msgs::msg::Bool status_msg;
+  Publish_robot_data(current_odom_, 1, -1);
+  Publish_robot_data(current_odom_, 1, -1);
+  Publish_robot_data(current_odom_, 1, -1);
+  Publish_robot_data(current_odom_, 1, -1);
+
+
   status_msg.data = false;  // Set the boolean value to false initially
   goal_pub_->publish(status_msg); 
 
@@ -119,6 +129,7 @@ void Controller::controlLoop() {
     std::cout << "Aligning robot: current yaw = " << calculateYaw(current_odom_) << std::endl;
     traj.angular.z = 0.1;  // optimize this so direction and speed is considered
     SendCmdTb1(traj);
+    Publish_custom_odom(current_odom_);
   }
 
   std::cout << "Robot aligned with the first goal." << std::endl;
@@ -131,7 +142,7 @@ void Controller::controlLoop() {
   ////////////////////////////////////////////////////////////////////////
   std::cout << "Starting driving loop..." << std::endl;
   while (!goal_reached){ 
-
+    
     // Find the current waypoint goal
     target_goal = findLookAheadPoint(trajectory_path, current_odom_.pose.pose.position, 0.5);
     std::cout << "Lookahead point at (" << target_goal.x << ", " << target_goal.y << ")" << std::endl;
@@ -153,17 +164,19 @@ void Controller::controlLoop() {
     std::cout << "Generated trajectory: linear.x = " << traj.linear.x << ", angular.z = " << traj.angular.z << std::endl;
     SendCmdTb1(traj);
 
-    std::this_thread::sleep_for(std::chrono::milliseconds(200));
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));
 
   }
 
   std::cout << "Stopping the TurtleBot, current speed: " << current_speed_ << std::endl;
 
-  while (current_speed_ > 0){
+  while (current_speed_ > 0.05){
     SendCmdTb1(zero_trajectory);
     std::this_thread::sleep_for(std::chrono::milliseconds(20));
     std::cout << "Decelerating..." << std::endl;
   }
+  SendCmdTb1(zero_trajectory);
+
 
   std::cout << "TurtleBot stopped." << std::endl;
 
@@ -184,40 +197,87 @@ void Controller::controlLoop() {
   status_msg.data = true;  // Set the boolean value to true
   Publish_robot_data(current_odom_, 0, 0);
   Publish_robot_data(current_odom_, 0, 0);
+  Publish_custom_odom(current_odom_);
 
   NewPath_ = false;
 }
 
 
 
-geometry_msgs::msg::Point Controller::findLookAheadPoint(nav_msgs::msg::Path path, geometry_msgs::msg::Point Current_position, double tolerance){
-  geometry_msgs::msg::Point lookahead_point = Current_position;
+// geometry_msgs::msg::Point Controller::findLookAheadPoint(nav_msgs::msg::Path path, geometry_msgs::msg::Point Current_position, double tolerance){
+//   geometry_msgs::msg::Point lookahead_point = Current_position;
 
-  // Iterate through the path points
-  for (const auto& pose_stamped : path.poses) {
-    geometry_msgs::msg::Point path_point = pose_stamped.pose.position;
+//   // Iterate through the path points
+//   for (const auto& pose_stamped : path.poses) {
+//     geometry_msgs::msg::Point path_point = pose_stamped.pose.position;
 
-    // Calculate the distance between the current position and the path point
-    double distance_to_point = calculateDistance(Current_position, path_point);
+//     // Calculate the distance between the current position and the path point
+//     double distance_to_point = calculateDistance(Current_position, path_point);
 
-    // If the distance is greater than the tolerance, this is our lookahead point
-    if (distance_to_point > tolerance) {
-      lookahead_point = path_point;
-      break;
+//     // If the distance is greater than the tolerance, this is our lookahead point
+//     if (distance_to_point > tolerance) {
+//       lookahead_point = path_point;
+//       break;
+//     }
+//   }
+
+//   // If we are near the end point (within the tolerance), set the lookahead point to the end of the path
+//   geometry_msgs::msg::Point end_point = path.poses.back().pose.position;
+//   double distance_to_end = calculateDistance(Current_position, end_point);
+//   if (distance_to_end <= tolerance) {
+//     lookahead_point = end_point;
+//   }
+//   return lookahead_point;
+
+// }
+
+
+geometry_msgs::msg::Point Controller::findLookAheadPoint(nav_msgs::msg::Path path, geometry_msgs::msg::Point Current_position, double tolerance) {
+  double cumulative_distance = 0.0;
+  double closest_goal = 9999999;
+  size_t current_gaol_id;
+  geometry_msgs::msg::Point look_ahead_point = path.poses.at(0).pose.position;
+
+  // Find the closest point on the path to the current position (could be in front or behind the TB)
+  for (size_t j = 0; j< path.poses.size(); j++){
+    
+    double temp = calculateDistance(path.poses.at(j).pose.position, Current_position);
+    if (temp < closest_goal){
+      look_ahead_point = path.poses.at(j).pose.position;
+      current_gaol_id = j;
+      closest_goal = temp;
     }
   }
 
-  // If we are near the end point (within the tolerance), set the lookahead point to the end of the path
-  geometry_msgs::msg::Point end_point = path.poses.back().pose.position;
-  double distance_to_end = calculateDistance(Current_position, end_point);
-  if (distance_to_end <= tolerance) {
-    lookahead_point = end_point;
+
+  // Ensure that the current goal / closest point is the one in front of the TB
+  double p1_p2 = calculateDistance(path.poses.at(current_gaol_id).pose.position, path.poses.at(current_gaol_id + 1).pose.position); // between current(p1) and next(p2) points
+  double p1_p3 = calculateDistance(path.poses.at(current_gaol_id).pose.position, Current_position); // between current point(p1) and current pos(p3)
+  double p2_p3 = calculateDistance(path.poses.at(current_gaol_id + 1).pose.position, Current_position); // between next point(p2) and current pos(p3)
+  // Determine if goal is behind TB (which is bad)
+    if (p1_p2 >= p2_p3 && p1_p2 >= p1_p3){ // current pos is middle point so current point is behind the TB, thus we must increment to the next point
+      current_gaol_id++;
+      look_ahead_point = path.poses.at(current_gaol_id).pose.position;
+    }
+
+  // Calculate cumulative distance along the path starting from the current position
+  double distanceToNextPoint = calculateDistance(Current_position, path.poses.at(current_gaol_id).pose.position);
+  cumulative_distance += distanceToNextPoint; 
+  for (size_t i = current_gaol_id; i < path.poses.size() - 1; ++i) {
+    double segment_length = calculateDistance(path.poses.at(i).pose.position, path.poses.at(i+1).pose.position);
+    cumulative_distance += segment_length;
+    // sets lookahead point
+    if (cumulative_distance >= tolerance) {
+      double overshoot = cumulative_distance - tolerance;
+      double ratio = (segment_length - overshoot) / segment_length;
+      look_ahead_point.x = path.poses.at(i).pose.position.x + ratio * (path.poses.at(i+1).pose.position.x - path.poses.at(i).pose.position.x);
+      look_ahead_point.y = path.poses.at(i).pose.position.y + ratio * (path.poses.at(i+1).pose.position.y - path.poses.at(i).pose.position.y);
+      return look_ahead_point;
+    }
   }
-  return lookahead_point;
+  return path.poses.back().pose.position;
 
 }
-
-
 
 void Controller::shut_downCallback(const std_msgs::msg::Bool::SharedPtr msg) {
   if (msg->data) {
@@ -243,6 +303,11 @@ void Controller::Publish_robot_data(nav_msgs::msg::Odometry odom, int status, in
   msg.status = status; 
   msg.ar_tag_id = Ar_tag_info;
   robot_info_pub->publish(msg);
+}
+
+void Controller::Publish_custom_odom(nav_msgs::msg::Odometry odom){
+  custom_odom_pub->publish(odom);
+
 }
 
 // Callbacks
