@@ -72,7 +72,7 @@ void Global_Controller::Default_state() {
     // Initialize the delivery location and start point
     geometry_msgs::msg::Point delievery_Location1;
     delievery_Location1.x = 0;
-    delievery_Location1.y = -2;
+    delievery_Location1.y = 2;
 
     geometry_msgs::msg::Point start;
     start = manager->GetCurrentOdom().pose.pose.position;
@@ -103,17 +103,20 @@ void Global_Controller::Default_state() {
          
             manager->publishTrajectory(trajectory);
 
-         
-            while (!manager->get_status_bool()){
-         
-
-            rate.sleep();
-
-            }
+            std::this_thread::sleep_for(std::chrono::milliseconds(10000));
+            std::cout << "geeting status" << std::endl;
+            std::cout << manager->get_status_bool() << std::endl;
+            
+            while (!manager->get_status_bool()){ // for multiple robot the below loop will run on a seperate thread. if synochous
+                rate.sleep();
+                std::this_thread::sleep_for(std::chrono::milliseconds(500));
+                //Add listener for e-stop
+            }       
+        
 
         }
         else {
-            // maybe read organise goals with task allocation
+            // maybe re -  organise goals with task allocation
         }
         
 

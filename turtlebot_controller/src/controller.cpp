@@ -75,6 +75,13 @@ void Controller::Default_state(){
       std::cout << "New Path detected, entering control loop..." << std::endl;
       Publish_robot_data(current_odom_, 1, -1);
 
+      for (size_t i = 0; i < path_->poses.size(); ++i) {
+        double x = path_->poses[i].pose.position.x;
+        double y = path_->poses[i].pose.position.y;
+        double z = path_->poses[i].pose.position.z;
+
+        std::cout << "Waypoint " << i << ": x=" << x << ", y=" << y << ", z=" << z << std::endl;
+      }
       controlLoop();
     }
     if (shutdown_request_){
@@ -124,9 +131,11 @@ void Controller::controlLoop() {
   double Desired_yaw = Calculate_desired_yaw(trajectory_path);
 
   std::cout << "Desired yaw: " << Desired_yaw << std::endl;
+  std::cout << "current yaw" << std::endl;
+  std::cout << "alligning yaw" << std::endl;
 
   while (std::abs(calculateYaw(current_odom_) - Desired_yaw) > 0.5) {
-    std::cout << "Aligning robot: current yaw = " << calculateYaw(current_odom_) << std::endl;
+    // std::cout << "Aligning robot: current yaw = " << calculateYaw(current_odom_) << std::endl;
     traj.angular.z = 0.1;  // optimize this so direction and speed is considered
     SendCmdTb1(traj);
     Publish_custom_odom(current_odom_);
@@ -136,6 +145,8 @@ void Controller::controlLoop() {
 
   // Stop the rotation
   SendCmdTb1(zero_trajectory);
+  SendCmdTb1(zero_trajectory);
+
   traj = zero_trajectory;
 
   // Once aligned, start driving loop
@@ -164,7 +175,7 @@ void Controller::controlLoop() {
     std::cout << "Generated trajectory: linear.x = " << traj.linear.x << ", angular.z = " << traj.angular.z << std::endl;
     SendCmdTb1(traj);
 
-    std::this_thread::sleep_for(std::chrono::milliseconds(50));
+    std::this_thread::sleep_for(std::chrono::milliseconds(200));
 
   }
 
@@ -175,6 +186,7 @@ void Controller::controlLoop() {
     std::this_thread::sleep_for(std::chrono::milliseconds(20));
     std::cout << "Decelerating..." << std::endl;
   }
+  SendCmdTb1(zero_trajectory);
   SendCmdTb1(zero_trajectory);
 
 
@@ -214,8 +226,10 @@ void Controller::controlLoop() {
 //     // Calculate the distance between the current position and the path point
 //     double distance_to_point = calculateDistance(Current_position, path_point);
 
-//     // If the distance is greater than the tolerance, this is our lookahead point
-//     if (distance_to_point > tolerance) {
+// //     // If the distance is greater than the tolerance,   if (NewPath_){
+//       std::cout << "New Path detected, entering control loop..." << std::endl;
+//       Publish_robot_data(current_odom_, 1, -1); this is our lookahead point
+// //     if (distance_to_point > tolerance) {
 //       lookahead_point = path_point;
 //       break;
 //     }
@@ -233,6 +247,13 @@ void Controller::controlLoop() {
 
 
 geometry_msgs::msg::Point Controller::findLookAheadPoint(nav_msgs::msg::Path path, geometry_msgs::msg::Point Current_position, double tolerance) {
+  for (size_t i = 0; i < path.poses.size(); ++i) {
+    double x = path.poses[i].pose.position.x;
+    double y = path.poses[i].pose.position.y;
+    double z = path.poses[i].pose.position.z;
+
+    std::cout << "Waypoint " << i << ": x=" << x << ", y=" << y << ", z=" << z << std::endl;
+  }
   double cumulative_distance = 0.0;
   double closest_goal = 9999999;
   size_t current_gaol_id;
@@ -366,13 +387,14 @@ double Controller::calculateYaw(nav_msgs::msg::Odometry odometry_data){
 }
 
 double Controller::Calculate_desired_yaw(nav_msgs::msg::Path path){
-  double path_yaw;
+  double deltaX = path.poses.at(1).pose.position.x - current_odom_.pose.pose.position.x;
+  double deltaY = path.poses.at(1).pose.position.y - current_odom_.pose.pose.position.y;
+  
+  // Calculate the angle (yaw) to face the point
+  double required_yaw = atan2(deltaY, deltaX);
 
-  // complete calculations
-
-  return path_yaw;
+  return required_yaw;
 }
-
 
 double Controller::calculateDistance(const geometry_msgs::msg::Point& point1, const geometry_msgs::msg::Point& point2) {
   return std::sqrt(std::pow(point2.x - point1.x, 2) + std::pow(point2.y - point1.y, 2));
