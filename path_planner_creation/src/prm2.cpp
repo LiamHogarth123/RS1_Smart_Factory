@@ -108,7 +108,7 @@ void Graph::Generate_Map()
 {
 
     
-    std::vector<Polygons> userPolygon = getUserDefinedPolygons("/home/liam/map.pgm");
+    std::vector<Polygons> userPolygon = getUserDefinedPolygons("/home/liam/git/RS1_Smart_Factory/global_controller_single_robot/map/gazebo_sf_map.pgm");
     Lane_polygons = userPolygon;
     
     generateGridNodes(SlamMapData, userPolygon);
@@ -137,7 +137,7 @@ void Graph::Generate_Map()
 
 
     show_Prm(path);
-    // cv::Mat map = Load_Map();
+    // // cv::Mat map = Load_Map();
     // User_path_drawing(map);
 
     // export
@@ -191,7 +191,7 @@ void Graph::show_map(cv::Mat mapImage)
 
 void Graph::save_map(cv::Mat mapImage)
 {
-    cv::imwrite("/home/liam/Desktop/map_with_nodes fixed2!!!.png", mapImage);
+    cv::imwrite("/home/liam/Desktop/warhouse_map_with_nodes!!!.png", mapImage);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -200,7 +200,7 @@ cv::Mat Graph::Load_Map()
 {
     // READ Image
     std::cout << "Reading the map image from '/home/liam/map.pgm'...\n";
-    cv::Mat grayscaleMapImage = cv::imread("/home/liam/map.pgm", cv::IMREAD_GRAYSCALE);
+    cv::Mat grayscaleMapImage = cv::imread("/home/liam/git/RS1_Smart_Factory/global_controller_single_robot/map/gazebo_sf_map.pgm", cv::IMREAD_GRAYSCALE);
     if (grayscaleMapImage.empty())
     {
         std::cerr << "Could not open or find the map image" << std::endl;
@@ -213,7 +213,8 @@ cv::Mat Graph::Load_Map()
     cv::cvtColor(grayscaleMapImage, mapImage, cv::COLOR_GRAY2BGR);
     std::cout << "Converted grayscale map image to BGR.\n";
 
-    cv::flip(mapImage, mapImage, 0);
+    // cv::flip(mapImage, mapImage, 0);
+    cv::flip(mapImage, mapImage, 0); // Flip around the x-axis
     std::cout << "Flipped the map image vertically.\n";
 
     return mapImage;
@@ -399,7 +400,7 @@ void Graph::generate_Prm_Nodes(){
 
     double Prm_area = boundary_area - Grid_area;
     double area_per_node = 1;
-    int density = static_cast<int>((Prm_area * 0.25) / area_per_node);;
+    int density = static_cast<int>((Prm_area * 0.4) / area_per_node);;
     
     
      // add cacluation for ratio of free space of
@@ -727,7 +728,7 @@ bool Graph::validate_point(geometry_msgs::msg::Point point){
     int index = grid_x + (grid_y * SlamMapData.info.width);
     
     // Define the size of the grid to check around the point
-    int grid_size = 5; 
+    int grid_size = 6; 
 
     // Loop through the grid_size x grid_size area around the point
     for (int dx = -grid_size / 2; dx <= grid_size / 2; ++dx) {
@@ -792,6 +793,9 @@ std::vector<Polygons> Graph::getUserDefinedPolygons(const std::string &mapImageP
     // Convert grayscale to BGR for drawing
     cv::Mat colorImage;
     cv::cvtColor(image, colorImage, cv::COLOR_GRAY2BGR);
+    cv::flip(colorImage, colorImage, 0); // Flip around the x-axis
+    
+
 
     // Set up the window and callback
     cv::namedWindow("Draw Polygons");

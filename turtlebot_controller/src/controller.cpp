@@ -157,7 +157,7 @@ void Controller::controlLoop() {
   while (!goal_reached){ 
     
     // Find the current waypoint goal
-    target_goal = findLookAheadPoint(trajectory_path, current_odom_.pose.pose.position, 0.5);
+    target_goal = findLookAheadPoint(trajectory_path, current_odom_.pose.pose.position, 0.25);
     std::cout << "Lookahead point at (" << target_goal.x << ", " << target_goal.y << ")" << std::endl;
 
     publishSingleMarker(target_goal);

@@ -114,7 +114,7 @@ private:
     std::vector<Node> nodes;
     std::vector<Node> Graph;
     nav_msgs::msg::OccupancyGrid SlamMapData;
-    nav_msgs::msg::MapMetaData latestMapMetaData_;
+    nav_msgs::msg::MapMetaData latestMapMetaData_; 
     double offsetX;
     double offsetY;
     double offsetYaw;

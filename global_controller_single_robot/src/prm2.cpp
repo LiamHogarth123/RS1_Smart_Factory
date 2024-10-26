@@ -36,7 +36,9 @@
 
 Path_Planner::Path_Planner()
 {
-
+    map_file_path = "/home/liam/git/RS1_Smart_Factory/global_controller_single_robot/map/gazebo_sf_map.pgm";
+    saved_nodes_path = "/home/liam/git/RS1_Smart_Factory/path_planner_creation/road_map/file.json";
+    save_map_file_path = "/home/liam/Desktop/Proof_of_Import!!!.png";
 }
 
 
@@ -230,7 +232,7 @@ double Path_Planner::heuristic(const Node& a, const Node& b) {
 
 
 void Path_Planner::import_map(){
-    nodes_Graph = load_nodes("/home/liam/git/RS1_Smart_Factory/path_planner_creation/road_map/file.json");
+    nodes_Graph = load_nodes(saved_nodes_path);
 
 
 }
@@ -301,14 +303,14 @@ cv::Mat Path_Planner::visalise_path(cv::Mat mapImage, std::vector<int> path) {
 
 
 void Path_Planner::save_map(cv::Mat mapImage) {
-    cv::imwrite("/home/liam/Desktop/Proof_of_Import!!!.png", mapImage);
+    cv::imwrite(save_map_file_path, mapImage);
 }
 
 
 cv::Mat Path_Planner::Load_Map() {
     // READ Image
     std::cout << "Reading the map image from '/home/liam/map.pgm'...\n";
-    cv::Mat grayscaleMapImage = cv::imread("/home/liam/map.pgm", cv::IMREAD_GRAYSCALE);
+    cv::Mat grayscaleMapImage = cv::imread(map_file_path, cv::IMREAD_GRAYSCALE);
     if (grayscaleMapImage.empty())
     {
         std::cerr << "Could not open or find the map image" << std::endl;

@@ -9,6 +9,8 @@
 #include <sensor_msgs/msg/image.hpp>
 #include "marker_msgs/msg/marker.hpp"
 #include "geometry_msgs/msg/point.hpp"  
+#include <nav_msgs/msg/odometry.hpp>
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -21,17 +23,6 @@
 // #include "turtlebot_control_cal.hpp"
 
 
-struct package_info{
-    geometry_msgs::msg::Point package_location;
-    int id;
-    geometry_msgs::msg::Point delivery_location;
-};
-
-struct Package {
-    int id;
-    double start_x, start_y;
-    double finish_x, finish_y;
-};
 
 struct turtlebot_job {
     int id;
@@ -45,13 +36,24 @@ public:
     std::vector<geometry_msgs::msg::Point> get_job_list();
     void Load_job_list_txt();
 
-    std::vector<std::vector<turtlebot_job>> Tsp_sort();
+    std::vector<turtlebot_job> get_Job_List(std::vector<nav_msgs::msg::Odometry> turtlebot_starts);
+
+    std::vector<std::vector<turtlebot_job>> optimise_turtlebot_jobs(int num_robot);
+
+    std::vector<turtlebot_job> PackageSort(const geometry_msgs::msg::Point& current_location);
+
+
+
+    double calculateEuclideanDistance(const geometry_msgs::msg::Point& a, const geometry_msgs::msg::Point& b);
+
 
 private:
     std::string namespace_param_;
     rclcpp::Subscription<nav_msgs::msg::Path>::SharedPtr path_sub_;
     rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr path_pub_;
-    std::vector<Package> packages_info;
+    std::vector<turtlebot_job> turtlebot_job_list;
+
+    std::string job_list_file_path;
 
 
 

@@ -41,6 +41,8 @@ void Global_Controller::Default_state() {
     auto manager = std::make_shared<TurtleBotManager>("bacon_bot", 1);
     std::thread spin_thread([manager]() {rclcpp::spin(manager); });
     // Waiting for map data to be received
+
+
     while (!map_data_recieved) {
         rate.sleep();
         std::cout << "Waiting for map data..." << std::endl;
@@ -54,25 +56,20 @@ void Global_Controller::Default_state() {
     std::cout << "Map data received. Initializing path planning system..." << std::endl;
     GPS.UpdateMapData(map);
 
-    // // Create the TurtleBot manager
-    // std::cout << "Creating TurtleBot manager..." << std::endl;
-    // auto manager = std::make_shared<TurtleBotManager>("");
-
     // Get the job list (goals)
-    std::vector<geometry_msgs::msg::Point> goals = TA.get_job_list();
-    std::cout << "Number of goals retrieved: " << goals.size() << std::endl;
-
-    // Print the retrieved goals
-    for (size_t i = 0; i < goals.size(); ++i) {
-        std::cout << "Goal " << i + 1 << ": (" << goals[i].x << ", " << goals[i].y << ")" << std::endl;
-    }
+    // std::vector<geometry_msgs::msg::Point> goals = TA.get_job_list();
+    // std::cout << "Number of goals retrieved: " << goals.size() << std::endl;
+    std::vector<nav_msgs::msg::Odometry> turtlebot_start_odom;
+    turtlebot_start_odom.push_back(manager->GetCurrentOdom());
+    std::vector<turtlebot_job> job_list = TA.get_Job_List(turtlebot_start_odom);
 
 
 
-    // Initialize the delivery location and start point
-    geometry_msgs::msg::Point delievery_Location1;
-    delievery_Location1.x = 0;
-    delievery_Location1.y = 2;
+
+
+    
+
+
 
     geometry_msgs::msg::Point start;
     start = manager->GetCurrentOdom().pose.pose.position;
@@ -81,14 +78,16 @@ void Global_Controller::Default_state() {
     int package_id = 5;
 
 
-    for (int i = 0; i < goals.size(); i++){
+    for (int i = 0; i < job_list.size(); i++){
 
         trajectory.clear();
-        trajectory = GPS.A_star_To_Goal(start, goals.at(i));
+        trajectory = GPS.A_star_To_Goal(manager->GetCurrentOdom().pose.pose.position, job_list.at(i).package_location);
         manager->publishTrajectory(trajectory);
+
         std::this_thread::sleep_for(std::chrono::milliseconds(10000));
         std::cout << "geeting status" << std::endl;
         std::cout << manager->get_status_bool() << std::endl;
+        
         while (!manager->get_status_bool()){ // for multiple robot the below loop will run on a seperate thread. if synochous
             rate.sleep();
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
@@ -96,10 +95,11 @@ void Global_Controller::Default_state() {
             //Add listener for e-stop
         }
 
-        Process_Package_AR_info(manager->GetARTag(), package_id);
-        if (true){ // if (get_AR_Tag = true){
+        bool correct_package_found = Process_Package_AR_info(manager->GetARTag(), job_list.at(i).id);
+        
+        if (correct_package_found){ // if (get_AR_Tag = true){
             trajectory.clear();
-            trajectory = GPS.A_star_To_Goal(manager->GetCurrentOdom().pose.pose.position, delievery_Location1);
+            trajectory = GPS.A_star_To_Goal(manager->GetCurrentOdom().pose.pose.position, job_list.at(i).delivery_location);
          
             manager->publishTrajectory(trajectory);
 
@@ -116,7 +116,7 @@ void Global_Controller::Default_state() {
 
         }
         else {
-            // maybe re -  organise goals with task allocation
+            // maybe re -  organise goals with task allocation if package not found
         }
         
 

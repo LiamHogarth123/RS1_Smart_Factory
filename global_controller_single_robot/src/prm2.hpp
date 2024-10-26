@@ -138,6 +138,9 @@ private:
     std::vector<cv::Point> path_points_withoutValidation;
     std::vector<cv::Point> path_points;
     std::vector<int> path_id;
+    std::string map_file_path;
+    std::string saved_nodes_path;
+    std::string save_map_file_path;
 };
 
 #endif // PRM_HPP
