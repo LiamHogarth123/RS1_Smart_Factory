@@ -15,7 +15,8 @@
 #include "turtlebot_control_cal.hpp"
 #include "warehouse_robot_msgs/msg/robot_data.hpp"
 #include <std_msgs/msg/bool.hpp>
-
+#include <visualization_msgs/msg/marker.hpp>
+#include <visualization_msgs/msg/marker_array.hpp>
 
 class Controller : public rclcpp::Node {
 public:
@@ -33,6 +34,12 @@ private:
     double calculateDistance(const geometry_msgs::msg::Point& point1, const geometry_msgs::msg::Point& point2);
 
     
+
+
+    //visualis marker
+    void publishMarkerArray(const nav_msgs::msg::Path &paths);
+    void publishSingleMarker(const geometry_msgs::msg::Point &point);
+
 
 
     std::string namespace_param_;
@@ -76,6 +83,9 @@ private:
 
     rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr cmd_vel_pub_;
     rclcpp::Publisher<nav_msgs::msg::Odometry>::SharedPtr custom_odom_pub;
+
+    rclcpp::Publisher<visualization_msgs::msg::Marker>::SharedPtr marker_pub_;
+    rclcpp::Publisher<visualization_msgs::msg::MarkerArray>::SharedPtr marker_array_pub_;
 
     rclcpp::Subscription<nav_msgs::msg::Odometry>::SharedPtr sub1_;
     rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr sub2_;

@@ -727,7 +727,7 @@ bool Graph::validate_point(geometry_msgs::msg::Point point){
     int index = grid_x + (grid_y * SlamMapData.info.width);
     
     // Define the size of the grid to check around the point
-    int grid_size = 4; 
+    int grid_size = 5; 
 
     // Loop through the grid_size x grid_size area around the point
     for (int dx = -grid_size / 2; dx <= grid_size / 2; ++dx) {

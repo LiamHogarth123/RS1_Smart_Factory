@@ -31,6 +31,8 @@ Controller::Controller(const std::string &namespace_param)  : Node(namespace_par
   // Publish to the cmd_vel topic
   cmd_vel_pub_ = this->create_publisher<geometry_msgs::msg::Twist>("cmd_vel", 10);
   robot_info_pub = this->create_publisher<warehouse_robot_msgs::msg::RobotData>("robot_data", 10);
+  marker_pub_ = this->create_publisher<visualization_msgs::msg::Marker>("visualization_marker", 10);
+  marker_array_pub_ = this->create_publisher<visualization_msgs::msg::MarkerArray>("visualization_marker_array", 10);
 
 
   // Subscribe to other topics without manually adding the namespace
@@ -125,7 +127,7 @@ void Controller::controlLoop() {
   goal = path_->poses.at(0).pose.position;
   nav_msgs::msg::Path trajectory_path = *path_;
 
-  std::cout << "First goal at (" << goal.x << ", " << goal.y << ")" << std::endl;
+  publishMarkerArray(trajectory_path);
 
   // first align the robot's orientation with the first goal
   double Desired_yaw = Calculate_desired_yaw(trajectory_path);
@@ -157,6 +159,8 @@ void Controller::controlLoop() {
     // Find the current waypoint goal
     target_goal = findLookAheadPoint(trajectory_path, current_odom_.pose.pose.position, 0.5);
     std::cout << "Lookahead point at (" << target_goal.x << ", " << target_goal.y << ")" << std::endl;
+
+    publishSingleMarker(target_goal);
 
     // Setup PID calculation
     Turtlebot_GPS_.updateControlParam(target_goal, 0.1, current_odom_);
@@ -216,88 +220,61 @@ void Controller::controlLoop() {
 
 
 
-// geometry_msgs::msg::Point Controller::findLookAheadPoint(nav_msgs::msg::Path path, geometry_msgs::msg::Point Current_position, double tolerance){
-//   geometry_msgs::msg::Point lookahead_point = Current_position;
-
-//   // Iterate through the path points
-//   for (const auto& pose_stamped : path.poses) {
-//     geometry_msgs::msg::Point path_point = pose_stamped.pose.position;
-
-//     // Calculate the distance between the current position and the path point
-//     double distance_to_point = calculateDistance(Current_position, path_point);
-
-// //     // If the distance is greater than the tolerance,   if (NewPath_){
-//       std::cout << "New Path detected, entering control loop..." << std::endl;
-//       Publish_robot_data(current_odom_, 1, -1); this is our lookahead point
-// //     if (distance_to_point > tolerance) {
-//       lookahead_point = path_point;
-//       break;
-//     }
-//   }
-
-//   // If we are near the end point (within the tolerance), set the lookahead point to the end of the path
-//   geometry_msgs::msg::Point end_point = path.poses.back().pose.position;
-//   double distance_to_end = calculateDistance(Current_position, end_point);
-//   if (distance_to_end <= tolerance) {
-//     lookahead_point = end_point;
-//   }
-//   return lookahead_point;
-
-// }
 
 
-geometry_msgs::msg::Point Controller::findLookAheadPoint(nav_msgs::msg::Path path, geometry_msgs::msg::Point Current_position, double tolerance) {
+geometry_msgs::msg::Point Controller::findLookAheadPoint(nav_msgs::msg::Path path, geometry_msgs::msg::Point current_position, double tolerance) {
+  if (path.poses.empty()) {
+    // Return the current position if the path is empty
+    return current_position;
+  }
+
+  double closest_distance = std::numeric_limits<double>::max();
+  size_t closest_point_id = 0;
+  geometry_msgs::msg::Point look_ahead_point = path.poses.front().pose.position;
+
+  // Find the closest point on the path to the current position
   for (size_t i = 0; i < path.poses.size(); ++i) {
-    double x = path.poses[i].pose.position.x;
-    double y = path.poses[i].pose.position.y;
-    double z = path.poses[i].pose.position.z;
-
-    std::cout << "Waypoint " << i << ": x=" << x << ", y=" << y << ", z=" << z << std::endl;
-  }
-  double cumulative_distance = 0.0;
-  double closest_goal = 9999999;
-  size_t current_gaol_id;
-  geometry_msgs::msg::Point look_ahead_point = path.poses.at(0).pose.position;
-
-  // Find the closest point on the path to the current position (could be in front or behind the TB)
-  for (size_t j = 0; j< path.poses.size(); j++){
-    
-    double temp = calculateDistance(path.poses.at(j).pose.position, Current_position);
-    if (temp < closest_goal){
-      look_ahead_point = path.poses.at(j).pose.position;
-      current_gaol_id = j;
-      closest_goal = temp;
+    double distance = calculateDistance(path.poses[i].pose.position, current_position);
+    if (distance < closest_distance) {
+      closest_distance = distance;
+      closest_point_id = i;
+      look_ahead_point = path.poses[i].pose.position;
     }
   }
 
+  // Check if the closest point is behind the TurtleBot, and if so, move to the next point
+  if (closest_point_id + 1 < path.poses.size()) { // Ensure we are within bounds
+    double dist_to_next = calculateDistance(path.poses[closest_point_id].pose.position, path.poses[closest_point_id + 1].pose.position);
+    double dist_to_current = calculateDistance(path.poses[closest_point_id].pose.position, current_position);
+    double dist_next_to_current = calculateDistance(path.poses[closest_point_id + 1].pose.position, current_position);
 
-  // Ensure that the current goal / closest point is the one in front of the TB
-  double p1_p2 = calculateDistance(path.poses.at(current_gaol_id).pose.position, path.poses.at(current_gaol_id + 1).pose.position); // between current(p1) and next(p2) points
-  double p1_p3 = calculateDistance(path.poses.at(current_gaol_id).pose.position, Current_position); // between current point(p1) and current pos(p3)
-  double p2_p3 = calculateDistance(path.poses.at(current_gaol_id + 1).pose.position, Current_position); // between next point(p2) and current pos(p3)
-  // Determine if goal is behind TB (which is bad)
-    if (p1_p2 >= p2_p3 && p1_p2 >= p1_p3){ // current pos is middle point so current point is behind the TB, thus we must increment to the next point
-      current_gaol_id++;
-      look_ahead_point = path.poses.at(current_gaol_id).pose.position;
+    // If current position is between the closest and next point, increment to the next point
+    if (dist_to_next >= dist_next_to_current && dist_to_next >= dist_to_current) {
+      closest_point_id++;
+      look_ahead_point = path.poses[closest_point_id].pose.position;
     }
+  }
 
-  // Calculate cumulative distance along the path starting from the current position
-  double distanceToNextPoint = calculateDistance(Current_position, path.poses.at(current_gaol_id).pose.position);
-  cumulative_distance += distanceToNextPoint; 
-  for (size_t i = current_gaol_id; i < path.poses.size() - 1; ++i) {
-    double segment_length = calculateDistance(path.poses.at(i).pose.position, path.poses.at(i+1).pose.position);
+  // Calculate the cumulative distance along the path starting from the current position
+  double cumulative_distance = calculateDistance(current_position, path.poses[closest_point_id].pose.position);
+
+  for (size_t i = closest_point_id; i < path.poses.size() - 1; ++i) {
+    double segment_length = calculateDistance(path.poses[i].pose.position, path.poses[i + 1].pose.position);
     cumulative_distance += segment_length;
-    // sets lookahead point
+
+    // If the cumulative distance exceeds the tolerance, calculate the look-ahead point
     if (cumulative_distance >= tolerance) {
       double overshoot = cumulative_distance - tolerance;
       double ratio = (segment_length - overshoot) / segment_length;
-      look_ahead_point.x = path.poses.at(i).pose.position.x + ratio * (path.poses.at(i+1).pose.position.x - path.poses.at(i).pose.position.x);
-      look_ahead_point.y = path.poses.at(i).pose.position.y + ratio * (path.poses.at(i+1).pose.position.y - path.poses.at(i).pose.position.y);
+
+      look_ahead_point.x = path.poses[i].pose.position.x + ratio * (path.poses[i + 1].pose.position.x - path.poses[i].pose.position.x);
+      look_ahead_point.y = path.poses[i].pose.position.y + ratio * (path.poses[i + 1].pose.position.y - path.poses[i].pose.position.y);
       return look_ahead_point;
     }
   }
-  return path.poses.back().pose.position;
 
+  // If tolerance not reached, return the last point in the path
+  return path.poses.back().pose.position;
 }
 
 void Controller::shut_downCallback(const std_msgs::msg::Bool::SharedPtr msg) {
@@ -400,3 +377,83 @@ double Controller::calculateDistance(const geometry_msgs::msg::Point& point1, co
   return std::sqrt(std::pow(point2.x - point1.x, 2) + std::pow(point2.y - point1.y, 2));
 }
 
+
+
+
+
+// visualisation section
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void Controller::publishMarkerArray(const nav_msgs::msg::Path &paths) {
+   visualization_msgs::msg::MarkerArray marker_array;
+
+    // Debug output: Check if the path contains any poses
+
+    int marker_id = 0;
+    for (const auto &pose_stamped : paths.poses) {
+
+        visualization_msgs::msg::Marker marker;
+        marker.header.frame_id = "map";  // Replace "map" with your desired frame
+        marker.header.stamp = this->now();
+        marker.ns = "path_marker_array";
+        marker.id = marker_id++;
+        marker.type = visualization_msgs::msg::Marker::SPHERE;
+        marker.action = visualization_msgs::msg::Marker::ADD;
+
+        // Set marker position to each point in the path
+        marker.pose.position = pose_stamped.pose.position;
+        marker.pose.position.z = 0;
+        marker.pose.orientation.w = 1.0;
+
+
+
+        // Set the marker size
+        marker.scale.x = 0.1;  // Adjust size as needed
+        marker.scale.y = 0.1;
+        marker.scale.z = 0.1;
+
+
+        // Set color (RGBA)
+        marker.color.r = 0.0;
+        marker.color.g = 1.0;
+        marker.color.b = 0.0;
+        marker.color.a = 1.0;
+
+
+
+        // Add marker to the array
+        marker_array.markers.push_back(marker);
+    }
+
+    // Publish the marker array
+    marker_array_pub_->publish(marker_array);
+
+
+}
+
+void Controller::publishSingleMarker(const geometry_msgs::msg::Point &point) {
+        visualization_msgs::msg::Marker marker;
+        marker.header.frame_id = "map";  // Replace "map" with your frame of choice
+        marker.header.stamp = this->now();
+        marker.ns = "single_marker";
+        marker.id = 0;
+        marker.type = visualization_msgs::msg::Marker::SPHERE;
+        marker.action = visualization_msgs::msg::Marker::ADD;
+
+        // Set marker position
+        marker.pose.position = point;
+        marker.pose.orientation.w = 1.0;
+
+        // Marker properties
+        marker.scale.x = 0.2;  // Set size as needed
+        marker.scale.y = 0.2;
+        marker.scale.z = 0.2;
+
+        // Set color (RGBA)
+        marker.color.r = 1.0;
+        marker.color.g = 0.0;
+        marker.color.b = 0.0;
+        marker.color.a = 1.0;
+
+        // Publish the marker
+        marker_pub_->publish(marker);
+    }

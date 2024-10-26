@@ -20,10 +20,10 @@ std::vector<geometry_msgs::msg::Point> Task_Allocation::get_job_list(){
     // Define five different goals (x, y, z)
     std::vector<std::tuple<double, double, double>> goals = {
         {2.0, 0.0, 0.0},
-        {4.0, 1.0, 0.0},
-        {3.0, -1.0, 0.0},
-        {4.0, 0, 0.0},
-        {2.5, 0.5, 0.0}
+        {0.0, -2.0, 0.0},
+        {-2.0, 0.5, 0.0},
+        {0.5, 0, 0.0},
+        {0.5, -1.0, 0.0}
     };
 
     // Fill the job list with points

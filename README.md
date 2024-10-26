@@ -5,10 +5,7 @@ sudo apt install ros-humble-apriltag
 
 
 Current state
-* Global planner has been tested in developing paths and publishing it to the robot. 
-* Turtlebot_controller has not been tested and is stil being cleaned up.
-* About a month ago the system worked together with very limited features so therefore with minial work they should function together.
-
+* turtlebot drives to multiple goals semi successul. the testing map is not fully optimise leading to touches to the environment. Turtlebot 
 
 Important To do list first
 - Ensure Global planner is publishing trajectory correctly - Done <- printed correctly in terminal
