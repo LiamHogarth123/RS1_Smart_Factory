@@ -36,7 +36,7 @@
 
 Path_Planner::Path_Planner()
 {
-    map_file_path = "/home/liam/git/RS1_Smart_Factory/global_controller_single_robot/map/gazebo_sf_map.pgm";
+    map_file_path = "/home/liam/map.pgm";
     saved_nodes_path = "/home/liam/git/RS1_Smart_Factory/path_planner_creation/road_map/file.json";
     save_map_file_path = "/home/liam/Desktop/Proof_of_Import!!!.png";
 }

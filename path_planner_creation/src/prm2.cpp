@@ -108,7 +108,7 @@ void Graph::Generate_Map()
 {
 
     
-    std::vector<Polygons> userPolygon = getUserDefinedPolygons("/home/liam/git/RS1_Smart_Factory/global_controller_single_robot/map/gazebo_sf_map.pgm");
+    std::vector<Polygons> userPolygon = getUserDefinedPolygons("/home/liam/map.pgm");
     Lane_polygons = userPolygon;
     
     generateGridNodes(SlamMapData, userPolygon);
@@ -191,7 +191,7 @@ void Graph::show_map(cv::Mat mapImage)
 
 void Graph::save_map(cv::Mat mapImage)
 {
-    cv::imwrite("/home/liam/Desktop/warhouse_map_with_nodes!!!.png", mapImage);
+    cv::imwrite("/home/liam/Desktop/fixed_warhouse_map_with_nodes!!!.png", mapImage);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -200,7 +200,7 @@ cv::Mat Graph::Load_Map()
 {
     // READ Image
     std::cout << "Reading the map image from '/home/liam/map.pgm'...\n";
-    cv::Mat grayscaleMapImage = cv::imread("/home/liam/git/RS1_Smart_Factory/global_controller_single_robot/map/gazebo_sf_map.pgm", cv::IMREAD_GRAYSCALE);
+    cv::Mat grayscaleMapImage = cv::imread("/home/liam/map.pgm", cv::IMREAD_GRAYSCALE);
     if (grayscaleMapImage.empty())
     {
         std::cerr << "Could not open or find the map image" << std::endl;
@@ -728,7 +728,7 @@ bool Graph::validate_point(geometry_msgs::msg::Point point){
     int index = grid_x + (grid_y * SlamMapData.info.width);
     
     // Define the size of the grid to check around the point
-    int grid_size = 6; 
+    int grid_size = 8; 
 
     // Loop through the grid_size x grid_size area around the point
     for (int dx = -grid_size / 2; dx <= grid_size / 2; ++dx) {

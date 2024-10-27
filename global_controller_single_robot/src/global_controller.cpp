@@ -65,6 +65,10 @@ void Global_Controller::Default_state() {
 
 
 
+    for (int i = 0; i < job_list.size(); i++){
+        std::cout << "package x " << job_list.at(i).package_location.x << "y" << job_list.at(i).package_location.y << std::endl; 
+        std::cout << "deliever x " << job_list.at(i).delivery_location.x << "y" << job_list.at(i).delivery_location.y << std::endl;
+    }
 
 
     
