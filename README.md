@@ -7,30 +7,36 @@ Commands to run
 
 turtlebot_driver
 - ros2 launch turtlebot_controller turtlebot_controller_launch.py 
+
 global controller
 - ros2 run global_controller_single_robot global_controller_single_robot 
+
 Gazebo sim
 - ros2 launch turtlebot3_gazebo SmartFactory.launch.py
+
 Nav
 - ros2 launch turtlebot3_navigation2 navigation2.launch.py use_sim_time:=True map:=/home/liam/git/RS1_Smart_Factory/global_controller_single_robot/map/gazebo_sf_map.yaml
 
+
 Current state
-* turtlebot drives to multiple goals semi successul. the testing map is not fully optimise leading to touches to the environment. Turtlebot drives to each goal rotates to orientate for next goal and drives.
+* Turtlebot drives to multiple goal. path planning could be optimised and it doesn't have collision aviodance alignment optimisation or Ar tag recon.
+* multi turtlebot works with a modifed package that can't be pushed to git. For multi need updated task allo and path collision aviodance
+
+
 
 
 IMPORT TO FIX
-- gazebo, nav2 rviz cordinates are WRONG and they BREAKS A FEW THINGS
 - Orintating the robot is slow and turns only clockwise and badly
-- 
+- collision aviodance not impolemented
+- see if lanes will work else increase distance tolerance
 
 Jobs for teammates
 - Setup ros action call so we can publish a message to start job
 - setup package inspection at each package site (e.g turn look check for AR tag)
 - collision aviodance or re pathing if collision is found.
-- integrate with real ware house environment
 - Set up AR Tag recognision
-- implement e-stop
-- multi robot ;-)
+- implement e-stop - need fixing - blocking method may have failed
+- multi robot ;-) - done
 - set up rostopic status publishing
 - re organise environment for drop off sareas
 - setup warehouse package logging
