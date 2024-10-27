@@ -1,23 +1,28 @@
 #include "turtlebot_manager.hpp"
 
-TurtleBotManager::TurtleBotManager(const std::string& name, int id) : Node(name + "_turtlebot_manager_node_" + std::to_string(id)), namespace_(name) {    
-  data_recieved = false;
+TurtleBotManager::TurtleBotManager(const std::string& name, int id) : Node(name + "turtlebot_manager_node" + std::to_string(id)), namespace_(name) {    
 
+  data_recieved = false;
   odom_recieved = false;
 
-  path_pub_ = this->create_publisher<nav_msgs::msg::Path>("trajectory", 10);
+  // Prefix the namespace to the topic names
+  std::string ns_prefix = namespace_ + "/";
+
+  // Create publisher with namespace
+  path_pub_ = this->create_publisher<nav_msgs::msg::Path>(ns_prefix + "trajectory", 10);
 
   std::cout << "subsciber_created" << std::endl;
-  back_odom_sub =  this->create_subscription<nav_msgs::msg::Odometry>("backup/odom", 10, std::bind(&TurtleBotManager::customOdomCallback, this, std::placeholders::_1));
 
-
+  // Create subscriptions with namespace
+  back_odom_sub = this->create_subscription<nav_msgs::msg::Odometry>(
+      ns_prefix + "backup/odom", 10, 
+      std::bind(&TurtleBotManager::customOdomCallback, this, std::placeholders::_1));
 
   robot_info_sub = this->create_subscription<warehouse_robot_msgs::msg::RobotData>(
-      "/robot_data", 
-      10, 
-      std::bind(static_cast<void(TurtleBotManager::*)(const warehouse_robot_msgs::msg::RobotData::SharedPtr)>(&TurtleBotManager::robot_info_Callback), this, std::placeholders::_1)
-  );
-
+        ns_prefix + "robot_data", 
+        10, 
+        std::bind(static_cast<void(TurtleBotManager::*)(const warehouse_robot_msgs::msg::RobotData::SharedPtr)>(&TurtleBotManager::robot_info_Callback), 
+                  this, std::placeholders::_1));
 
 
 

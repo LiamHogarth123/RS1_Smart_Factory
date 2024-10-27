@@ -6,7 +6,7 @@
 
 Controller::Controller(const std::string &namespace_param)  : Node(namespace_param + "_controller"), namespace_param_(namespace_param) {
 
-
+  std::cout <<namespace_param_ << std::endl;
   // Initialize your classes
   Turtlebot_SensorProcessing machine_vision_;
   turtlebot_control Turtlebot_GPS_;

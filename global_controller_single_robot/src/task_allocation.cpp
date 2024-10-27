@@ -72,6 +72,10 @@ std::vector<std::vector<turtlebot_job>> Task_Allocation::optimise_turtlebot_jobs
 
     std::vector<std::vector<turtlebot_job>> sorted_jobs(num_robot);
 
+    for (int i = 0; i < num_robot; i++){
+        sorted_jobs.at(0).push_back(turtlebot_job_list.at(i));
+    }    
+
     // // // Step 1: Initialize jobs
     // // std::vector<turtlebot_job> jobs;
     // // for (const auto& package : turtlebot_job_list) {
@@ -157,3 +161,4 @@ std::vector<turtlebot_job> Task_Allocation::get_Job_List(std::vector<nav_msgs::m
     job_list = PackageSort(turtlebot_starts.at(0).pose.pose.position);
     return job_list;
 }
+

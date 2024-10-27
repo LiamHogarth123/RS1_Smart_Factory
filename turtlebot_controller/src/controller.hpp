@@ -8,7 +8,7 @@
 #include <nav_msgs/msg/odometry.hpp>
 #include <sensor_msgs/msg/laser_scan.hpp>
 #include <sensor_msgs/msg/image.hpp>
-#include "marker_msgs/msg/marker.hpp"
+// #include "marker_msgs/msg/marker.hpp"
 
 // #include "turtlebot.hpp"
 #include "turtlebot_sensorprocessing.hpp"
@@ -92,7 +92,7 @@ private:
     rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr sub3_;
     rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr sub4_;
     rclcpp::Subscription<nav_msgs::msg::Odometry>::SharedPtr sub5_;
-    rclcpp::Subscription<marker_msgs::msg::Marker>::SharedPtr sub6_;
+    // rclcpp::Subscription<marker_msgs::msg::Marker>::SharedPtr sub6_;
     // rclcpp::Subscription<std_msgs::msg::Int16>::SharedPtr sub7_;
 
     std::mutex odom_locker_;
@@ -108,7 +108,7 @@ private:
     sensor_msgs::msg::Image updated_rgb_;
     sensor_msgs::msg::LaserScan updated_lida_;
     sensor_msgs::msg::Image updated_image_depth_;
-    marker_msgs::msg::Marker ar_tag_;
+    // marker_msgs::msg::Marker ar_tag_;
     // std_msgs::msg::Int16 boundary_status_;
 
     double current_speed_;
