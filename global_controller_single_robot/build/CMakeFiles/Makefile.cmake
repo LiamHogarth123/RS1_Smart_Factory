@@ -1002,5 +1002,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/uninstall.dir/DependInfo.cmake"
   "CMakeFiles/global_controller_single_robot_uninstall.dir/DependInfo.cmake"
-  "CMakeFiles/global_controller.dir/DependInfo.cmake"
+  "CMakeFiles/global_controller_single_robot.dir/DependInfo.cmake"
   )

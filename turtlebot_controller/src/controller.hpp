@@ -8,9 +8,8 @@
 #include <nav_msgs/msg/odometry.hpp>
 #include <sensor_msgs/msg/laser_scan.hpp>
 #include <sensor_msgs/msg/image.hpp>
-// #include "marker_msgs/msg/marker.hpp"
 
-// #include "turtlebot.hpp"
+
 #include "turtlebot_sensorprocessing.hpp"
 #include "turtlebot_control_cal.hpp"
 #include "warehouse_robot_msgs/msg/robot_data.hpp"
@@ -50,7 +49,7 @@ private:
     geometry_msgs::msg::Pose current_pose_;
 
 
-    Turtlebot_SensorProcessing machine_vision_;
+    // Turtlebot_SensorProcessing machine_vision_;
     turtlebot_control Turtlebot_GPS_;
     // std::unique_ptr<DefaultTurtleBot> 
     // DefaultTurtleBot* turtlebot_RosCom_; // Unique ownership   
@@ -92,8 +91,6 @@ private:
     rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr sub3_;
     rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr sub4_;
     rclcpp::Subscription<nav_msgs::msg::Odometry>::SharedPtr sub5_;
-    // rclcpp::Subscription<marker_msgs::msg::Marker>::SharedPtr sub6_;
-    // rclcpp::Subscription<std_msgs::msg::Int16>::SharedPtr sub7_;
 
     std::mutex odom_locker_;
     std::mutex odom_locker2_;
@@ -108,8 +105,6 @@ private:
     sensor_msgs::msg::Image updated_rgb_;
     sensor_msgs::msg::LaserScan updated_lida_;
     sensor_msgs::msg::Image updated_image_depth_;
-    // marker_msgs::msg::Marker ar_tag_;
-    // std_msgs::msg::Int16 boundary_status_;
 
     double current_speed_;
 

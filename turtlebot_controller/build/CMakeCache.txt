@@ -274,7 +274,7 @@ SITE:STRING=Liam-ROS2
 TinyXML2_DIR:PATH=TinyXML2_DIR-NOTFOUND
 
 //Path to a library.
-_lib:FILEPATH=/home/liam/ros2_ws/install/warehouse_robot_msgs/lib/libwarehouse_robot_msgs__rosidl_typesupport_fastrtps_cpp.so
+_lib:FILEPATH=/opt/ros/humble/lib/libvisualization_msgs__rosidl_typesupport_fastrtps_cpp.so
 
 //The directory containing a CMake configuration file for action_msgs.
 action_msgs_DIR:PATH=/opt/ros/humble/share/action_msgs/cmake
@@ -368,9 +368,6 @@ libstatistics_collector_DIR:PATH=/opt/ros/humble/share/libstatistics_collector/c
 
 //The directory containing a CMake configuration file for libyaml_vendor.
 libyaml_vendor_DIR:PATH=/opt/ros/humble/share/libyaml_vendor/cmake
-
-//The directory containing a CMake configuration file for marker_msgs.
-marker_msgs_DIR:PATH=/opt/ros/humble/share/marker_msgs/cmake
 
 //The directory containing a CMake configuration file for message_filters.
 message_filters_DIR:PATH=/opt/ros/humble/share/message_filters/cmake
@@ -530,6 +527,9 @@ turtlebot_controller_SOURCE_DIR:STATIC=/home/liam/git/RS1_Smart_Factory/turtlebo
 
 //The directory containing a CMake configuration file for unique_identifier_msgs.
 unique_identifier_msgs_DIR:PATH=/opt/ros/humble/share/unique_identifier_msgs/cmake
+
+//The directory containing a CMake configuration file for visualization_msgs.
+visualization_msgs_DIR:PATH=/opt/ros/humble/share/visualization_msgs/cmake
 
 //The directory containing a CMake configuration file for warehouse_robot_msgs.
 warehouse_robot_msgs_DIR:PATH=/home/liam/ros2_ws/install/warehouse_robot_msgs/share/warehouse_robot_msgs/cmake

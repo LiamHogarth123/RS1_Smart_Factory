@@ -67,43 +67,68 @@ void Task_Allocation::Load_job_list_txt(){
 
 }
 
-std::vector<std::vector<turtlebot_job>> Task_Allocation::optimise_turtlebot_jobs(int num_robot){
+std::vector<std::vector<turtlebot_job>> Task_Allocation::optimise_turtlebot_jobs(int num_robot,  std::vector<geometry_msgs::msg::Point>& robot_positions){
     Load_job_list_txt();
 
-    std::vector<std::vector<turtlebot_job>> sorted_jobs(num_robot);
-
-    for (int i = 0; i < num_robot; i++){
-        sorted_jobs.at(0).push_back(turtlebot_job_list.at(i));
-    }    
-
-    // // // Step 1: Initialize jobs
-    // // std::vector<turtlebot_job> jobs;
-    // // for (const auto& package : turtlebot_job_list) {
-    // //     turtlebot_job job{package.id, package.pickup_location, package.delivery_location};
-    // //     jobs.push_back(job);
-    // // }
-
-    // // Step 2: Assign jobs to each robot based on nearest package location
-    // for (int robot_idx = 0; robot_idx < num_robot; ++robot_idx) {
-    //     // Find closest package for each TurtleBot and assign
-    //     std::sort(turtlebot_job_list.begin(), turtlebot_job_list.end(), [&](const turtlebot_job& a, const turtlebot_job& b) {
-    //         geometry_msgs::msg::Point robot_start = getRobotStartPosition(robot_idx); // Define this function
-    //         return calculateEuclideanDistance(robot_start, a.package_location) < calculateEuclideanDistance(robot_start, b.package_location);
-    //     });
-
-    //     // Step 3: Allocate sorted jobs to this TurtleBot, avoiding overlap
-    //     int job_count = turtlebot_job_list.size() / num_robot;
-    //     auto start_itr = jobs.begin() + robot_idx * job_count;
-    //     auto end_itr = (robot_idx == num_robot - 1) ? jobs.end() : start_itr + job_count;
-    //     sorted_jobs[robot_idx].insert(sorted_jobs[robot_idx].end(), start_itr, end_itr);
-
-    //     // Sort jobs for each TurtleBot to minimize travel distance between consecutive jobs
-    //     std::sort(sorted_jobs[robot_idx].begin(), sorted_jobs[robot_idx].end(), [&](const turtlebot_job& a, const turtlebot_job& b) {
-    //         return calculateEuclideanDistance(a.delivery_location, b.package_location) < calculateEuclideanDistance(a.package_location, b.delivery_location);
-    //     });
+     std::vector<turtlebot_job> job_list = turtlebot_job_list;
+    int num_robots = robot_positions.size();
+    std::vector<std::vector<turtlebot_job>> robot_jobs(num_robots);
+ 
+    // Define a single hardcoded delivery location
+    geometry_msgs::msg::Point delivery_location;
+    delivery_location.x = 5.0;
+    delivery_location.y = 5.0;
+    delivery_location.z = 0.0;
+ 
+    // Initialize each robot's location
+    std::vector<geometry_msgs::msg::Point> current_locations = robot_positions;
+ 
+    // Round-robin assignment of jobs to robots
+    int robot_index = 0;
+    while (!job_list.empty()) {
+        // Step 1: Find the closest initial goal from the current location of the selected robot
+        auto nearest_job = std::min_element(job_list.begin(), job_list.end(),
+            [&](const turtlebot_job& a, const turtlebot_job& b) {
+                return calculateEuclideanDistance(current_locations[robot_index], a.package_location) < calculateEuclideanDistance(current_locations[robot_index], b.package_location);
+            });
+ 
+        // Add the nearest job to the selected robot's assigned job list
+        robot_jobs[robot_index].push_back(*nearest_job);
+ 
+        // Step 2: Move the robot to the delivery location after pickup
+        current_locations[robot_index] = nearest_job->delivery_location;
+ 
+        // Step 3: Remove the job from the list and move to the next robot
+        job_list.erase(nearest_job);
+        robot_index = (robot_index + 1) % num_robots;
+    }
+ 
+    // // Ensure each robot ends at the delivery location
+    // for (int i = 0; i < num_robots; ++i) {
+    //     // Add a "final delivery" stop for each robot
+    //     turtlebot_job end_job;
+    //     end_job.id = -1;  // -1 to indicate it's a final stop rather than a specific pickup job
+    //     end_job.package_location = delivery_location;  // Set the location to the delivery location
+    //     robot_jobs[i].push_back(end_job);
     // }
-    
-    return sorted_jobs;
+ 
+    // Print the job assignments with delivery visits
+    for (int i = 0; i < num_robots; ++i) {
+        std::cout << "\nRobot " << i + 1 << " is assigned the following jobs:\n";
+        for (const auto& job : robot_jobs[i]) {
+            if (job.id == -1) {
+                std::cout << " - Final stop at delivery location (" << delivery_location.x << ", "
+                          << delivery_location.y << ", " << delivery_location.z << ")\n";
+            } else {
+                std::cout << " - Pick up Job ID: " << job.id << " at (" << job.package_location.x << ", "
+                          << job.package_location.y << ", " << job.package_location.z << ")\n";
+                std::cout << "   Deliver to (" << delivery_location.x << ", "
+                          << delivery_location.y << ", " << delivery_location.z << ")\n";
+            }
+        }
+    }
+    return robot_jobs;
+ 
 }
 
 

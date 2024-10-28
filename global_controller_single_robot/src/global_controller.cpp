@@ -249,7 +249,7 @@ void Global_Controller::Default_state_multi() {
         rate.sleep();
         std::cout << "Waiting for map data..." << std::endl;
     }
-    std::this_thread::sleep_for(std::chrono::milliseconds(20000));  // Small delay to prevent busy-waiting
+    std::this_thread::sleep_for(std::chrono::milliseconds(40000));  // Small delay to prevent busy-waiting
 
 
     
@@ -282,10 +282,10 @@ void Global_Controller::Default_state_multi() {
         spin_threads.emplace_back([manager]() { rclcpp::spin(manager); });
     }
 
-    std::vector<nav_msgs::msg::Odometry> turtlebot_start;
+    std::vector<geometry_msgs::msg::Point> turtlebot_start;
 
     for (int i = 0; i < managers.size(); i++){
-        turtlebot_start.push_back(managers.at(i)->GetCurrentOdom());
+        turtlebot_start.push_back(managers.at(i)->GetCurrentOdom().pose.pose.position);
     }
 
  
@@ -298,36 +298,39 @@ void Global_Controller::Default_state_multi() {
 
 
     std::cout << "Path planner initialised, run task allocation" << std::endl;
-    std::vector<turtlebot_job> job_list = TA.get_Job_List(turtlebot_start);
+    // std::vector<turtlebot_job> job_list = 
 
 
 
 
-    for (int i = 0; i < job_list.size(); i++){
-        std::cout << "package x " << job_list.at(i).package_location.x << "y" << job_list.at(i).package_location.y << std::endl; 
-        std::cout << "deliever x " << job_list.at(i).delivery_location.x << "y" << job_list.at(i).delivery_location.y << std::endl;
-    }
+    // for (int i = 0; i < job_list.size(); i++){
+    //     std::cout << "package x " << job_list.at(i).package_location.x << "y" << job_list.at(i).package_location.y << std::endl; 
+    //     std::cout << "deliever x " << job_list.at(i).delivery_location.x << "y" << job_list.at(i).delivery_location.y << std::endl;
+    // }
 
 
     
 
 
     std::vector<std::vector<geometry_msgs::msg::Point>> trajectory_points;
-    std::vector<std::vector<turtlebot_job>> multi_turtlebot_job_list = TA.optimise_turtlebot_jobs(num_robots);
+    std::vector<std::vector<turtlebot_job>> multi_turtlebot_job_list = TA.optimise_turtlebot_jobs(num_robots, turtlebot_start);
 
-
-   
-   
-    for (int job_list_idex = 0; job_list_idex < job_list.size(); job_list_idex++){
+    std::cout << "checking job list size" << std::endl;
+    std::cout << multi_turtlebot_job_list.size() << std::endl;
+    std::cout << multi_turtlebot_job_list.at(0).size() << std::endl;
+    
+    for (int job_list_idex = 0; job_list_idex < multi_turtlebot_job_list.size(); job_list_idex++){
         trajectory_points.clear();
 
         for (int robot_index = 0; robot_index < num_robots; robot_index++){    
-            trajectory_points.push_back(GPS.A_star_To_Goal(managers.at(robot_index)->GetCurrentOdom().pose.pose.position, multi_turtlebot_job_list.at(job_list_idex).at(robot_index).package_location));
+            trajectory_points.push_back(GPS.A_star_To_Goal(managers.at(robot_index)->GetCurrentOdom().pose.pose.position, multi_turtlebot_job_list.at(robot_index).at(job_list_idex).package_location));
         }
 
         for(int publishing_index = 0; publishing_index < trajectory_points.size(); publishing_index++){
             managers.at(publishing_index)->publishTrajectory(trajectory_points.at(publishing_index));
         }
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(20000));  // Small delay to prevent busy-waiting
 
 
 

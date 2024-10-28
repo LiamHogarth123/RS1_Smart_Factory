@@ -74,6 +74,7 @@
         "cfenv": "cpp",
         "variant": "cpp",
         "any": "cpp",
-        "valarray": "cpp"
+        "valarray": "cpp",
+        "*.ipp": "cpp"
     }
 }

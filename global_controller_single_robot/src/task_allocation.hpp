@@ -38,7 +38,7 @@ public:
 
     std::vector<turtlebot_job> get_Job_List(std::vector<nav_msgs::msg::Odometry> turtlebot_starts);
 
-    std::vector<std::vector<turtlebot_job>> optimise_turtlebot_jobs(int num_robot);
+    std::vector<std::vector<turtlebot_job>> optimise_turtlebot_jobs(int num_robot,  std::vector<geometry_msgs::msg::Point>& robot_positions);
 
     std::vector<turtlebot_job> PackageSort(const geometry_msgs::msg::Point& current_location);
 

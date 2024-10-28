@@ -198,24 +198,24 @@ global_controller_single_robot_uninstall/fast:
 .PHONY : global_controller_single_robot_uninstall/fast
 
 #=============================================================================
-# Target rules for targets named global_controller
+# Target rules for targets named global_controller_single_robot
 
 # Build rule for target.
-global_controller: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 global_controller
-.PHONY : global_controller
+global_controller_single_robot: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 global_controller_single_robot
+.PHONY : global_controller_single_robot
 
 # fast build rule for target.
-global_controller/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/global_controller.dir/build.make CMakeFiles/global_controller.dir/build
-.PHONY : global_controller/fast
+global_controller_single_robot/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/global_controller_single_robot.dir/build.make CMakeFiles/global_controller_single_robot.dir/build
+.PHONY : global_controller_single_robot/fast
 
 src/global_controller.o: src/global_controller.cpp.o
 .PHONY : src/global_controller.o
 
 # target to build an object file
 src/global_controller.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/global_controller.dir/build.make CMakeFiles/global_controller.dir/src/global_controller.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/global_controller_single_robot.dir/build.make CMakeFiles/global_controller_single_robot.dir/src/global_controller.cpp.o
 .PHONY : src/global_controller.cpp.o
 
 src/global_controller.i: src/global_controller.cpp.i
@@ -223,7 +223,7 @@ src/global_controller.i: src/global_controller.cpp.i
 
 # target to preprocess a source file
 src/global_controller.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/global_controller.dir/build.make CMakeFiles/global_controller.dir/src/global_controller.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/global_controller_single_robot.dir/build.make CMakeFiles/global_controller_single_robot.dir/src/global_controller.cpp.i
 .PHONY : src/global_controller.cpp.i
 
 src/global_controller.s: src/global_controller.cpp.s
@@ -231,7 +231,7 @@ src/global_controller.s: src/global_controller.cpp.s
 
 # target to generate assembly for a file
 src/global_controller.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/global_controller.dir/build.make CMakeFiles/global_controller.dir/src/global_controller.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/global_controller_single_robot.dir/build.make CMakeFiles/global_controller_single_robot.dir/src/global_controller.cpp.s
 .PHONY : src/global_controller.cpp.s
 
 src/main.o: src/main.cpp.o
@@ -239,7 +239,7 @@ src/main.o: src/main.cpp.o
 
 # target to build an object file
 src/main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/global_controller.dir/build.make CMakeFiles/global_controller.dir/src/main.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/global_controller_single_robot.dir/build.make CMakeFiles/global_controller_single_robot.dir/src/main.cpp.o
 .PHONY : src/main.cpp.o
 
 src/main.i: src/main.cpp.i
@@ -247,7 +247,7 @@ src/main.i: src/main.cpp.i
 
 # target to preprocess a source file
 src/main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/global_controller.dir/build.make CMakeFiles/global_controller.dir/src/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/global_controller_single_robot.dir/build.make CMakeFiles/global_controller_single_robot.dir/src/main.cpp.i
 .PHONY : src/main.cpp.i
 
 src/main.s: src/main.cpp.s
@@ -255,7 +255,7 @@ src/main.s: src/main.cpp.s
 
 # target to generate assembly for a file
 src/main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/global_controller.dir/build.make CMakeFiles/global_controller.dir/src/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/global_controller_single_robot.dir/build.make CMakeFiles/global_controller_single_robot.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
 src/prm2.o: src/prm2.cpp.o
@@ -263,7 +263,7 @@ src/prm2.o: src/prm2.cpp.o
 
 # target to build an object file
 src/prm2.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/global_controller.dir/build.make CMakeFiles/global_controller.dir/src/prm2.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/global_controller_single_robot.dir/build.make CMakeFiles/global_controller_single_robot.dir/src/prm2.cpp.o
 .PHONY : src/prm2.cpp.o
 
 src/prm2.i: src/prm2.cpp.i
@@ -271,7 +271,7 @@ src/prm2.i: src/prm2.cpp.i
 
 # target to preprocess a source file
 src/prm2.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/global_controller.dir/build.make CMakeFiles/global_controller.dir/src/prm2.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/global_controller_single_robot.dir/build.make CMakeFiles/global_controller_single_robot.dir/src/prm2.cpp.i
 .PHONY : src/prm2.cpp.i
 
 src/prm2.s: src/prm2.cpp.s
@@ -279,7 +279,7 @@ src/prm2.s: src/prm2.cpp.s
 
 # target to generate assembly for a file
 src/prm2.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/global_controller.dir/build.make CMakeFiles/global_controller.dir/src/prm2.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/global_controller_single_robot.dir/build.make CMakeFiles/global_controller_single_robot.dir/src/prm2.cpp.s
 .PHONY : src/prm2.cpp.s
 
 src/task_allocation.o: src/task_allocation.cpp.o
@@ -287,7 +287,7 @@ src/task_allocation.o: src/task_allocation.cpp.o
 
 # target to build an object file
 src/task_allocation.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/global_controller.dir/build.make CMakeFiles/global_controller.dir/src/task_allocation.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/global_controller_single_robot.dir/build.make CMakeFiles/global_controller_single_robot.dir/src/task_allocation.cpp.o
 .PHONY : src/task_allocation.cpp.o
 
 src/task_allocation.i: src/task_allocation.cpp.i
@@ -295,7 +295,7 @@ src/task_allocation.i: src/task_allocation.cpp.i
 
 # target to preprocess a source file
 src/task_allocation.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/global_controller.dir/build.make CMakeFiles/global_controller.dir/src/task_allocation.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/global_controller_single_robot.dir/build.make CMakeFiles/global_controller_single_robot.dir/src/task_allocation.cpp.i
 .PHONY : src/task_allocation.cpp.i
 
 src/task_allocation.s: src/task_allocation.cpp.s
@@ -303,7 +303,7 @@ src/task_allocation.s: src/task_allocation.cpp.s
 
 # target to generate assembly for a file
 src/task_allocation.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/global_controller.dir/build.make CMakeFiles/global_controller.dir/src/task_allocation.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/global_controller_single_robot.dir/build.make CMakeFiles/global_controller_single_robot.dir/src/task_allocation.cpp.s
 .PHONY : src/task_allocation.cpp.s
 
 src/turtlebot_manager.o: src/turtlebot_manager.cpp.o
@@ -311,7 +311,7 @@ src/turtlebot_manager.o: src/turtlebot_manager.cpp.o
 
 # target to build an object file
 src/turtlebot_manager.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/global_controller.dir/build.make CMakeFiles/global_controller.dir/src/turtlebot_manager.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/global_controller_single_robot.dir/build.make CMakeFiles/global_controller_single_robot.dir/src/turtlebot_manager.cpp.o
 .PHONY : src/turtlebot_manager.cpp.o
 
 src/turtlebot_manager.i: src/turtlebot_manager.cpp.i
@@ -319,7 +319,7 @@ src/turtlebot_manager.i: src/turtlebot_manager.cpp.i
 
 # target to preprocess a source file
 src/turtlebot_manager.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/global_controller.dir/build.make CMakeFiles/global_controller.dir/src/turtlebot_manager.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/global_controller_single_robot.dir/build.make CMakeFiles/global_controller_single_robot.dir/src/turtlebot_manager.cpp.i
 .PHONY : src/turtlebot_manager.cpp.i
 
 src/turtlebot_manager.s: src/turtlebot_manager.cpp.s
@@ -327,7 +327,7 @@ src/turtlebot_manager.s: src/turtlebot_manager.cpp.s
 
 # target to generate assembly for a file
 src/turtlebot_manager.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/global_controller.dir/build.make CMakeFiles/global_controller.dir/src/turtlebot_manager.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/global_controller_single_robot.dir/build.make CMakeFiles/global_controller_single_robot.dir/src/turtlebot_manager.cpp.s
 .PHONY : src/turtlebot_manager.cpp.s
 
 # Help Target
@@ -345,7 +345,7 @@ help:
 	@echo "... test"
 	@echo "... global_controller_single_robot_uninstall"
 	@echo "... uninstall"
-	@echo "... global_controller"
+	@echo "... global_controller_single_robot"
 	@echo "... src/global_controller.o"
 	@echo "... src/global_controller.i"
 	@echo "... src/global_controller.s"

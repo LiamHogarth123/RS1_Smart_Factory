@@ -1,7 +1,7 @@
 # Smart_Factory_System
 
 need to installls
-sudo apt install ros-humble-apriltag
+sudo apt install ros-haumble-apriltag
 
 Commands to run
 
@@ -26,19 +26,16 @@ Current state
 
 
 IMPORT TO FIX
-- Orintating the robot is slow and turns only clockwise and badly
-- collision aviodance not impolemented
 - see if lanes will work else increase distance tolerance
+- launch
+- multi robot path aviodance
 
 Jobs for teammates
 - Setup ros action call so we can publish a message to start job
 - setup package inspection at each package site (e.g turn look check for AR tag)
-- collision aviodance or re pathing if collision is found.
 - Set up AR Tag recognision
 - implement e-stop - need fixing - blocking method may have failed
-- multi robot ;-) - done
 - set up rostopic status publishing
-- re organise environment for drop off sareas
 - setup warehouse package logging
 - cleanup path planner with lanes saved
 - ur3 controller finish
@@ -49,7 +46,6 @@ Key functionality
 - Ensure turtlebot is driving correctly <- Done
 - Ensure turtlebot is publishing its status and info correctly <- DONE 
 - Ensure Launch file launches global Planner and turtlebot_controller - semi done with nav,gazebo,global but without turtle_controllr
-
 
 
 

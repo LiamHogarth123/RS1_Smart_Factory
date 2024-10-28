@@ -6,9 +6,9 @@
 
 Controller::Controller(const std::string &namespace_param)  : Node(namespace_param + "_controller"), namespace_param_(namespace_param) {
 
-  std::cout <<namespace_param_ << std::endl;
+
   // Initialize your classes
-  Turtlebot_SensorProcessing machine_vision_;
+  // Turtlebot_SensorProcessing machine_vision_;
   turtlebot_control Turtlebot_GPS_;
   NewPath_ = false;
   shutdown_request_ = false;
@@ -72,6 +72,7 @@ void Controller::Default_state(){
     std::cout << "Publishing odom, status, and AR info (if available)..." << std::endl;
     Publish_robot_data(current_odom_, 0, -1);
     Publish_custom_odom(current_odom_);
+    std::cout << current_odom_.pose.pose.position.x << std::endl;
 
     if (NewPath_){
       std::cout << "New Path detected, entering control loop..." << std::endl;
@@ -136,11 +137,13 @@ void Controller::controlLoop() {
   std::cout << "current yaw" << std::endl;
   std::cout << "alligning yaw" << std::endl;
 
-  while (std::abs(calculateYaw(current_odom_) - Desired_yaw) > 0.5) {
+  while (Turtlebot_GPS_.angleToGoal(current_odom_, trajectory_path.poses.at(1).pose.position) > 0.1) {
     // std::cout << "Aligning robot: current yaw = " << calculateYaw(current_odom_) << std::endl;
-    traj.angular.z = 0.1;  // optimize this so direction and speed is considered
+    traj.angular.z = Turtlebot_GPS_.steeringPID(trajectory_path.poses.at(1).pose.position, current_odom_);  // optimize this so direction and speed is considered
+           
     SendCmdTb1(traj);
     Publish_custom_odom(current_odom_);
+    std::this_thread::sleep_for(std::chrono::milliseconds(200));
   }
 
   std::cout << "Robot aligned with the first goal." << std::endl;
@@ -157,13 +160,13 @@ void Controller::controlLoop() {
   while (!goal_reached){ 
     
     // Find the current waypoint goal
-    target_goal = findLookAheadPoint(trajectory_path, current_odom_.pose.pose.position, 0.25);
+    target_goal = findLookAheadPoint(trajectory_path, current_odom_.pose.pose.position, 0.5);
     std::cout << "Lookahead point at (" << target_goal.x << ", " << target_goal.y << ")" << std::endl;
 
     publishSingleMarker(target_goal);
 
     // Setup PID calculation
-    Turtlebot_GPS_.updateControlParam(target_goal, 0.1, current_odom_);
+    Turtlebot_GPS_.updateControlParam(target_goal, 0.1, current_odom_, updated_lida_);
     std::cout << "PID control updated with target goal." << std::endl;
 
     // If final goal is hit, stop
@@ -179,7 +182,7 @@ void Controller::controlLoop() {
     std::cout << "Generated trajectory: linear.x = " << traj.linear.x << ", angular.z = " << traj.angular.z << std::endl;
     SendCmdTb1(traj);
 
-    std::this_thread::sleep_for(std::chrono::milliseconds(200));
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
 
   }
 
@@ -299,7 +302,7 @@ void Controller::Publish_robot_data(nav_msgs::msg::Odometry odom, int status, in
   warehouse_robot_msgs::msg::RobotData msg;
   msg.odom = odom;
   msg.status = status; 
-  msg.ar_tag_id = Ar_tag_info;
+  // msg.ar_tag_id = Ar_tag_info;
   robot_info_pub->publish(msg);
 }
 
@@ -406,7 +409,7 @@ void Controller::publishMarkerArray(const nav_msgs::msg::Path &paths) {
 
 
 
-        // Set the marker size
+        // Set the marker geometry_msgs::msg::Point temp_goal, nav_msgs::msg::Odometry temp_odome
         marker.scale.x = 0.1;  // Adjust size as needed
         marker.scale.y = 0.1;
         marker.scale.z = 0.1;

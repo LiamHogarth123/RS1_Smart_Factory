@@ -35,11 +35,11 @@ turtlebot_control::turtlebot_control()
     prevOdom.pose.pose.position.y = 0;
 }
 
-void turtlebot_control::updateControlParam(geometry_msgs::msg::Point temp_lookahead, double temp_distanceToDestination, nav_msgs::msg::Odometry temp_odom )
+void turtlebot_control::updateControlParam(geometry_msgs::msg::Point temp_lookahead, double temp_distanceToDestination, nav_msgs::msg::Odometry temp_odom, sensor_msgs::msg::LaserScan temp_lidar)
 {
     goal = temp_lookahead;
     odom = temp_odom;
-    
+    lidar = temp_lidar;
     distanceToDestination = temp_distanceToDestination;
 }
 
@@ -48,40 +48,40 @@ geometry_msgs::msg::Twist turtlebot_control::generate_trajectory()
     geometry_msgs::msg::Twist cmd_vel;
 
     double velocityX = velocityPID();
-    double velocityZ = steeringPID();
+    double velocityZ = steeringPID(goal, odom);
 
-    // double obstacleMidpoint = collisionDetection();
-    // double avoidanceFactor = -0.1; // value determining the rate of avoidance (lower is faster rate of change)
-    // integralResetCount++; // for integral reset at initial object detection
+    //// OBJECT AVOIDANCE ////
+    double obstacleMidpoint = collisionDetection();
+    double avoidanceFactor = -0.08; // the value determining the rate of avoidance (lower is faster rate of change)
+    integralResetCount++; // for integral reset at initial object detection
 
-    // if (obstacleMidpoint > 0)
-    // {
-    //     std::cout << "avoiding object on left" << std::endl;
-    //     velocityZ = avoidanceFactor / std::pow(obstacleMidpoint + 0.23, 2);
-    //     if (velocityZ < -maxVelz)
-    //     {
-    //         velocityZ = -maxVelz;
-    //     }
-    //     if (integralResetCount > 15)
-    //     {
-    //         integral_ = 0;
-    //     }
-    //     integralResetCount = 0;
-    // }
-    // else if (obstacleMidpoint < 0)
-    // {
-    //     std::cout << "avoiding object on right" << std::endl;
-    //     velocityZ = avoidanceFactor / -std::pow(obstacleMidpoint - 0.23, 2);
-    //     if (velocityZ > maxVelz)
-    //     {
-    //         velocityZ = maxVelz;
-    //     }
-    //     if (integralResetCount > 15)
-    //     {
-    //         integral_ = 0;
-    //     }
-    //     integralResetCount = 0;
-    // }
+    std::cout << "MIDPOINT: " << obstacleMidpoint << std::endl;
+
+    if (obstacleMidpoint > 0) {
+        // std::cout << obstacleMidpoint << std::endl;
+        std::cout << "avoiding object on left" << std::endl;
+        velocityZ = avoidanceFactor/pow(obstacleMidpoint+0.23,2); 
+        if (velocityZ < -maxVelz) {
+            velocityZ = -maxVelz;
+        }
+        if (integralResetCount > 15){ // if object first detected then slows down by resetting integral so it builds back up speed
+            integral_ = 0;
+        }
+        integralResetCount = 0;
+        // velocityX *= 0.5;
+    } else if (obstacleMidpoint < 0) {
+        // std::cout << obstacleMidpoint << std::endl;
+        std::cout << "avoiding object on right" << std::endl;
+        velocityZ = avoidanceFactor/-pow(obstacleMidpoint-0.23,2);
+        if (velocityZ > maxVelz) {
+            velocityZ = maxVelz;
+        }
+        if (integralResetCount > 15){
+            integral_ = 0;
+        }
+        integralResetCount = 0;
+        // velocityX *= 0.5;
+    }
 
     cmd_vel.linear.x = velocityX;
     cmd_vel.angular.z = velocityZ;
@@ -131,9 +131,9 @@ double turtlebot_control::velocityPID()
     return control_command;
 }
 
-double turtlebot_control::steeringPID()
+double turtlebot_control::steeringPID(geometry_msgs::msg::Point temp_goal, nav_msgs::msg::Odometry temp_odom)
 {
-    double current_heading = angleToGoal(odom, goal);
+    double current_heading = angleToGoal(temp_odom, temp_goal);
     double heading_error = -(toleranceAngle - current_heading);
 
     heading_integral_ += heading_error;
@@ -180,19 +180,20 @@ double turtlebot_control::steeringPID()
     return angular_command;
 }
 
-// double turtlebot_control::collisionDetection()
-// {
-//     // objectDetection.NewData(lidar);
-//     // double obstacleMidpoint = objectDetection.findObstacle();
-//     double obstacleMidpoint = 0;
+double turtlebot_control::collisionDetection() {
 
-//     if (obstacleMidpoint != 0)
-//     {
-//         heading_integral_ = 0;
-//     }
+    ObjectDetection.NewData(lidar);
+    double obstacleMidpoint = ObjectDetection.findObstacle();
 
-//     return obstacleMidpoint;
-// }
+    // if obstacle == 0 then does nothing
+    if (obstacleMidpoint != 0) {
+        // integral_ = 0;
+        heading_integral_ = 0;
+    }
+
+
+    return obstacleMidpoint;
+}
 
 bool turtlebot_control::goal_hit(geometry_msgs::msg::Point temp_goal, nav_msgs::msg::Odometry temp_odom)
 {
@@ -238,20 +239,3 @@ double turtlebot_control::angleToGoal(nav_msgs::msg::Odometry temp_odom, geometr
     return angle;
 }
 
-void turtlebot_control::fillVelPlot()
-{
-    double dx = odom.pose.pose.position.x - prevOdom.pose.pose.position.x;
-    double dy = odom.pose.pose.position.y - prevOdom.pose.pose.position.y;
-    double linear_velocity = sqrt(dx * dx + dy * dy);
-
-    velPlot.push_back(linear_velocity);
-
-    prevOdom = odom;
-}
-
-std::vector<std::vector<double>> turtlebot_control::getPlots()
-{
-    std::vector<std::vector<double>> temp = {xPlot, zPlot, velPlot};
-
-    return temp;
-}
