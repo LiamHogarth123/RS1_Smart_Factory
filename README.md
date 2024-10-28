@@ -27,8 +27,11 @@ Current state
 
 IMPORT TO FIX
 - see if lanes will work else increase distance tolerance
-- launch
+- launch file
 - multi robot path aviodance
+- REMAP
+- fix job_list
+
 
 Jobs for teammates
 - Setup ros action call so we can publish a message to start job
