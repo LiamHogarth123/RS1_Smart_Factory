@@ -3,8 +3,8 @@
 # Odometry data
 nav_msgs/Odometry odom
 
-# Status string
-string status
+# Status int
+int32 status
 
 # AR tag position (pose)
-geometry_msgs/Pose ar_tag_pose
+int32 ar_tag_id

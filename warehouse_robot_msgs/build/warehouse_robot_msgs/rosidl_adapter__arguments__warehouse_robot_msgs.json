@@ -1,0 +1,6 @@
+{
+  "package_name": "warehouse_robot_msgs",
+  "non_idl_tuples": [
+    "/home/liam/ros2_ws/src/warehouse_robot_msgs:msg/RobotData.msg"
+  ]
+}

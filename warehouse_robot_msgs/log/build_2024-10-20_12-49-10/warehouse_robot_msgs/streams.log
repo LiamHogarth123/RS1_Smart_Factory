@@ -1,0 +1,57 @@
+[0.023s] Invoking command in '/home/liam/ros2_ws/src/warehouse_robot_msgs/build/warehouse_robot_msgs': CMAKE_PREFIX_PATH=/home/liam/ros2_ws/install/warehouse_robot_msgs:/home/liam/ros2_ws/install/ur_simulation_gazebo:/home/liam/ros2_ws/install/ur5_ros2_moveit2:/home/liam/ros2_ws/install/ur5_ros2_gazebo:/home/liam/ros2_ws/install/ur3_ros2_moveit2:/home/liam/ros2_ws/install/ur3_ros2_gazebo:/home/liam/ros2_ws/install/ur10_ros2_moveit2:/home/liam/ros2_ws/install/ur10_ros2_gazebo:/home/liam/ros2_ws/install/turtlesim:/home/liam/ros2_ws/install/turtlebot_controller:/home/liam/ros2_ws/install/turtlebot3:/home/liam/ros2_ws/install/turtlebot3_simulations:/home/liam/ros2_ws/install/turtlebot3_bringup:/home/liam/ros2_ws/install/turtlebot3_node:/home/liam/ros2_ws/install/turtlebot3_navigation2:/home/liam/ros2_ws/install/turtlebot3_fake_node:/home/liam/ros2_ws/install/turtlebot3_msgs:/home/liam/ros2_ws/install/turtlebot3_gazebo:/home/liam/ros2_ws/install/turtlebot3_description:/home/liam/ros2_ws/install/turtlebot3_cartographer:/home/liam/ros2_ws/install/sprint_2:/home/liam/ros2_ws/install/sprint_1:/home/liam/ros2_ws/install/sprint3:/home/liam/ros2_ws/install/moveit_task_constructor_visualization:/home/liam/ros2_ws/install/moveit_task_constructor_demo:/home/liam/ros2_ws/install/moveit_task_constructor_capabilities:/home/liam/ros2_ws/install/moveit2_tutorials:/home/liam/ros2_ws/install/moveit_task_constructor_core:/home/liam/ros2_ws/install/rviz_marker_tools:/home/liam/ros2_ws/install/turtlebot3_teleop:/home/liam/ros2_ws/install/turtlebot3_example:/opt/ros/humble:/home/liam/ros2_ws/install/ros2_ur3_husky:/home/liam/ros2_ws/install/ros2_grasping:/home/liam/ros2_ws/install/ros2_execution:/home/liam/ros2_ws/install/panda_ros2_moveit2:/home/liam/ros2_ws/install/irb6640_ros2_moveit2:/home/liam/ros2_ws/install/irb120_ros2_moveit2:/home/liam/ros2_ws/install/irb1200_ros2_moveit2:/home/liam/ros2_ws/install/iiwa_ros2_moveit2:/home/liam/ros2_ws/install/cr35ia_ros2_moveit2:/home/liam/ros2_ws/install/ros2_data:/home/liam/ros2_ws/install/robot_localization:/home/liam/ros2_ws/install/pybind11_vendor:/home/liam/ros2_ws/install/path_planner_setup:/home/liam/ros2_ws/install/panda_ros2_gazebo:/home/liam/ros2_ws/install/moveit_task_constructor_msgs:/home/liam/ros2_ws/install/mapoverlay:/home/liam/ros2_ws/install/map_processor_node:/home/liam/ros2_ws/install/irb6640_ros2_gazebo:/home/liam/ros2_ws/install/irb120_ros2_gazebo:/home/liam/ros2_ws/install/irb1200_ros2_gazebo:/home/liam/ros2_ws/install/iiwa_ros2_gazebo:/home/liam/ros2_ws/install/husky_simulations:/home/liam/ros2_ws/install/husky_gazebo:/home/liam/ros2_ws/install/global_controller_single_robot:/home/liam/ros2_ws/install/global_controller:/home/liam/ros2_ws/install/gazebo_map_creator:/home/liam/ros2_ws/install/gazebo_map_creator_interface:/home/liam/ros2_ws/install/dynamixel_sdk_examples:/home/liam/ros2_ws/install/dynamixel_sdk_custom_interfaces:/home/liam/ros2_ws/install/dynamixel_sdk:/home/liam/ros2_ws/install/cr35ia_ros2_gazebo:/home/liam/ros2_ws/install/common_pkg:/home/liam/ros2_ws/install /usr/bin/cmake /home/liam/ros2_ws/src/warehouse_robot_msgs -DCMAKE_INSTALL_PREFIX=/home/liam/ros2_ws/src/warehouse_robot_msgs/install/warehouse_robot_msgs
+[0.043s] -- Found ament_cmake: 1.3.10 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.244s] -- Found rclcpp: 16.0.10 (/opt/ros/humble/share/rclcpp/cmake)
+[0.278s] -- Found rosidl_generator_c: 3.1.5 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.281s] -- Found rosidl_adapter: 3.1.5 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.291s] -- Found rosidl_generator_cpp: 3.1.5 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.307s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.325s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.359s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.362s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.503s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.558s] -- Found nav_msgs: 4.2.4 (/opt/ros/humble/share/nav_msgs/cmake)
+[0.586s] -- Found rosidl_default_generators: 1.2.0 (/opt/ros/humble/share/rosidl_default_generators/cmake)
+[0.850s] [31mCMake Error at /opt/ros/humble/share/rosidl_adapter/cmake/rosidl_adapt_interfaces.cmake:59 (message):
+[0.851s]   execute_process(/usr/bin/python3 -m rosidl_adapter --package-name
+[0.851s]   warehouse_robot_msgs --arguments-file
+[0.851s]   /home/liam/ros2_ws/src/warehouse_robot_msgs/build/warehouse_robot_msgs/rosidl_adapter__arguments__warehouse_robot_msgs.json
+[0.852s]   --output-dir
+[0.852s]   /home/liam/ros2_ws/src/warehouse_robot_msgs/build/warehouse_robot_msgs/rosidl_adapter/warehouse_robot_msgs
+[0.852s]   --output-file
+[0.852s]   /home/liam/ros2_ws/src/warehouse_robot_msgs/build/warehouse_robot_msgs/rosidl_adapter/warehouse_robot_msgs.idls)
+[0.852s]   returned error code 1:
+[0.853s] 
+[0.853s]   Error processing 'int32 Ar_tag_id' of 'warehouse_robot_msgs/RobotData':
+[0.853s]   ''Ar_tag_id' is an invalid field name.  It should have the pattern
+[0.853s]   '^(?!.*__)(?!.*_$)[a-z][a-z0-9_]*$''
+[0.853s] 
+[0.853s]   Traceback (most recent call last):
+[0.853s] 
+[0.854s]     File "/usr/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+[0.854s]       return _run_code(code, main_globals, None,
+[0.854s]     File "/usr/lib/python3.10/runpy.py", line 86, in _run_code
+[0.854s]       exec(code, run_globals)
+[0.854s]     File "/opt/ros/humble/local/lib/python3.10/dist-packages/rosidl_adapter/__main__.py", line 19, in <module>
+[0.854s]       sys.exit(main())
+[0.855s]     File "/opt/ros/humble/local/lib/python3.10/dist-packages/rosidl_adapter/main.py", line 53, in main
+[0.855s]       abs_idl_file = convert_to_idl(
+[0.855s]     File "/opt/ros/humble/local/lib/python3.10/dist-packages/rosidl_adapter/__init__.py", line 19, in convert_to_idl
+[0.855s]       return convert_msg_to_idl(
+[0.855s]     File "/opt/ros/humble/local/lib/python3.10/dist-packages/rosidl_adapter/msg/__init__.py", line 28, in convert_msg_to_idl
+[0.855s]       msg = parse_message_string(package_name, input_file.stem, content)
+[0.855s]     File "/opt/ros/humble/local/lib/python3.10/dist-packages/rosidl_adapter/parser.py", line 519, in parse_message_string
+[0.855s]       fields.append(Field(
+[0.855s]     File "/opt/ros/humble/local/lib/python3.10/dist-packages/rosidl_adapter/parser.py", line 354, in __init__
+[0.855s]       raise NameError(
+[0.856s] 
+[0.856s]   NameError: 'Ar_tag_id' is an invalid field name.  It should have the
+[0.856s]   pattern '^(?!.*__)(?!.*_$)[a-z][a-z0-9_]*$'
+[0.856s] 
+[0.856s] Call Stack (most recent call first):
+[0.856s]   /opt/ros/humble/share/rosidl_cmake/cmake/rosidl_generate_interfaces.cmake:130 (rosidl_adapt_interfaces)
+[0.856s]   CMakeLists.txt:17 (rosidl_generate_interfaces)
+[0.856s] 
+[0.856s] [0m
+[0.857s] -- Configuring incomplete, errors occurred!
+[0.857s] See also "/home/liam/ros2_ws/src/warehouse_robot_msgs/build/warehouse_robot_msgs/CMakeFiles/CMakeOutput.log".
+[0.865s] Invoked command in '/home/liam/ros2_ws/src/warehouse_robot_msgs/build/warehouse_robot_msgs' returned '1': CMAKE_PREFIX_PATH=/home/liam/ros2_ws/install/warehouse_robot_msgs:/home/liam/ros2_ws/install/ur_simulation_gazebo:/home/liam/ros2_ws/install/ur5_ros2_moveit2:/home/liam/ros2_ws/install/ur5_ros2_gazebo:/home/liam/ros2_ws/install/ur3_ros2_moveit2:/home/liam/ros2_ws/install/ur3_ros2_gazebo:/home/liam/ros2_ws/install/ur10_ros2_moveit2:/home/liam/ros2_ws/install/ur10_ros2_gazebo:/home/liam/ros2_ws/install/turtlesim:/home/liam/ros2_ws/install/turtlebot_controller:/home/liam/ros2_ws/install/turtlebot3:/home/liam/ros2_ws/install/turtlebot3_simulations:/home/liam/ros2_ws/install/turtlebot3_bringup:/home/liam/ros2_ws/install/turtlebot3_node:/home/liam/ros2_ws/install/turtlebot3_navigation2:/home/liam/ros2_ws/install/turtlebot3_fake_node:/home/liam/ros2_ws/install/turtlebot3_msgs:/home/liam/ros2_ws/install/turtlebot3_gazebo:/home/liam/ros2_ws/install/turtlebot3_description:/home/liam/ros2_ws/install/turtlebot3_cartographer:/home/liam/ros2_ws/install/sprint_2:/home/liam/ros2_ws/install/sprint_1:/home/liam/ros2_ws/install/sprint3:/home/liam/ros2_ws/install/moveit_task_constructor_visualization:/home/liam/ros2_ws/install/moveit_task_constructor_demo:/home/liam/ros2_ws/install/moveit_task_constructor_capabilities:/home/liam/ros2_ws/install/moveit2_tutorials:/home/liam/ros2_ws/install/moveit_task_constructor_core:/home/liam/ros2_ws/install/rviz_marker_tools:/home/liam/ros2_ws/install/turtlebot3_teleop:/home/liam/ros2_ws/install/turtlebot3_example:/opt/ros/humble:/home/liam/ros2_ws/install/ros2_ur3_husky:/home/liam/ros2_ws/install/ros2_grasping:/home/liam/ros2_ws/install/ros2_execution:/home/liam/ros2_ws/install/panda_ros2_moveit2:/home/liam/ros2_ws/install/irb6640_ros2_moveit2:/home/liam/ros2_ws/install/irb120_ros2_moveit2:/home/liam/ros2_ws/install/irb1200_ros2_moveit2:/home/liam/ros2_ws/install/iiwa_ros2_moveit2:/home/liam/ros2_ws/install/cr35ia_ros2_moveit2:/home/liam/ros2_ws/install/ros2_data:/home/liam/ros2_ws/install/robot_localization:/home/liam/ros2_ws/install/pybind11_vendor:/home/liam/ros2_ws/install/path_planner_setup:/home/liam/ros2_ws/install/panda_ros2_gazebo:/home/liam/ros2_ws/install/moveit_task_constructor_msgs:/home/liam/ros2_ws/install/mapoverlay:/home/liam/ros2_ws/install/map_processor_node:/home/liam/ros2_ws/install/irb6640_ros2_gazebo:/home/liam/ros2_ws/install/irb120_ros2_gazebo:/home/liam/ros2_ws/install/irb1200_ros2_gazebo:/home/liam/ros2_ws/install/iiwa_ros2_gazebo:/home/liam/ros2_ws/install/husky_simulations:/home/liam/ros2_ws/install/husky_gazebo:/home/liam/ros2_ws/install/global_controller_single_robot:/home/liam/ros2_ws/install/global_controller:/home/liam/ros2_ws/install/gazebo_map_creator:/home/liam/ros2_ws/install/gazebo_map_creator_interface:/home/liam/ros2_ws/install/dynamixel_sdk_examples:/home/liam/ros2_ws/install/dynamixel_sdk_custom_interfaces:/home/liam/ros2_ws/install/dynamixel_sdk:/home/liam/ros2_ws/install/cr35ia_ros2_gazebo:/home/liam/ros2_ws/install/common_pkg:/home/liam/ros2_ws/install /usr/bin/cmake /home/liam/ros2_ws/src/warehouse_robot_msgs -DCMAKE_INSTALL_PREFIX=/home/liam/ros2_ws/src/warehouse_robot_msgs/install/warehouse_robot_msgs
