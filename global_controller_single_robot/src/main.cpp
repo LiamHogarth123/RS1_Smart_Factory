@@ -12,7 +12,7 @@ int main(int argc, char** argv) {
     auto global_controller = std::make_shared<Global_Controller>(number_of_robot_parameter);
 
     // Start the defaultStat function in a separate thread
-    std::thread default_stat_thread([&global_controller]() {global_controller->Default_state_multi();});
+    std::thread default_stat_thread([&global_controller]() {global_controller->Default_state();});
 
     // Spin the node to handle incoming messages
     rclcpp::spin(global_controller);
