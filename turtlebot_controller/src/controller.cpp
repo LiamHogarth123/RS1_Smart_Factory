@@ -66,13 +66,13 @@ void Controller::Default_state(){
 
   std::cout << "Entering Default State..." << std::endl;
 
+  std::cout << "Publishing odom, status, and AR info (if available)..." << std::endl;
+
   while (active){
       
     //publish odom, status, and Ar Info if it is available.
-    std::cout << "Publishing odom, status, and AR info (if available)..." << std::endl;
     Publish_robot_data(current_odom_, 0, -1);
     Publish_custom_odom(current_odom_);
-    std::cout << current_odom_.pose.pose.position.x << std::endl;
 
     if (NewPath_){
       std::cout << "New Path detected, entering control loop..." << std::endl;

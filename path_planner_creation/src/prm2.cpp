@@ -131,9 +131,9 @@ void Graph::Generate_Map()
 
    
 
-    save_nodes(nodes, "/home/liam/git/RS1_Smart_Factory/path_planner_creation/road_map/file.json");
+    save_nodes(nodes, "/home/liam/git/RS1_Smart_Factory/path_planner_creation/road_map/lane_nodes_file.json");
     nodes.clear();
-    nodes = load_nodes("/home/liam/git/RS1_Smart_Factory/path_planner_creation/road_map/file.json");
+    nodes = load_nodes("/home/liam/git/RS1_Smart_Factory/path_planner_creation/road_map/lane_nodes_file.json");
 
 
     show_Prm(path);

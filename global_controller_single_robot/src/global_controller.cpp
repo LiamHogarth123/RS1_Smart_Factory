@@ -42,10 +42,11 @@ void Global_Controller::Default_state() {
     std::thread spin_thread([manager]() {rclcpp::spin(manager); });
     // Waiting for map data to be received
 
+    std::cout << "Waiting for map data..." << std::endl;
+
 
     while (!map_data_recieved) {
         rate.sleep();
-        std::cout << "Waiting for map data..." << std::endl;
     }
 
  
@@ -244,10 +245,13 @@ void Global_Controller::Default_state_multi() {
     std::vector<geometry_msgs::msg::Point> trajectory;
     rclcpp::Rate rate(10); // 10 Hz
     std_msgs::msg::Bool msg;
+    std::cout << "Waiting for map data..." << std::endl;
+
     
     while (!map_data_recieved) {
         rate.sleep();
         std::cout << "Waiting for map data..." << std::endl;
+
     }
     std::this_thread::sleep_for(std::chrono::milliseconds(40000));  // Small delay to prevent busy-waiting
 

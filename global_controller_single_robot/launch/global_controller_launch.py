@@ -62,6 +62,7 @@ from launch import LaunchDescription
 from launch_ros.actions import Node
 from launch.actions import DeclareLaunchArgument
 from launch.substitutions import LaunchConfiguration, TextSubstitution
+from launch.actions import ExecuteProcess
 
 def generate_launch_description():
     # Declare the namespace argument
@@ -77,12 +78,8 @@ def generate_launch_description():
         # namespace_arg,
         
         # Define the global_controller node with namespace substitution
-        Node(
-            package='global_controller_single_robot',
-            executable='global_controller_single_robot',
-            name='global_controller_launcher',
-            # namespace=LaunchConfiguration('namespace'),
-            output='screen',
-            # arguments=[LaunchConfiguration('namespace')],
+        ExecuteProcess(
+            cmd=['ros2', 'run', 'global_controller_single_robot', 'global_controller_single_robot'],
+            output='screen'
         ),
     ])

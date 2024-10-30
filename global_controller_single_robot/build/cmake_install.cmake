@@ -63,7 +63,10 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/global_controller_single_robot/" TYPE DIRECTORY FILES "/home/liam/git/RS1_Smart_Factory/global_controller_single_robot/launch")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/global_controller_single_robot/" TYPE DIRECTORY FILES
+    "/home/liam/git/RS1_Smart_Factory/global_controller_single_robot/launch"
+    "/home/liam/git/RS1_Smart_Factory/global_controller_single_robot/map"
+    )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
