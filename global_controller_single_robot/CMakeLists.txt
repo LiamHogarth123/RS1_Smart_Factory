@@ -7,7 +7,7 @@ find_package(rclcpp REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(nav_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
-find_package(marker_msgs REQUIRED)
+# find_package(marker_msgs REQUIRED)
 find_package(tf2_geometry_msgs REQUIRED)
 find_package(OpenCV REQUIRED)  # Find OpenCV package
 find_package(nlohmann_json REQUIRED)
@@ -31,7 +31,7 @@ ament_target_dependencies(
   geometry_msgs
   nav_msgs
   sensor_msgs
-  marker_msgs
+  # marker_msgs
   tf2_geometry_msgs
   warehouse_robot_msgs
 )

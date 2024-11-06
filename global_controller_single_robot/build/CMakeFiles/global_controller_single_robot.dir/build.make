@@ -161,12 +161,6 @@ global_controller_single_robot: /opt/ros/humble/lib/libsensor_msgs__rosidl_types
 global_controller_single_robot: /opt/ros/humble/lib/libsensor_msgs__rosidl_typesupport_introspection_c.so
 global_controller_single_robot: /opt/ros/humble/lib/libsensor_msgs__rosidl_typesupport_introspection_cpp.so
 global_controller_single_robot: /opt/ros/humble/lib/libsensor_msgs__rosidl_generator_py.so
-global_controller_single_robot: /opt/ros/humble/lib/libmarker_msgs__rosidl_typesupport_fastrtps_c.so
-global_controller_single_robot: /opt/ros/humble/lib/libmarker_msgs__rosidl_typesupport_fastrtps_cpp.so
-global_controller_single_robot: /opt/ros/humble/lib/libmarker_msgs__rosidl_typesupport_introspection_c.so
-global_controller_single_robot: /opt/ros/humble/lib/libmarker_msgs__rosidl_typesupport_introspection_cpp.so
-global_controller_single_robot: /opt/ros/humble/lib/libmarker_msgs__rosidl_typesupport_cpp.so
-global_controller_single_robot: /opt/ros/humble/lib/libmarker_msgs__rosidl_generator_py.so
 global_controller_single_robot: /home/liam/ros2_ws/install/warehouse_robot_msgs/lib/libwarehouse_robot_msgs__rosidl_typesupport_fastrtps_c.so
 global_controller_single_robot: /home/liam/ros2_ws/install/warehouse_robot_msgs/lib/libwarehouse_robot_msgs__rosidl_typesupport_fastrtps_cpp.so
 global_controller_single_robot: /home/liam/ros2_ws/install/warehouse_robot_msgs/lib/libwarehouse_robot_msgs__rosidl_typesupport_introspection_c.so
@@ -211,8 +205,6 @@ global_controller_single_robot: /usr/lib/x86_64-linux-gnu/libopencv_xphoto.so.4.
 global_controller_single_robot: /opt/ros/humble/lib/libsensor_msgs__rosidl_typesupport_c.so
 global_controller_single_robot: /opt/ros/humble/lib/libsensor_msgs__rosidl_generator_c.so
 global_controller_single_robot: /opt/ros/humble/lib/libsensor_msgs__rosidl_typesupport_cpp.so
-global_controller_single_robot: /opt/ros/humble/lib/libmarker_msgs__rosidl_typesupport_c.so
-global_controller_single_robot: /opt/ros/humble/lib/libmarker_msgs__rosidl_generator_c.so
 global_controller_single_robot: /usr/lib/x86_64-linux-gnu/liborocos-kdl.so
 global_controller_single_robot: /opt/ros/humble/lib/libtf2_ros.so
 global_controller_single_robot: /opt/ros/humble/lib/libtf2.so

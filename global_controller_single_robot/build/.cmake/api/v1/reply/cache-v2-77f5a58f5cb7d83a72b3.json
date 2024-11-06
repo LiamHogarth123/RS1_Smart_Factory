@@ -2410,18 +2410,6 @@
 			"value" : "/opt/ros/humble/share/libyaml_vendor/cmake"
 		},
 		{
-			"name" : "marker_msgs_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "The directory containing a CMake configuration file for marker_msgs."
-				}
-			],
-			"type" : "PATH",
-			"value" : "/opt/ros/humble/share/marker_msgs/cmake"
-		},
-		{
 			"name" : "message_filters_DIR",
 			"properties" : 
 			[
