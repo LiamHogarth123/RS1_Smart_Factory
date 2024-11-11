@@ -1,23 +1,21 @@
-#ifndef CONTROLLER_HPP
-#define CONTROLLER_HPP
+#ifndef UR3_CONTROLLER_HPP
+#define UR3_CONTROLLER_HPP
 
-#include "rclcpp/rclcpp.hpp"
-#include "geometry_msgs/msg/point.hpp"
-#include "std_msgs/msg/bool.hpp"
+#include <rclcpp/rclcpp.hpp>
+#include <moveit/move_group_interface/move_group_interface.h>
+#include <geometry_msgs/msg/pose.hpp>
 
-class Controller : public rclcpp::Node {
+class UR3Controller : public rclcpp::Node {
 public:
-    Controller();
-    void set_default_state();
+    UR3Controller();
     void control_loop();
 
-private:
-    void package_callback(const geometry_msgs::msg::Point::SharedPtr msg);
+    // Function to initialize MoveGroupInterface
+    void setupMoveGroup(const std::shared_ptr<moveit::planning_interface::MoveGroupInterface>& move_group);
 
-    rclcpp::Subscription<geometry_msgs::msg::Point>::SharedPtr package_sub_;
-    geometry_msgs::msg::Point package_location_;
-    geometry_msgs::msg::Point delivery_location_;
-    bool package_received_;
+private:
+    std::shared_ptr<moveit::planning_interface::MoveGroupInterface> move_group_interface;
+    bool move_to_position(double x, double y, double z);
 };
 
-#endif // CONTROLLER_HPP
+#endif // UR3_CONTROLLER_HPP

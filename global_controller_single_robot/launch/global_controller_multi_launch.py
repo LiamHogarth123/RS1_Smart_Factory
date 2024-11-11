@@ -7,7 +7,7 @@ from ament_index_python.packages import get_package_share_directory
 import os
 
 def generate_launch_description():
-    # Paths to launch files in your workspace
+    # Paths to launch files in your workspace9
     turtlebot3_gazebo_launch_file_dir = os.path.join(get_package_share_directory('turtlebot3_gazebo'), 'launch')
     turtlebot3_navigation2_launch_file_dir = os.path.join(get_package_share_directory('turtlebot3_navigation2'), 'launch')
     turtlebot_controller_launch_file_dir = os.path.join(get_package_share_directory('turtlebot_controller'), 'launch')
