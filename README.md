@@ -1,7 +1,12 @@
 # Smart_Factory_System
 
 need to installls
+
 sudo apt install ros-haumble-apriltag
+install ros
+
+to set up you need to colcon buid warehouse msgs first in workspace before building other packages. 
+You need to change a couple of file paths in the constructors of globabl_controller Prm2.cpp and taskallocation.cpp
 
 Commands to run
 
@@ -24,31 +29,24 @@ Current state
 
 
 
+UR3 jobs
+- need the UR3 to be able to move to a x,y,z position to simulate picking up an object
 
-IMPORT TO FIX
-- see if lanes will work else increase distance tolerance
-- launch file
-- multi robot path aviodance
-- REMAP
-- fix job_list
+Turtlebot jobs
+- test and fix lanes
+- Implement Ar tag detection
+- setup status logging
 
+Multi turtlebot jobs
+- Find an optimised way to drive multi ansychously
+- Implement multi robot path collision avoidance
+- 
 
-Jobs for teammates
-- Setup ros action call so we can publish a message to start job
-- setup package inspection at each package site (e.g turn look check for AR tag)
-- Set up AR Tag recognision
-- implement e-stop - need fixing - blocking method may have failed
-- set up rostopic status publishing
-- setup warehouse package logging
-- cleanup path planner with lanes saved
-- ur3 controller finish
+Top level system
+- Set up ros action call to start system
+- Gui setup for error loging, shutdown request, e-stop,
+- 
 
-
-Key functionality
-- Ensure Global planner is publishing trajectory correctly - Done <- printed correctly in terminal
-- Ensure turtlebot is driving correctly <- Done
-- Ensure turtlebot is publishing its status and info correctly <- DONE 
-- Ensure Launch file launches global Planner and turtlebot_controller - semi done with nav,gazebo,global but without turtle_controllr
 
 
 
