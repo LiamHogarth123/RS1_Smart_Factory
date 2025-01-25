@@ -55,11 +55,11 @@ geometry_msgs::msg::Twist turtlebot_control::generate_trajectory()
     double avoidanceFactor = -0.08; // the value determining the rate of avoidance (lower is faster rate of change)
     integralResetCount++; // for integral reset at initial object detection
 
-    std::cout << "MIDPOINT: " << obstacleMidpoint << std::endl;
+    // std::cout << "MIDPOINT: " << obstacleMidpoint << std::endl;
 
     if (obstacleMidpoint > 0) {
         // std::cout << obstacleMidpoint << std::endl;
-        std::cout << "avoiding object on left" << std::endl;
+        // std::cout << "avoiding object on left" << std::endl;
         velocityZ = avoidanceFactor/pow(obstacleMidpoint+0.23,2); 
         if (velocityZ < -maxVelz) {
             velocityZ = -maxVelz;
@@ -71,7 +71,7 @@ geometry_msgs::msg::Twist turtlebot_control::generate_trajectory()
         // velocityX *= 0.5;
     } else if (obstacleMidpoint < 0) {
         // std::cout << obstacleMidpoint << std::endl;
-        std::cout << "avoiding object on right" << std::endl;
+        // std::cout << "avoiding object on right" << std::endl;
         velocityZ = avoidanceFactor/-pow(obstacleMidpoint-0.23,2);
         if (velocityZ > maxVelz) {
             velocityZ = maxVelz;

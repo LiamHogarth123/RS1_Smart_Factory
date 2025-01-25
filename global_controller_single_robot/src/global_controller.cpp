@@ -9,10 +9,15 @@ Global_Controller::Global_Controller(const int &num_robots) : Node("global_contr
    
    
     // std::string path_topic = "trajectory"; 
-    robot_status_sub = this->create_subscription<std_msgs::msg::Bool>("reached_goal", 10, std::bind(&Global_Controller::statusCallback, this, std::placeholders::_1));\
+    robot_status_sub = this->create_subscription<std_msgs::msg::Bool>("reached_goal", 10, std::bind(&Global_Controller::statusCallback, this, std::placeholders::_1));
+    start_subscription_ = this->create_subscription<std_msgs::msg::Bool>("start", 10, std::bind(&Global_Controller::startCallback, this, std::placeholders::_1));
+        
     Shut_down_request = this->create_publisher<std_msgs::msg::Bool>("shut_down", 10);
     map_subscription_ = this->create_subscription<nav_msgs::msg::OccupancyGrid>("map", 10, std::bind(&Global_Controller::mapCallback, this, std::placeholders::_1));
     map_data_recieved = false;
+
+
+    publisher_ = this->create_publisher<std_msgs::msg::Int32>("package_status", 10);
 
     // this->declare_parameter<int>("number_of_robots");
 
@@ -26,6 +31,19 @@ Global_Controller::Global_Controller(const int &num_robots) : Node("global_contr
 }
 
 
+
+void Global_Controller::startCallback(const std_msgs::msg::Bool::SharedPtr msg){
+    if (msg->data)
+    {
+        RCLCPP_INFO(this->get_logger(), "Received start signal: TRUE");
+        // Add logic to handle the start signal
+    }
+    else
+    {
+        RCLCPP_INFO(this->get_logger(), "Received start signal: FALSE");
+        // Add logic for stop or other behavior
+    }
+}
 
 
 
@@ -236,7 +254,28 @@ void Global_Controller::publishTrajectory(std::vector<geometry_msgs::msg::Point>
 
 
 
+void Global_Controller::publish_package_status(int package_id, int status_code){
 
+    if (package_id < 1 || package_id > 8) {
+        RCLCPP_ERROR(this->get_logger(), "Invalid package ID: %d", package_id);
+        return;
+    }
+    if (status_code != 1 && status_code != 2 && status_code != 3 &&
+        status_code != 4 && status_code != 5 && status_code != 6 &&
+        status_code != 8 && status_code != 9) {
+        RCLCPP_ERROR(this->get_logger(), "Invalid status code: %d", status_code);
+        return;
+    }
+
+    // Combine package ID and status code into a single number
+    auto message = std_msgs::msg::Int32();
+    message.data = package_id * 10 + status_code;
+
+    // Publish the message
+    publisher_->publish(message);
+    RCLCPP_INFO(this->get_logger(), "Published: Package ID %d, Status %d", package_id, status_code);
+
+}
 
 
 
@@ -386,6 +425,208 @@ void Global_Controller::Default_state_multi() {
         }
 
     }
+    
+    
+    msg.data = true;  // Set the boolean value to true
+    Shut_down_request->publish(msg); 
+
+    rclcpp::shutdown();
+
+}
+
+
+
+
+
+
+
+void Global_Controller::Default_state_multi_complex() {
+    std::vector<geometry_msgs::msg::Point> trajectory;
+    rclcpp::Rate rate(10); // 10 Hz
+    std_msgs::msg::Bool msg;
+    std::cout << "Waiting for map data..." << std::endl;
+
+    
+    while (!map_data_recieved) {
+        rate.sleep();
+        std::cout << "Waiting for map data..." << std::endl;
+
+    }
+    std::this_thread::sleep_for(std::chrono::milliseconds(40000));  // Small delay to prevent busy-waiting
+
+
+    
+    int r = 0;
+    
+    int num_robots = 4;
+
+    // std::cout << "Creating TurtleBot manager..." << std::endl;
+    // auto manager = std::make_shared<TurtleBotManager>("bacon_bot", 1);
+    // std::thread spin_thread([manager]() {rclcpp::spin(manager); });
+    // // Waiting for map data to be received
+
+
+    std::vector<std::shared_ptr<TurtleBotManager>> managers;
+    std::vector<std::thread> spin_threads;
+
+    std::cout << "Creating TurtleBot managers..." << std::endl;
+
+    for (int i = 1; i <= num_robots; ++i) {
+        // Create the namespace as "tb" followed by the robot number, e.g., tb1, tb2, etc.
+        std::string namespace_name = "tb" + std::to_string(i);
+
+        // Instantiate a TurtleBotManager with the namespace and ID
+        auto manager = std::make_shared<TurtleBotManager>(namespace_name, i);
+
+        // Add the manager to the vector to keep it alive
+        managers.push_back(manager);
+
+        // Start a separate thread to spin each manager
+        spin_threads.emplace_back([manager]() { rclcpp::spin(manager); });
+    }
+
+    std::vector<geometry_msgs::msg::Point> turtlebot_start;
+
+    for (int i = 0; i < managers.size(); i++){
+        turtlebot_start.push_back(managers.at(i)->GetCurrentOdom().pose.pose.position);
+    }
+
+ 
+
+
+
+    // Once map data is received, initialize the path planning system
+    std::cout << "Map data received. Initializing path planning system..." << std::endl;
+    GPS.UpdateMapData(map);
+
+
+    std::cout << "Path planner initialised, run task allocation" << std::endl;
+    // std::vector<turtlebot_job> job_list = 
+
+    std::vector<std::vector<geometry_msgs::msg::Point>> trajectory_points;
+    std::vector<geometry_msgs::msg::Point> single_trajectory;
+    std::vector<std::vector<turtlebot_job>> multi_turtlebot_job_list = TA.optimise_turtlebot_jobs(num_robots, turtlebot_start);
+    std::vector<int> each_robot_goal_index;
+    std::vector<nav_msgs::msg::Odometry> current_odoms;
+
+    for (int j = 0; j < managers.size(); j++){
+        each_robot_goal_index.push_back(1);
+    }
+
+
+
+
+    trajectory_points.clear();
+    
+
+    for (int robot_index = 0; robot_index < num_robots; robot_index++){    
+        trajectory_points.push_back(GPS.A_star_To_Goal(managers.at(robot_index)->GetCurrentOdom().pose.pose.position, multi_turtlebot_job_list.at(robot_index).at(0).package_location));
+    }
+
+    for(int publishing_index = 0; publishing_index < trajectory_points.size(); publishing_index++){
+        publish_package_status(multi_turtlebot_job_list.at(publishing_index).at(0).id, 2);
+        managers.at(publishing_index)->publishTrajectory(trajectory_points.at(publishing_index));
+        
+    }
+
+    std::this_thread::sleep_for(std::chrono::milliseconds(20000));  // Small delay to prevent busy-waiting
+
+
+
+
+    std::vector<int> finish_ids;
+    bool all_goals_reached = false;
+    
+    
+    while (!all_goals_reached) {
+        for (int i = 0; i < managers.size(); i++){
+            bool status_check = managers.at(i)->get_status_bool();
+
+            
+            // Checks to see if the each robot has finished all its goal and if it needs to be checked.
+            if (std::find(finish_ids.begin(), finish_ids.end(), i) != finish_ids.end()) {
+                continue; // Skip if the robot is already finished
+            }
+            else if (each_robot_goal_index.at(i)/2 >= multi_turtlebot_job_list.at(i).size()) {
+                finish_ids.push_back(i);
+                if (finish_ids.size() == managers.size()){
+                    all_goals_reached = true;
+                    break;
+                }
+                continue;
+            }
+        
+            //Then check status of robot to see if it has reach a goal
+             if (!status_check) {
+                continue; // Skip if the robot has not reached a goal
+            }
+            // //get odoms of all robots
+            // for (int j = 0; j < managers.size(); j++){
+            //     current_odoms.at(j) = managers.at(j)->GetCurrentOdom();
+            // }
+
+
+
+            //Checkecks if index is even or odd to see if the robot needs to drive to delievery or pickup 
+            if (each_robot_goal_index.at(i) % 2 == 0){ //if index is even
+                
+                std::cout << "robot " << i << " heading to goal " << (each_robot_goal_index.at(i)/2) << std::endl;
+                std::cout << "package at x" << multi_turtlebot_job_list.at(i).at(each_robot_goal_index.at(i)/2).package_location.x << " y"  << multi_turtlebot_job_list.at(i).at(each_robot_goal_index.at(i)/2).package_location.y << std::endl;
+                publish_package_status(multi_turtlebot_job_list.at(i).at(each_robot_goal_index.at(i)/2).id, 2);
+               
+                
+                single_trajectory = GPS.A_star_To_Goal(managers.at(i)->GetCurrentOdom().pose.pose.position, multi_turtlebot_job_list.at(i).at(each_robot_goal_index.at(i)/2).package_location);
+                trajectory_points.at(i) = single_trajectory;
+                // path_aviodance_checker.check_trajectory_odom(trajectory_points, current_odoms);
+
+
+
+                managers.at(i)->publishTrajectory(single_trajectory);
+            }
+            else { // if index is odd   if (each_robot_goal_index.at(i) % 2 != 0)
+                
+                std::cout << "robot " << i << " heading to delievery location" << multi_turtlebot_job_list.at(i).at(each_robot_goal_index.at(i)/2).id << std::endl;
+                std::cout << "delivery at x" << multi_turtlebot_job_list.at(i).at(each_robot_goal_index.at(i)/2).delivery_location.x << " y" << multi_turtlebot_job_list.at(i).at(each_robot_goal_index.at(i)/2).delivery_location.y << std::endl;
+                publish_package_status((multi_turtlebot_job_list.at(i).at((each_robot_goal_index.at(i)-1)/2)).id, 3);
+
+
+                if (true) { // check AR tag status
+                    std::cout << "Ar tag found" << std::endl;
+
+                    //Add trajectory checking planning
+                    single_trajectory = GPS.A_star_To_Goal(managers.at(i)->GetCurrentOdom().pose.pose.position, multi_turtlebot_job_list.at(i).at((each_robot_goal_index.at(i)-1)/2).delivery_location);
+                    trajectory_points.at(i) = single_trajectory;
+                        // path_aviodance_checker.check_trajectory_odom(trajectory_points, current_odoms);
+                    managers.at(i)->publishTrajectory(single_trajectory);
+                
+                }
+                else {
+                    continue;
+                }
+
+            
+            }
+            std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+
+            // else if (docking){
+            //     add docking serario
+            // }
+            
+            
+            each_robot_goal_index.at(i) = each_robot_goal_index.at(i) + 1;
+        
+
+
+        }
+    }
+
+
+        //check all AR tags
+        // bool correct_package_found = Process_Package_AR_info(manager->GetARTag(), job_list.at(i).id);
+        
+
+
+    std::cout << "Program complete Shutting down" << std::endl;
     
     
     msg.data = true;  // Set the boolean value to true

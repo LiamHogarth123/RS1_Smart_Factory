@@ -71,13 +71,15 @@ private:
     void guiderOdomCallback(const nav_msgs::msg::Odometry::SharedPtr odomMsg);
     void shut_downCallback(const std_msgs::msg::Bool::SharedPtr msg);
 
+    void e_stop_callback(const std_msgs::msg::Bool::SharedPtr msg); 
 
     rclcpp::Publisher<warehouse_robot_msgs::msg::RobotData>::SharedPtr robot_info_pub;
     rclcpp::Subscription<nav_msgs::msg::Path>::SharedPtr path_sub_;
     rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr cmd_pub_;
+
     rclcpp::Publisher<std_msgs::msg::Bool>::SharedPtr goal_pub_;
     rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr shut_down_request;
-
+    rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr e_stop_subscriber_;
 
 
     rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr cmd_vel_pub_;

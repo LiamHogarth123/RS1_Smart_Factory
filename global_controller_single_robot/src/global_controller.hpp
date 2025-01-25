@@ -10,6 +10,7 @@
 #include <sensor_msgs/msg/image.hpp>
 // #include "marker_msgs/msg/marker.hpp"
 #include <std_msgs/msg/bool.hpp>
+#include "std_msgs/msg/int32.hpp"
 
 
 #include "turtlebot_manager.hpp"
@@ -25,10 +26,14 @@ public:
     Global_Controller(const int &num_robots);
     void Default_state();
     void Default_state_multi();
+    void Default_state_multi_complex();
     void statusCallback(const std_msgs::msg::Bool::SharedPtr msg);
     void mapCallback(const nav_msgs::msg::OccupancyGrid::SharedPtr msg);
+    void startCallback(const std_msgs::msg::Bool::SharedPtr msg);
 
     void publishTrajectory(std::vector<geometry_msgs::msg::Point> goals);
+    void publish_package_status(int package_id, int status_code);
+
  
 
 private:
@@ -40,12 +45,19 @@ private:
 
 
     std::string namespace_param_;
+
+    //Ros pub and subscribers
     rclcpp::Subscription<nav_msgs::msg::Path>::SharedPtr path_sub_;
+    rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr robot_status_sub;
+    rclcpp::Subscription<nav_msgs::msg::OccupancyGrid>::SharedPtr map_subscription_;
+    rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr start_subscription_;
+
 
     rclcpp::Publisher<std_msgs::msg::Bool>::SharedPtr Shut_down_request;
-    rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr robot_status_sub;
+    rclcpp::Publisher<std_msgs::msg::Int32>::SharedPtr publisher_;
     rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr path_pub_;
-    rclcpp::Subscription<nav_msgs::msg::OccupancyGrid>::SharedPtr map_subscription_;
+
+    
 
 
     Task_Allocation TA;

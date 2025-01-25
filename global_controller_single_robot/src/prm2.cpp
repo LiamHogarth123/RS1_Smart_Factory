@@ -67,7 +67,7 @@ std::vector<int> Path_Planner::findPathAStar(const std::unordered_map<int, Node>
 
     // Insert start node into the priority queue with f_cost = heuristic
     open_set.emplace(heuristic(map_nodes.at(start_id), map_nodes.at(finish_id)), start_id);
-    std::cout << "Starting A* from node " << start_id << " to node " << finish_id << std::endl;
+    // std::cout << "Starting A* from node " << start_id << " to node " << finish_id << std::endl;
 
     while (!open_set.empty()) {
         // Get the node with the lowest f_cost
@@ -87,9 +87,9 @@ std::vector<int> Path_Planner::findPathAStar(const std::unordered_map<int, Node>
             std::reverse(path.begin(), path.end());
             // std::cout << "Path found: ";
             for (int id : path) {
-                std::cout << id << " ";
+                // std::cout << id << " ";
             }
-            std::cout << std::endl;
+            // std::cout << std::endl;
             return path; // Return the path from start to finish
         }
 
@@ -122,23 +122,23 @@ std::vector<geometry_msgs::msg::Point> Path_Planner::A_star_To_Goal(geometry_msg
     std::vector<int> trajectory_node_ID;
 
     // Print the start and goal points
-    std::cout << "Start Point: (" << start.x << ", " << start.y << ")" << std::endl;
-    std::cout << "Goal Point: (" << goal.x << ", " << goal.y << ")" << std::endl;
+    // std::cout << "Start Point: (" << start.x << ", " << start.y << ")" << std::endl;
+    // std::cout << "Goal Point: (" << goal.x << ", " << goal.y << ")" << std::endl;
 
     int start_Id = setGoalNode(start);
 
     // Print the start node ID
-    std::cout << "Start Node ID: " << start_Id << std::endl;
+    // std::cout << "Start Node ID: " << start_Id << std::endl;
 
     int Goal_Id = setGoalNode(goal);
 
     // Print the goal node ID
-    std::cout << "Goal Node ID: " << Goal_Id << std::endl;
+    // std::cout << "Goal Node ID: " << Goal_Id << std::endl;
 
     trajectory_node_ID = findPathAStar(nodes_Graph, start_Id, Goal_Id);
 
     // Print the IDs of the nodes in the trajectory
-    std::cout << "Trajectory Node IDs: ";
+    // std::cout << "Trajectory Node IDs: ";
     for (int x = 0; x < trajectory_node_ID.size(); x++) {
         std::cout << trajectory_node_ID.at(x) << " ";
     }
@@ -150,12 +150,12 @@ std::vector<geometry_msgs::msg::Point> Path_Planner::A_star_To_Goal(geometry_msg
     for (int x = 0; x < trajectory_node_ID.size(); x++) {
         geometry_msgs::msg::Point point = convertNodeToPoint(nodes_Graph.at(trajectory_node_ID.at(x)));
         trajectory.push_back(point);
-        std::cout << "Converted Point: (" << point.x << ", " << point.y << ")" << std::endl;
+        // std::cout << "Converted Point: (" << point.x << ", " << point.y << ")" << std::endl;
     }
 
     // Print the final goal point being added to the trajectory
     trajectory.push_back(goal);
-    std::cout << "Final Goal Point added to trajectory: (" << goal.x << ", " << goal.y << ")" << std::endl;
+    // std::cout << "Final Goal Point added to trajectory: (" << goal.x << ", " << goal.y << ")" << std::endl;
 
     path_id = trajectory_node_ID;
     std::cout << path_id.size() << std::endl;
@@ -172,8 +172,8 @@ int Path_Planner::setGoalNode(geometry_msgs::msg::Point goal)
     map_point.y = (goal.y - SlamMapData.info.origin.position.y) / SlamMapData.info.resolution;
 
     // Print goal and map coordinates
-    std::cout << "Goal coordinates: (" << goal.x << ", " << goal.y << ")" << std::endl;
-    std::cout << "Converted map coordinates: (" << map_point.x << ", " << map_point.y << ")" << std::endl;
+    // std::cout << "Goal coordinates: (" << goal.x << ", " << goal.y << ")" << std::endl;
+    // std::cout << "Converted map coordinates: (" << map_point.x << ", " << map_point.y << ")" << std::endl;
 
     int closestNodeId = -1;
     float minDistance = std::numeric_limits<float>::infinity();
@@ -201,9 +201,9 @@ int Path_Planner::setGoalNode(geometry_msgs::msg::Point goal)
 
     // Print final closest node ID and its distance
     if (closestNodeId != -1) {
-        std::cout << "Final closest node ID: " << closestNodeId << ", Distance: " << minDistance << std::endl;
+        // std::cout << "Final closest node ID: " << closestNodeId << ", Distance: " << minDistance << std::endl;
     } else {
-        std::cout << "No valid node found!" << std::endl;
+        // std::cout << "No valid node found!" << std::endl;
     }
 
     return closestNodeId;
@@ -275,7 +275,7 @@ std::unordered_map<int, Node> Path_Planner::load_nodes(const std::string& filena
 //////////////////////////////////////////////////////////
 void Path_Planner::show_Prm()
 {
-    std::cout << "Show PRM Opens" << std::endl;
+    // std::cout << "Show PRM Opens" << std::endl;
     cv::Mat MapImage = Load_Map();
     MapImage = visalise_prm(MapImage, nodes_Graph);
     MapImage = visalise_path(MapImage, path_id);
@@ -309,7 +309,7 @@ void Path_Planner::save_map(cv::Mat mapImage) {
 
 cv::Mat Path_Planner::Load_Map() {
     // READ Image
-    std::cout << "Reading the map image from '/home/liam/map.pgm'...\n";
+    // std::cout << "Reading the map image from '/home/liam/map.pgm'...\n";
     cv::Mat grayscaleMapImage = cv::imread(map_file_path, cv::IMREAD_GRAYSCALE);
     if (grayscaleMapImage.empty())
     {
@@ -317,14 +317,14 @@ cv::Mat Path_Planner::Load_Map() {
         return cv::Mat(); // Return an empty Mat if the image could not be loaded
     }
 
-    std::cout << "Successfully loaded the grayscale map image.\n";
+    // std::cout << "Successfully loaded the grayscale map image.\n";
 
     cv::Mat mapImage;
     cv::cvtColor(grayscaleMapImage, mapImage, cv::COLOR_GRAY2BGR);
-    std::cout << "Converted grayscale map image to BGR.\n";
+    // std::cout << "Converted grayscale map image to BGR.\n";
 
     cv::flip(mapImage, mapImage, 0);
-    std::cout << "Flipped the map image vertically.\n";
+    // std::cout << "Flipped the map image vertically.\n";
 
     return mapImage;
 }
@@ -339,7 +339,7 @@ cv::Mat Path_Planner::visalise_prm(cv::Mat mapImage, std::unordered_map<int, Nod
 
    
     // Step 2: Visualize Edges Separately
-    std::cout << "Visualizing Edges" << std::endl;
+    // std::cout << "Visualizing Edges" << std::endl;
     for (const auto &[node_id, node] : graph_struct)
     {
         cv::Point center(node.x, node.y); // Center point of the current node
@@ -362,7 +362,7 @@ cv::Mat Path_Planner::visalise_prm(cv::Mat mapImage, std::unordered_map<int, Nod
         }
     }
      // Step 1: Visualize Nodes
-    std::cout << "Visualizing Nodes" << std::endl;
+    // std::cout << "Visualizing Nodes" << std::endl;
     for (int m = 0; m < graph_struct.size(); m++){
 
     // for (const auto &[node_id, node] : graph_struct)

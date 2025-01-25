@@ -19,13 +19,14 @@ Controller::Controller(const std::string &namespace_param)  : Node(namespace_par
 
   // Subscribe to the trajectory topic
   path_sub_ = this->create_subscription<nav_msgs::msg::Path>(path_topic, 10, std::bind(&Controller::pathCallback, this, std::placeholders::_1));
-  goal_pub_ = this->create_publisher<std_msgs::msg::Bool>("reached_goal", 10);
-  custom_odom_pub = this->create_publisher<nav_msgs::msg::Odometry>("backup/odom", 10);
+
+    // goal_pub_ = this->create_publisher<std_msgs::msg::Bool>("reached_goal", 10);
 
 
-  shut_down_request = this->create_subscription<std_msgs::msg::Bool>("shut_down", 10, std::bind(&Controller::shut_downCallback, this, std::placeholders::_1));\
 
+  shut_down_request = this->create_subscription<std_msgs::msg::Bool>("shut_down", 10, std::bind(&Controller::shut_downCallback, this, std::placeholders::_1));
 
+  e_stop_subscriber_ = this->create_subscription<std_msgs::msg::Bool>("e_stop", 10, std::bind(&Controller::e_stop_callback, this, std::placeholders::_1));
 
   // Turtlebot topics
   // Publish to the cmd_vel topic
@@ -53,7 +54,17 @@ Controller::Controller(const std::string &namespace_param)  : Node(namespace_par
 
 
 
-
+void Controller::e_stop_callback(const std_msgs::msg::Bool::SharedPtr msg)
+    {
+        if (msg->data)
+        {
+            RCLCPP_WARN(this->get_logger(), "Emergency Stop Activated!");
+        }
+        else
+        {
+            RCLCPP_INFO(this->get_logger(), "Emergency Stop Deactivated");
+        }
+    }
 
 
 
@@ -72,19 +83,19 @@ void Controller::Default_state(){
       
     //publish odom, status, and Ar Info if it is available.
     Publish_robot_data(current_odom_, 0, -1);
-    Publish_custom_odom(current_odom_);
+    // Publish_custom_odom(current_odom_);
 
     if (NewPath_){
       std::cout << "New Path detected, entering control loop..." << std::endl;
       Publish_robot_data(current_odom_, 1, -1);
 
-      for (size_t i = 0; i < path_->poses.size(); ++i) {
-        double x = path_->poses[i].pose.position.x;
-        double y = path_->poses[i].pose.position.y;
-        double z = path_->poses[i].pose.position.z;
+      // for (size_t i = 0; i < path_->poses.size(); ++i) {
+      //   double x = path_->poses[i].pose.position.x;
+      //   double y = path_->poses[i].pose.position.y;
+      //   double z = path_->poses[i].pose.position.z;
 
-        std::cout << "Waypoint " << i << ": x=" << x << ", y=" << y << ", z=" << z << std::endl;
-      }
+      //   std::cout << "Waypoint " << i << ": x=" << x << ", y=" << y << ", z=" << z << std::endl;
+      // }
       controlLoop();
     }
     if (shutdown_request_){
@@ -114,7 +125,7 @@ void Controller::controlLoop() {
 
 
   status_msg.data = false;  // Set the boolean value to false initially
-  goal_pub_->publish(status_msg); 
+  // F->publish(status_msg); 
 
   std::cout << "Entering control loop..." << std::endl;
 
@@ -133,20 +144,20 @@ void Controller::controlLoop() {
   // first align the robot's orientation with the first goal
   double Desired_yaw = Calculate_desired_yaw(trajectory_path);
 
-  std::cout << "Desired yaw: " << Desired_yaw << std::endl;
-  std::cout << "current yaw" << std::endl;
-  std::cout << "alligning yaw" << std::endl;
+  // std::cout << "Desired yaw: " << Desired_yaw << std::endl;
+  // std::cout << "current yaw" << std::endl;
+  // std::cout << "alligning yaw" << std::endl;
 
   while (Turtlebot_GPS_.angleToGoal(current_odom_, trajectory_path.poses.at(1).pose.position) > 0.1) {
     // std::cout << "Aligning robot: current yaw = " << calculateYaw(current_odom_) << std::endl;
     traj.angular.z = Turtlebot_GPS_.steeringPID(trajectory_path.poses.at(1).pose.position, current_odom_);  // optimize this so direction and speed is considered
            
     SendCmdTb1(traj);
-    Publish_custom_odom(current_odom_);
+    // Publish_custom_odom(current_odom_);
     std::this_thread::sleep_for(std::chrono::milliseconds(200));
   }
 
-  std::cout << "Robot aligned with the first goal." << std::endl;
+  // std::cout << "Robot aligned with the first goal." << std::endl;
 
   // Stop the rotation
   SendCmdTb1(zero_trajectory);
@@ -161,13 +172,13 @@ void Controller::controlLoop() {
     
     // Find the current waypoint goal
     target_goal = findLookAheadPoint(trajectory_path, current_odom_.pose.pose.position, 0.5);
-    std::cout << "Lookahead point at (" << target_goal.x << ", " << target_goal.y << ")" << std::endl;
+    // std::cout << "Lookahead point at (" << target_goal.x << ", " << target_goal.y << ")" << std::endl;
 
     publishSingleMarker(target_goal);
 
     // Setup PID calculation
     Turtlebot_GPS_.updateControlParam(target_goal, 0.1, current_odom_, updated_lida_);
-    std::cout << "PID control updated with target goal." << std::endl;
+    // std::cout << "PID control updated with target goal." << std::endl;
 
     // If final goal is hit, stop
     if (Turtlebot_GPS_.goal_hit(trajectory_path.poses.back().pose.position, current_odom_)) {
@@ -179,8 +190,12 @@ void Controller::controlLoop() {
     // If all good
     ///////////////////////////////////////////////////////////////////////////////////////////
     traj = Turtlebot_GPS_.generate_trajectory();
-    std::cout << "Generated trajectory: linear.x = " << traj.linear.x << ", angular.z = " << traj.angular.z << std::endl;
+    // std::cout << "Generated trajectory: linear.x = " << traj.linear.x << ", angular.z = " << traj.angular.z << std::endl;
     SendCmdTb1(traj);
+
+
+    // if (robot postition required publish)
+
 
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
 
@@ -216,7 +231,7 @@ void Controller::controlLoop() {
   status_msg.data = true;  // Set the boolean value to true
   Publish_robot_data(current_odom_, 0, 0);
   Publish_robot_data(current_odom_, 0, 0);
-  Publish_custom_odom(current_odom_);
+  // Publish_custom_odom(current_odom_);
 
   NewPath_ = false;
 }
@@ -302,14 +317,11 @@ void Controller::Publish_robot_data(nav_msgs::msg::Odometry odom, int status, in
   warehouse_robot_msgs::msg::RobotData msg;
   msg.odom = odom;
   msg.status = status; 
-  // msg.ar_tag_id = Ar_tag_info;
+  msg.ar_tag_id = Ar_tag_info;
   robot_info_pub->publish(msg);
 }
 
-void Controller::Publish_custom_odom(nav_msgs::msg::Odometry odom){
-  custom_odom_pub->publish(odom);
 
-}
 
 // Callbacks
 ///////////////////////////////////////////////////////////////////////////////////
