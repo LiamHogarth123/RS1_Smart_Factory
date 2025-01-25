@@ -1,21 +1,16 @@
-Multi-Robot Warehouse Automation System
+# Multi-Robot Warehouse Automation System
 
 This ROS 2 project provides a comprehensive solution for automating warehouse operations using TurtleBot robots. It includes global coordination, individual robot control, and visualization tools to efficiently manage tasks like package pickup and delivery.
 Features
-1. Global Controller
+1. Global_Controller
 
     Task Allocation: Assigns tasks to multiple TurtleBots based on their current position and capabilities.
     Path Planning: Uses A* algorithm for generating optimal paths.
     Multi-Robot Coordination: Synchronizes operations across robots while avoiding conflicts.
     Emergency Stop: Implements an e-stop functionality for safety.
 
-2. TurtleBot Manager
 
-    Trajectory Management: Receives trajectories and manages execution for individual robots.
-    Robot Data Publishing: Shares odometry, speed, and AR tag information.
-    Namespace Support: Operates in isolated namespaces for multi-robot environments.
-
-3. Controller
+2. Turtlebot_Controller
 
     Path Execution: Processes trajectory data and dynamically navigates TurtleBots to assigned goals.
     Look-Ahead Point Calculation: Ensures smooth navigation and obstacle avoidance.
@@ -27,10 +22,8 @@ Architecture
     Global Controller:
         Publishes trajectories for each TurtleBot.
         Manages task allocation and synchronization.
-    TurtleBot Manager:
-        Handles individual robot's state and odometry.
-        Receives trajectory commands from the Global Controller.
-    Controller:
+
+    Turtlebot_Controller:
         Executes trajectories.
         Uses PID control for precise movement.
         Publishes real-time robot status.
@@ -71,58 +64,54 @@ Source the workspace:
 
 Running the System
 
-    Launch Global Controller:
+    Launch Global Controller: ros2 launch global_controller_single_robot global_controller_multi_launch.py
 
-ros2 launch <package_name> global_controller.launch.py
 
-Launch TurtleBot Nodes:
-
-ros2 launch <package_name> turtlebot_manager.launch.py
 
 Launch RViz:
 
-    rviz2 -d <config_file>
+    ros2 launch global_controller_single_robot rviz_visualisation_launch.py 
+
 
 Notes
 
     Namespace Isolation: Each TurtleBot operates in its own namespace for scalability.
     Visualization: Use RViz to monitor paths, trajectories, and look-ahead points.
     E-Stop Safety: Emergency stop can be triggered via the /e_stop topic.
-Commands to run
-ros2 launch global_controller_single_robot global_controller_multi_launch.py
 
 
 
+# To do list
+
+# global planner functionality
+* Need to have predictive path planning consision aviodance. infrastructure is there functionality is not
+* Test and improve lane functionality
+
+* AR tag communication
+* docking or better publishing when package has been delievered
+  
+
+
+# turtlebot functionality
+* Ar tag detection
+* On request odom publishing
+* E-stop and resuming
+* 
+
+
+# Ur3 functionality
+* we can spawn a ur3 and control it manually but are unable to using movit through code
+* once Moveit works need to have it move repeativily on command to x,y,z position
+* Need to setup Ur3_controller interactable with global planner
+* Need to setup up proper launch files within this package
+
+* could add a camera functionality to find package Ar tag and pick it up
+
+# Ros launch files and packages
+* Need to setup better clear launch files and packages
 
 
 
-> To do list
-
-
-
-
-* Turtlebot drives to multiple goal. path planning could be optimised and it doesn't have collision aviodance alignment optimisation or Ar tag recon.
-* multi turtlebot works with a modifed package that can't be pushed to git. For multi need updated task allo and path collision aviodance
-
-
-
-UR3 jobs
-- need the UR3 to be able to move to a x,y,z position to simulate picking up an object
-
-Turtlebot jobs
-- test and fix lanes
-- Implement Ar tag detection
-- setup status logging
-
-Multi turtlebot jobs
-- Find an optimised way to drive multi ansychously
-- Implement multi robot path collision avoidance
-- 
-
-Top level system
-- Set up ros action call to start system
-- Gui setup for error loging, shutdown request, e-stop,
-- 
 
 
 
@@ -152,5 +141,3 @@ Gazebo sim
 Nav
 - ros2 launch turtlebot3_navigation2 navigation2.launch.py use_sim_time:=True map:=/home/liam/git/RS1_Smart_Factory/global_controller_single_robot/map/gazebo_sf_map.yaml
 
-
-Current state
